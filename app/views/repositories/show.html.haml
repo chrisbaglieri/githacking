@@ -1,16 +1,17 @@
-:erb
-  <p id="notice"><%= notice %></p>
-  
-  <p>
-    <b>Name:</b>
-    <%= @repository.name %>
-  </p>
-  
-  <p>
-    <b>User:</b>
-    <%= @repository.user %>
-  </p>
-  
-  
-  <%= link_to 'Edit', edit_repository_path(@repository) %> |
-  <%= link_to 'Back', repositories_path %>
+%p#notice
+  = notice
+%p
+  %strong
+    Name:
+  = @repository.name
+%p
+  %strong
+    User:
+  = @repository.user
+%p
+  %strong
+    Tags:
+  = @repository.tag_list
+= link_to 'Edit', edit_repository_path(@repository)
+|
+= link_to 'Back', repositories_path
