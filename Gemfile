@@ -6,8 +6,10 @@ gem 'simple_form', '1.3.0'
 gem 'haml'
 gem 'octopi'
 
-group :test do
+group :test, :development do
+  gem 'haml-rails'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl'
+  gem 'factory_girl_rails'
 end
