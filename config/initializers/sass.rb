@@ -1,1 +1,1 @@
-Sass::Plugin.options[:template_location] = { 'app/stylesheets' => 'public/stylesheets' }
+Sass::Plugin.options[:never_update] = true
