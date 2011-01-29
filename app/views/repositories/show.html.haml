@@ -1,17 +1,23 @@
 %p#notice
   = notice
-%p
-  %strong
-    Name:
-  = @repository.name
-%p
-  %strong
-    User:
-  = @repository.user
-%p
-  %strong
-    Tags:
-  = @repository.tag_list
+.repository
+  %h1.title
+    = link_to @repository.user, github_user_url(@repository)
+    \/
+    = link_to @repository.name, github_repository_url(@repository)
+  .data
+    .issues
+      %h3.title
+        Issues
+      - @repository.github.issues.each do |issue|
+        .issue
+          .title
+            = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
+          .date
+            = issue.created_at
+    %strong
+      tags: 
+    = @repository.tag_list
 = link_to 'Edit', edit_repository_path(@repository)
 |
 = link_to 'Back', repositories_path
