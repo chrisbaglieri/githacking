@@ -8,15 +8,16 @@
   = notice
 #repository
   %h1.title
-    = link_to @repository.user, github_user_url(@repository)
+    = link_to @repository.user, @repository.owner_url
     \/
-    = link_to @repository.name, github_repository_url(@repository)
+    = link_to @repository.name, @repository.url
   .data
     %strong
       tags: 
     = @repository.tag_list
 
     #infos
+
       %h3
         %a{href: '#'}
           What is #{@repository.name}?
@@ -39,13 +40,13 @@
         .issues
           %h3.title
             Issues
-        - @gh_issues.each do |tag, issues|
+        - @repository.issues.each do |tag, issues|
           %h5.tag-header
             = tag
           - issues.each do |issue|
             .issue
               .title
-                = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
+                = link_to "[#{issue.number}] #{issue.title}", @repository.url
               .date
                 = issue.created_at
               .body

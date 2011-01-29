@@ -16,14 +16,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-    issues = @repository.issues
-    @gh_issues = {}
-    RepositoriesHelper::GH_TAGS.each do |tag|
-      issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
-        @gh_issues[human_tag(tag)] ||= []
-        @gh_issues[human_tag(tag)] << issue
-      end
-    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
@@ -34,7 +26,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/new.xml
   def new
     @repository = Repository.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @repository }
@@ -50,7 +42,6 @@ class RepositoriesController < ApplicationController
   # POST /repositories.xml
   def create
     @repository = Repository.new(params[:repository])
-
     respond_to do |format|
       if @repository.save
         format.html { redirect_to(@repository, :notice => 'Repository was successfully created.') }
