@@ -1,0 +1,18 @@
+categories:
+    - foo
+    - bar
+    - yay
+    
+needs:
+    roles:
+        - developers
+        - evangelists
+        - testers
+        - ui
+    skills:
+        - natural language processing
+        - crawling/indexing
+
+mentions:
+    - http://a.well.written.post.of.my.gem
+    - http://another.well.written.post.of.my.gem
