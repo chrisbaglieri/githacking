@@ -28,20 +28,32 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    api_cache (0.2.0)
     arel (2.0.7)
     builder (2.1.2)
+    crack (0.1.8)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     factory_girl (1.3.2)
     haml (3.0.25)
+    httparty (0.7.3)
+      crack (= 0.1.8)
     i18n (0.5.0)
     mail (2.2.15)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mechanize (1.0.0)
+      nokogiri (>= 1.2.1)
     mime-types (1.16)
+    nokogiri (1.4.4)
+    octopi (0.4.0)
+      api_cache
+      httparty (>= 0.4.5)
+      mechanize (>= 0.9.3)
+      nokogiri (>= 1.3.1)
     pg (0.10.0)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -89,6 +101,7 @@ PLATFORMS
 DEPENDENCIES
   factory_girl
   haml
+  octopi
   pg (= 0.10.0)
   rails (= 3.0.3)
   rspec

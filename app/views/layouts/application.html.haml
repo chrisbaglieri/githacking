@@ -1,12 +1,18 @@
 !!!
-!!! Strict
 %html
   %head
-    %title
-      Githacking
-    = stylesheet_link_tag :all
-    = javascript_include_tag :defaults
+    %title= yield(:title)
+    = stylesheet_link_tag "blueprint/screen", "base", :media => "screen, projection"
+    = stylesheet_link_tag "blueprint/print", :media => "print"
+    /[if IE]
+      = stylesheet_link_tag "blueprint/ie", :media => "screen, projection", :cache => true
     = csrf_meta_tag
-  %body
-    = yield
-
+    = javascript_include_tag "http://use.typekit.com/nej5vuh.js"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js"
+    = javascript_include_tag "rails"
+    :javascript
+      try{Typekit.load();}catch(e){}  %body
+    #header= render :partial => "shared/header"
+    #content= render :partial => "shared/content"
+    #footer= render :partial => "shared/footer"

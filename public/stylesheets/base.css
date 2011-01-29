@@ -1,0 +1,30 @@
+body { background: url("../images/header.gif") repeat-x scroll 0 0 #F2F2F2; color: #666252; }
+
+form abbr { border-bottom: 0pt; }
+form label { display: block;}
+form input.text, input.title, textarea { width: 98%; }
+
+/* Header */
+#logo { padding-top: 10px; }
+#logo img { float: left; margin-right: 10px; }
+#logo h1 { margin-top: 15px; font-size: 3em; font-weight: 700; font-family: "museo-1","museo-2",serif; color: #789B31; }
+#logo h1 a { text-decoration: none; color: #FFFFFF; }
+#main-navigation ul { margin-right: 0pt; margin-top: 23px; padding: 2px; float: right; list-style: none; height: 35px; background-color: #789B31; }
+#main-navigation ul { -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; }
+#main-navigation ul li { float: left; margin: 2px; display: block; text-align: center; z-index: 200; position: relative; }
+#main-navigation ul li a { padding: 6px 14px; text-decoration: none; color: #eee; background-color: #222; display: block; text-align: center; }
+#main-navigation ul li a { -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; }
+
+/* Main Content */
+#content { background: #FFFFFF; padding-top: 30px; padding-bottom: 30px; }
+#content .main-content { background: url("../images/main-content-background.png") repeat-y left; margin-right: 0pt; }
+#content .secondary-navigation ul { margin: 10px 0pt 0pt 0pt; padding: 0pt; width: 200px; }
+#content .secondary-navigation ul li { list-style-type: none; padding: 10px 0pt 10px 20px; background: #F2F2F2; margin-bottom: 5px; }
+#content .secondary-navigation ul li { -webkit-border-radius-topright: 5px; -webkit-border-radius-bottomright: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -khtml-border-radius-topright: 5px; -khtml-border-radius-bottomright: 5px; border-radius-topright: 5px; border-radius-bottomright: 5px; }
+#content .secondary-navigation ul li:hover { background: #DBDBDB; }
+#content .secondary-navigation ul li a { text-decoration: none; }
+
+/* Footer */
+#footer { background: url("../images/footerhead.jpg") repeat-x scroll 0 0 #F2F2F2; margin-bottom: 40px; }
+#footer-container { padding-top: 20px; }
+#footer-navigation a { padding: 0pt 7px; }
