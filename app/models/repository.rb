@@ -18,6 +18,7 @@ class Repository < ActiveRecord::Base
             self.errors.add(:user, e.message)
         end
     end
+  end
 
   def github
     @github ||= Octopi::User.find(self.user).repository(self.name)
