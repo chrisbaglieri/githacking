@@ -7,6 +7,7 @@ gem 'haml'
 gem 'octopi'
 gem 'acts-as-taggable-on'
 gem 'curb'
+gem 'hassle', :git => 'git://github.com/koppen/hassle.git'
 
 group :test, :development do
   gem 'haml-rails'
