@@ -16,7 +16,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-    issues = @repository.github.issues
+    issues = @repository.issues
     @gh_issues = {}
     RepositoriesHelper::GH_TAGS.each do |tag|
       issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|

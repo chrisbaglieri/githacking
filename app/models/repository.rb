@@ -6,10 +6,6 @@ class Repository < ActiveRecord::Base
   
   acts_as_taggable
 
-  def github
-    @github ||= Octopi::User.find(self.user).repository(self.name)
-  end
-  
   def metadata
     @raw ||= Curl::Easy.perform(github_repository_metadata_url)
     YAML::load(@raw.body_str)
@@ -29,6 +25,16 @@ class Repository < ActiveRecord::Base
   
   def mentions
     metadata['mentions']
+  end
+
+  def issues
+    github.issues
+  end
+  
+  private
+
+  def github
+    @github ||= Octopi::User.find(user).repository(name)
   end
 
 end
