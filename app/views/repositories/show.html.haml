@@ -1,6 +1,6 @@
 %p#notice
   = notice
-.repository
+#repository
   %h1.title
     = link_to @repository.user, github_user_url(@repository)
     \/
@@ -9,12 +9,17 @@
     .issues
       %h3.title
         Issues
-      - @repository.github.issues.each do |issue|
-        .issue
-          .title
-            = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
-          .date
-            = issue.created_at
+      - @gh_issues.each do |tag, issues|
+        %h5.tag-header
+          = tag
+        - issues.each do |issue|
+          .issue
+            .title
+              = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
+            .date
+              = issue.created_at
+            .body
+              = issue.body
     %strong
       tags: 
     = @repository.tag_list
