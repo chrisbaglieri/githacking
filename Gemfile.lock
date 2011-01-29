@@ -28,6 +28,7 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
+    acts-as-taggable-on (2.0.6)
     api_cache (0.2.0)
     arel (2.0.7)
     builder (2.1.2)
@@ -107,6 +108,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   factory_girl
   factory_girl_rails
   haml
