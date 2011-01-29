@@ -33,6 +33,7 @@ GEM
     arel (2.0.7)
     builder (2.1.2)
     crack (0.1.8)
+    curb (0.7.10)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -109,6 +110,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
+  curb
   factory_girl
   factory_girl_rails
   haml

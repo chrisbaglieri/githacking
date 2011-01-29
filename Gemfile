@@ -6,6 +6,7 @@ gem 'simple_form', '1.3.0'
 gem 'haml'
 gem 'octopi'
 gem 'acts-as-taggable-on'
+gem 'curb'
 
 group :test, :development do
   gem 'haml-rails'
