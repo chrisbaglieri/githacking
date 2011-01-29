@@ -2,6 +2,7 @@
 %html
   %head
     %title= yield(:title)
+    = stylesheet_link_tag "jquery-ui/south-street/jquery-ui-1.8.9.custom"
     = stylesheet_link_tag "blueprint/screen", "base", :media => "screen, projection"
     = stylesheet_link_tag "blueprint/print", :media => "print"
     /[if IE]
@@ -12,7 +13,9 @@
     = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js"
     = javascript_include_tag "rails"
     :javascript
-      try{Typekit.load();}catch(e){}  %body
+      try{Typekit.load();}catch(e){}
+    = yield :javascripts
+  %body
     #header= render :partial => "shared/header"
     #content= render :partial => "shared/content"
     #footer= render :partial => "shared/footer"

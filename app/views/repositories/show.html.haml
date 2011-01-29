@@ -1,28 +1,60 @@
+- content_for :javascripts do
+  :javascript
+    $(document).ready(function() {
+      $('#infos').accordion();
+      $('#issues').tabs();
+    });
+
 %p#notice
   = notice
 #repository
   %h1.title
-    = link_to @repository.user, github_user_url(@repository)
+    = link_to @repository.user, @repository.owner_url
     \/
-    = link_to @repository.name, github_repository_url(@repository)
+    = link_to @repository.name, @repository.url
   .data
-    .issues
-      %h3.title
-        Issues
-      - @gh_issues.each do |tag, issues|
-        %h5.tag-header
-          = tag
-        - issues.each do |issue|
-          .issue
-            .title
-              = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
-            .date
-              = issue.created_at
-            .body
-              = issue.body
     %strong
       tags: 
     = @repository.tag_list
+
+    #infos
+
+      %h3
+        %a{href: '#'}
+          What is #{@repository.name}?
+      %div
+        Repo data here.
+        %br
+        Repo data here.
+        %br
+        Repo data here.
+        %br
+      %h3
+        %a{href: '#'}
+          Can I help?
+      %div
+        Metadata needed here.
+      %h3
+        %a{href: '#'}
+          Give me a task!
+      %div
+        
+        #issues
+          %ul
+            - @repository.issues.keys.each do |tag|
+              %li
+                %a{href: "##{tag}-issue"}
+                  = Repository::human_tag(tag)
+          - @repository.issues.keys.each do |tag|
+            %div{id: "#{tag}-issue"}
+              - @repository.issues[tag].each do |issue|
+                .issue
+                  .title
+                    = link_to "[#{issue.number}] #{issue.title}", @repository.url
+                  .date
+                    = issue.created_at
+                  .body
+                    = issue.body
 = link_to 'Edit', edit_repository_path(@repository)
 |
 = link_to 'Back', repositories_path

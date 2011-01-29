@@ -16,7 +16,6 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
