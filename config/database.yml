@@ -1,0 +1,14 @@
+development:
+  adapter: postgresql
+  database: githacking_development
+  username: sparecycles
+  
+test:
+  adapter: postgresql
+  database: githacking_test
+  username: sparecycles
+
+production:
+  adapter: postgresql
+  database: githacking
+  username: sparecycles
