@@ -26,8 +26,8 @@ class Repository < ActiveRecord::Base
     @issues = {}
     GH_TAGS.each do |tag|
       github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
-        @issues[human_tag(tag)] ||= []
-        @issues[human_tag(tag)] << issue
+        @issues[tag] ||= []
+        @issues[tag] << issue
       end
     end
     return @issues
@@ -84,7 +84,7 @@ class Repository < ActiveRecord::Base
   HUMAN_TAGS = {'gh-bitesize' => 'Bite Size', 'gh-easy' => 'Easy', 'gh-medium' => 'Medium', 'gh-hard' => 'Hard'}
   GH_TAGS = ['gh-bitesize', 'gh-easy', 'gh-medium', 'gh-hard']
   
-  def human_tag tag
+  def self.human_tag tag
     HUMAN_TAGS[tag]
   end
 
