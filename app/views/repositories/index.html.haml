@@ -5,6 +5,7 @@
     <tr>
       <th>Name</th>
       <th>User</th>
+      <th>Tag List</th>
       <th></th>
       <th></th>
       <th></th>
@@ -14,6 +15,7 @@
     <tr>
       <td><%= repository.name %></td>
       <td><%= repository.user %></td>
+      <td><%= repository.tag_list %></td>
       <td><%= link_to 'Show', repository %></td>
       <td><%= link_to 'Edit', edit_repository_path(repository) %></td>
       <td><%= link_to 'Destroy', repository, :confirm => 'Are you sure?', :method => :delete %></td>

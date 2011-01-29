@@ -1,16 +1,28 @@
-:erb
-  <p id="notice"><%= notice %></p>
-  
-  <p>
-    <b>Name:</b>
-    <%= @repository.name %>
-  </p>
-  
-  <p>
-    <b>User:</b>
-    <%= @repository.user %>
-  </p>
-  
-  
-  <%= link_to 'Edit', edit_repository_path(@repository) %> |
-  <%= link_to 'Back', repositories_path %>
+%p#notice
+  = notice
+#repository
+  %h1.title
+    = link_to @repository.user, github_user_url(@repository)
+    \/
+    = link_to @repository.name, github_repository_url(@repository)
+  .data
+    .issues
+      %h3.title
+        Issues
+      - @gh_issues.each do |tag, issues|
+        %h5.tag-header
+          = tag
+        - issues.each do |issue|
+          .issue
+            .title
+              = link_to "[#{issue.number}] #{issue.title}", github_repository_issues_url(@repository, issue.number)
+            .date
+              = issue.created_at
+            .body
+              = issue.body
+    %strong
+      tags: 
+    = @repository.tag_list
+= link_to 'Edit', edit_repository_path(@repository)
+|
+= link_to 'Back', repositories_path
