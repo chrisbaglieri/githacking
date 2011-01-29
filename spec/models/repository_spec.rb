@@ -36,4 +36,19 @@ describe Repository do
     @repo2 = Factory.build :repository, name: 'Repo', user: 'user2'
     @repo2.save.should be_true
   end
+  it "should expose github metadata" do
+    @repo = Factory.create :repository, name: 'githacking-example', user: 'chrisbaglieri'
+    @repo.url.should_not be_nil
+    @repo.description.should_not be_nil
+    @repo.url.should_not be_nil
+    @repo.issues.count.should == 4
+    @repo.commits.count.should > 0
+  end
+  it "should expose githacking metadata" do
+    @repo = Factory.create :repository, name: 'githacking-example', user: 'chrisbaglieri'
+    @repo.needs.count.should == 2
+    @repo.desired_roles.count.should == 4
+    @repo.desired_skills == 3
+    @repo.mentions.count.should == 2
+  end
 end

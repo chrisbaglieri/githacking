@@ -1,32 +1,39 @@
 class Repository < ActiveRecord::Base
-
-  include RepositoriesHelper
   
   validates_uniqueness_of :name, scope: :user
 
   validate :verify_github_existence
   acts_as_taggable
 
-  def verify_github_existence
-    begin 
-        user = Octopi::User.find(self.user)
-        user.repository(self.name)
-    rescue Octopi::NotFound => e
-        if e.message =~ /Repository/
-            self.errors.add(:name, e.message)
-        elsif e.message =~ /User/
-            self.errors.add(:user, e.message)
-        end
-    end
-  end
-
-  def github
-    @github ||= Octopi::User.find(self.user).repository(self.name)
+  def url
+    github.url
   end
   
-  def metadata
-    @raw ||= Curl::Easy.perform(github_repository_metadata_url)
-    YAML::load(@raw.body_str)
+  def owner_url
+    "http://github.com/#{github.owner}"
+  end
+  
+  def description
+    github.description
+  end
+  
+  def issues
+    @issues = {}
+    GH_TAGS.each do |tag|
+      github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
+        @issues[human_tag(tag)] ||= []
+        @issues[human_tag(tag)] << issue
+      end
+    end
+    return @issues
+  end
+  
+  def commits
+    github.commits
+  end
+  
+  def needs
+    metadata['needs']
   end
   
   def categories
@@ -44,5 +51,34 @@ class Repository < ActiveRecord::Base
   def mentions
     metadata['mentions']
   end
-
+  
+  private
+  def github
+    @github ||= Octopi::User.find(self.user).repository(self.name)
+  end
+  
+  def metadata
+    @raw ||= Curl::Easy.perform("https://github.com/#{user}/#{name}/raw/master/githacking.yaml")
+    YAML::load(@raw.body_str)
+  end
+  
+  def verify_github_existence
+    begin 
+        user = Octopi::User.find(self.user)
+        user.repository(self.name)
+    rescue Octopi::NotFound => e
+        if e.message =~ /Repository/
+            self.errors.add(:name, e.message)
+        elsif e.message =~ /User/
+            self.errors.add(:user, e.message)
+        end
+    end
+  end
+  
+  HUMAN_TAGS = {'gh-bitesize' => 'Bite Size', 'gh-easy' => 'Easy', 'gh-medium' => 'Medium', 'gh-hard' => 'Hard'}
+  GH_TAGS = ['gh-bitesize', 'gh-easy', 'gh-medium', 'gh-hard']
+  
+  def human_tag tag
+    HUMAN_TAGS[tag]
+  end
 end

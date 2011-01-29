@@ -16,14 +16,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-    issues = @repository.github.issues
-    @gh_issues = {}
-    RepositoriesHelper::GH_TAGS.each do |tag|
-      issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
-        @gh_issues[human_tag(tag)] ||= []
-        @gh_issues[human_tag(tag)] << issue
-      end
-    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @repository }
