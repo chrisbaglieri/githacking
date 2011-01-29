@@ -5,6 +5,7 @@ gem 'pg', '0.10.0'
 gem 'simple_form', '1.3.0'
 gem 'haml'
 gem 'octopi'
+gem 'hassle'
 
 group :test, :development do
   gem 'haml-rails'
