@@ -1,4 +1,6 @@
 class Repository < ActiveRecord::Base
+
+  include RepositoriesHelper
   
   validates_uniqueness_of :name, scope: :user
   
@@ -28,9 +30,5 @@ class Repository < ActiveRecord::Base
   def mentions
     metadata['mentions']
   end
-  
-  private
-  def github_repository_metadata_url
-    "https://github.com/#{user}/#{name}/raw/master/githacking.yaml"
-  end
+
 end

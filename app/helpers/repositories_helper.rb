@@ -17,4 +17,8 @@ module RepositoriesHelper
   def human_tag tag
     HUMAN_TAGS[tag]
   end
+  
+  def github_repository_metadata_url
+    "https://github.com/#{user}/#{name}/raw/master/githacking.yaml"
+  end
 end
