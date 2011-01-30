@@ -10,16 +10,16 @@
             = msg
   .field
     = f.label :name
-    %br
-    = f.text_field :name
+    = f.text_field :name, :class => "text"
+  %br
   .field
     = f.label :user
-    %br
-    = f.text_field :user
+    = f.text_field :user, :class => "text"
+  %br
   .field
     = f.label :tag_list
-    %br
-    = f.text_field :tag_list
+    = f.text_field :tag_list, :class => "text"
+  %br
   .actions
     = f.submit
 

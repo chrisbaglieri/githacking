@@ -6,8 +6,6 @@
       <th>Name</th>
       <th>Categories</th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
   
   <% @repositories.each do |repository| %>
@@ -19,8 +17,6 @@
         <% end %>
       </td>
       <td><%= link_to image_tag("find.png"), repository %></td>
-      <td><%= link_to image_tag("edit.png"), edit_repository_path(repository) %></td>
-      <td><%= link_to image_tag("delete.png"), repository, :confirm => 'Are you sure?', :method => :delete %></td>
     </tr>
   <% end %>
   </table>
