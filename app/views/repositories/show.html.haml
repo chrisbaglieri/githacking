@@ -55,16 +55,28 @@
         #issues
           %h4
             Bytesize
-          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[0]], :locals => {:repository => @repository}
+          - if not @repository.issues[Repository::GH_TAGS[0]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[0]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
           %h4
             Easy
-          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[1]], :locals => {:repository => @repository}
+          - if not @repository.issues[Repository::GH_TAGS[1]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[1]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
           %h4
             Medium
-          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[2]], :locals => {:repository => @repository}
+          - if not @repository.issues[Repository::GH_TAGS[2]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[2]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
           %h4
             Hard
-          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => @repository}
+          - if not @repository.issues[Repository::GH_TAGS[3]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
 %br
 = link_to 'Edit', edit_repository_path(@repository)
 |
