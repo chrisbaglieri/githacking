@@ -10,25 +10,28 @@
 #repository
   %h1.title
     = link_to @repository.user, @repository.owner_url
-    \/
+    %span
+      \/
     = link_to @repository.name, @repository.url
   .data
-    %strong
-      tags: 
-    = @repository.tag_list
-
     #infos
 
       %h3
         %a{href: '#'}
           What is #{@repository.name}?
       %div
-        Repo data here.
-        %br
-        Repo data here.
-        %br
-        Repo data here.
-        %br
+        %h4
+          Description
+        %p
+          = @repository.description
+        %h4
+          Categories
+        %p
+          = @repository.categories.to_sentence
+        %h4
+          Long Description
+        %p
+          = @repository.long_description
       %h3
         %a{href: '#'}
           Can I help?
