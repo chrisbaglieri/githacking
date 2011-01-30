@@ -2,7 +2,6 @@
   :javascript
     $(document).ready(function() {
       $('#infos').accordion();
-      $('#issues').tabs();
     });
 
 %p#notice
@@ -34,7 +33,7 @@
           = @repository.long_description
       %h3
         %a{href: '#'}
-          Can You help?
+          Can you help?
       %div
         %h4
           Roles We're Looking To Fill
@@ -50,25 +49,23 @@
               = skill
       %h3
         %a{href: '#'}
-          Give me a task!
+          Still interested? Let's get this party started!
       %div
         
         #issues
-          %ul
-            - @repository.issues.keys.each do |tag|
-              %li
-                %a{href: "##{tag}-issue"}
-                  = Repository::human_tag(tag)
-          - @repository.issues.keys.each do |tag|
-            %div{id: "#{tag}-issue"}
-              - @repository.issues[tag].each do |issue|
-                .issue
-                  .title
-                    = link_to "[#{issue.number}] #{issue.title}", @repository.url
-                  .date
-                    = issue.created_at
-                  .body
-                    = issue.body
+          %h4
+            Bytesize
+          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[0]], :locals => {:repository => @repository}
+          %h4
+            Easy
+          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[1]], :locals => {:repository => @repository}
+          %h4
+            Medium
+          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[2]], :locals => {:repository => @repository}
+          %h4
+            Hard
+          = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => @repository}
+%br
 = link_to 'Edit', edit_repository_path(@repository)
 |
 = link_to 'Back', repositories_path
