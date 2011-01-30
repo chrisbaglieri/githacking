@@ -23,6 +23,10 @@ class Repository < ActiveRecord::Base
   def description
     github.description
   end
+
+  def languages
+    github.languages
+  end
   
   def issues
     @issues = {}
