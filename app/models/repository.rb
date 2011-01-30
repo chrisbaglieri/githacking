@@ -25,12 +25,14 @@ class Repository < ActiveRecord::Base
   def issues
     @issues = {}
     GH_TAGS.each do |tag|
-      github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
+        github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
         @issues[tag] ||= []
         @issues[tag] << issue
       end
     end
     return @issues
+  rescue 
+  {}
   end
   
   def commits
