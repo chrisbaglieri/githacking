@@ -4,6 +4,8 @@ class Repository < ActiveRecord::Base
 
   validate :verify_github_existence
   acts_as_taggable
+  
+  scope :owned_by, lambda { |user| where(:user => user.username) }
 
   def metadata
     @raw ||= Curl::Easy.perform(github_repository_metadata_url)
@@ -41,26 +43,38 @@ class Repository < ActiveRecord::Base
   
   def needs
     metadata['needs']
+  rescue 
+  []
   end
   
   def categories
     metadata['categories']
+  rescue 
+  []
   end
   
   def desired_roles
     metadata['needs']['roles']
+  rescue 
+  []
   end
   
   def desired_skills
     metadata['needs']['skills']
+  rescue 
+  []
   end
   
   def mentions
     metadata['mentions']
+  rescue 
+  []
   end
   
   def long_description
     metadata['long_description']
+  rescue 
+  nil
   end
   
   private

@@ -7,6 +7,7 @@ gem 'haml'
 gem 'octopi'
 gem 'acts-as-taggable-on'
 gem 'curb'
+gem 'redis'
 gem 'authlogic'
 
 group :test, :development do

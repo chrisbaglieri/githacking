@@ -4,6 +4,7 @@ class RepositoriesController < ApplicationController
   # GET /repositories
   # GET /repositories.xml
   def index
+    #@repositories = Repository.owned_by(current_user)
     @repositories = Repository.all
 
     respond_to do |format|
@@ -78,6 +79,17 @@ class RepositoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(repositories_url) }
       format.xml  { head :ok }
+    end
+  end
+  
+  # GET /repositories/search
+  # GET /repositories/search.xml
+  def search
+    @repositories = Repository.all
+
+    respond_to do |format|
+      format.html # search.html.haml
+      format.xml  { render :xml => @repositories }
     end
   end
 end
