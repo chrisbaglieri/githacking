@@ -7,6 +7,7 @@ gem 'haml'
 gem 'octopi'
 gem 'acts-as-taggable-on'
 gem 'curb'
+gem 'authlogic', git: 'https://github.com/jjb/authlogic.git'
 
 group :test, :development do
   gem 'haml-rails'
