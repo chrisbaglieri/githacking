@@ -37,7 +37,7 @@
           Languages
       %div
         %h4
-          = render :partial => "languages", :locals => {:languages => @repository.languages.keys }
+          = render :partial => "languages", :collection => @repository.languages.keys, :locals => {:repository => @repository}
         %p
 
       %h3
