@@ -57,6 +57,10 @@ class Repository < ActiveRecord::Base
     metadata['mentions']
   end
   
+  def long_description
+    metadata['long_description']
+  end
+  
   private
 
   def github
