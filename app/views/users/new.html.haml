@@ -1,6 +1,4 @@
 %h1
   Register
-= form_for @user, :url => account_path do |f|
-  = render :partial => "form", :object => f
-  = f.submit "Register"
+= link_to 'Log in to Github', 'https://github.com/login/oauth/authorize?client_id=' + GITHUB[:client_id] + '&redirect_uri=' + GITHUB[:redirect_uri]
 
