@@ -8,7 +8,7 @@ gem 'octopi'
 gem 'acts-as-taggable-on'
 gem 'curb'
 gem 'redis'
-gem 'authlogic', git: 'https://github.com/jjb/authlogic.git'
+gem 'authlogic'
 
 group :test, :development do
   gem 'haml-rails'

@@ -2,7 +2,6 @@
   :javascript
     $(document).ready(function() {
       $('#infos').accordion();
-      $('#issues').tabs();
     });
 
 %p#notice
@@ -10,54 +9,75 @@
 #repository
   %h1.title
     = link_to @repository.user, @repository.owner_url
-    \/
+    %span
+      \/
     = link_to @repository.name, @repository.url
   .data
-    %strong
-      tags: 
-    = @repository.tag_list
-
     #infos
 
       %h3
         %a{href: '#'}
           What is #{@repository.name}?
       %div
-        Repo data here.
-        %br
-        Repo data here.
-        %br
-        Repo data here.
-        %br
+        %h4
+          Description
+        %p
+          = @repository.description
+        %h4
+          Categories
+        %p
+          = @repository.categories.to_sentence
+        %h4
+          Long Description
+        %p
+          = @repository.long_description
       %h3
         %a{href: '#'}
-          Can I help?
+          Can you help?
       %div
-        Metadata needed here.
+        %h4
+          Roles We're Looking To Fill
+        %ul
+          - @repository.desired_roles.each do |role|
+            %li 
+              = role
+        %h4
+          Skills We're Looking For
+        %ul
+          - @repository.desired_skills.each do |skill|
+            %li 
+              = skill
       %h3
         %a{href: '#'}
-          Give me a task!
+          Still interested? Let's get this party started!
       %div
         
         #issues
-          - if not @repository.issues.empty?
-            %ul
-              - @repository.issues.keys.each do |tag|
-                %li
-                  %a{href: "##{tag}-issue"}
-                    = Repository::human_tag(tag)
-            - @repository.issues.keys.each do |tag|
-              %div{id: "#{tag}-issue"}
-                - @repository.issues[tag].each do |issue|
-                  .issue
-                    .title
-                      = link_to "[#{issue.number}] #{issue.title}", @repository.url
-                    .date
-                      = issue.created_at
-                    .body
-                      = issue.body
+          %h4
+            Bytesize
+          - if not @repository.issues[Repository::GH_TAGS[0]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[0]], :locals => {:repository => @repository}
           - else
             Currently, there are no issues available.
+          %h4
+            Easy
+          - if not @repository.issues[Repository::GH_TAGS[1]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[1]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
+          %h4
+            Medium
+          - if not @repository.issues[Repository::GH_TAGS[2]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[2]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
+          %h4
+            Hard
+          - if not @repository.issues[Repository::GH_TAGS[3]].empty?
+            = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => @repository}
+          - else
+            Currently, there are no issues available.
+%br
 = link_to 'Edit', edit_repository_path(@repository)
 |
 = link_to 'Back', repositories_path

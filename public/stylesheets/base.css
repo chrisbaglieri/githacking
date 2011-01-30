@@ -24,6 +24,12 @@ form input.text, input.title, textarea { width: 98%; }
 #content .secondary-navigation ul li:hover { background: #DBDBDB; }
 #content .secondary-navigation ul li a { text-decoration: none; }
 
+/* Repositories */
+#content #repository .title { font-family: "museo-1","museo-2",serif; }
+#content #repository .title span { color: #3D3D3D;}
+#content #repository .title a { color: #3D3D3D; text-decoration: none; }
+#content #repository .issue { padding-bottom: 15px; }
+
 /* Footer */
 #footer { background: url("../images/footerhead.jpg") repeat-x scroll 0 0 #F2F2F2; margin-bottom: 40px; }
 #footer-container { padding-top: 20px; }
