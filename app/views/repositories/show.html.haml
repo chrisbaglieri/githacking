@@ -34,9 +34,20 @@
           = @repository.long_description
       %h3
         %a{href: '#'}
-          Can I help?
+          Can You help?
       %div
-        Metadata needed here.
+        %h4
+          Roles We're Looking To Fill
+        %ul
+          - @repository.desired_roles.each do |role|
+            %li 
+              = role
+        %h4
+          Skills We're Looking For
+        %ul
+          - @repository.desired_skills.each do |skill|
+            %li 
+              = skill
       %h3
         %a{href: '#'}
           Give me a task!
