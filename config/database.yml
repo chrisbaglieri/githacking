@@ -1,7 +1,6 @@
 development:
   adapter: postgresql
   database: githacking_development
-  username: josiah
   
 test:
   adapter: postgresql

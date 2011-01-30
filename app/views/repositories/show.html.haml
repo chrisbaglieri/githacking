@@ -31,6 +31,15 @@
           Long Description
         %p
           = @repository.long_description
+
+      %h3
+        %a{href: '#'}
+          Languages
+      %div
+        %h4
+          = render :partial => "languages", :collection => @repository.languages.keys, :locals => {:repository => @repository}
+        %p
+
       %h3
         %a{href: '#'}
           Can you help?
