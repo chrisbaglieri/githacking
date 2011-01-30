@@ -35,7 +35,7 @@ module RepoWeights
     def self.get_contrib_weights(username, repo)
         contribs = Curl::Easy.perform("http://github.com/api/v2/json/repos/show/#{username}/#{repo}/contributors")
         rails_contribs = JSON.parse(contribs.body_str)
-        return rails_contribs["contributors"].length*0.05
+        return rails_contribs["contributors"].length*0.025
     end
 
     def self.get_weights(username, repo)
