@@ -38,3 +38,19 @@ tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody
 #footer-container { padding-top: 20px; }
 #footer-navigation a { padding: 0pt 7px; }
 
+#log-in-to-github {
+    width: 250px;
+    padding: 25px;
+    text-align: center;
+    margin: 0 auto;
+}
+a #log-in-to-github {
+    text-decoration: none;
+    font-size: 15px;
+}
+a {
+    text-decoration: none;
+    color: navy;
+}
+
+

@@ -1,2 +1,6 @@
-= link_to 'Log in with Github!', github_login_url
+%a{href: github_login_url}
+  #log-in-to-github
+    Use your GitHub account to log in
+= @user_session.errors.inspect unless @user_session.errors.empty?
+  
 
