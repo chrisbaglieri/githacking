@@ -10,8 +10,11 @@ gem 'curb'
 gem 'redis'
 gem 'authlogic'
 
-group :test, :development do
+group :test do
   gem 'webmock'
+end
+
+group :test, :development do
   gem 'haml-rails'
   gem 'rspec'
   gem 'rspec-rails'
