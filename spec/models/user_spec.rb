@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  [:login, :github_access_token].each do |field|
+    it 'should require #{field} on create' do
+      Factory.build(:user, field => nil).save.should be_false
+    end
+  end
+  
 end
