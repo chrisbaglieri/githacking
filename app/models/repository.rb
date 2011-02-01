@@ -5,7 +5,7 @@ class Repository < ActiveRecord::Base
   validate :verify_github_existence
   acts_as_taggable
   
-  scope :owned_by, lambda { |user| where(:user => user.username) }
+  scope :owned_by, lambda { |user| where(:user => user.login) }
 
   def metadata
     @raw ||= Curl::Easy.perform(github_repository_metadata_url)
@@ -17,7 +17,7 @@ class Repository < ActiveRecord::Base
   end
   
   def owner_url
-    "http://github.com/#{github.owner}"
+    "http://github.com/#{user}"
   end
   
   def description

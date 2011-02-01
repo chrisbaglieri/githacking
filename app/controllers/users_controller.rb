@@ -27,7 +27,6 @@ class UsersController < ApplicationController
 
     @user = User.new(login: data['login'], email: data['email'], github_access_token: token, gravatar_id: data['gravatar_id'])
     if @user.save
-      flash[:notice] = "Account registered!"
       redirect_back_or_default account_url
     else
       render :action => :new
@@ -43,7 +42,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = @current_user # makes our views "cleaner" and more consistent
+    @user = @current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to account_url

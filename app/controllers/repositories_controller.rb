@@ -1,37 +1,19 @@
 class RepositoriesController < ApplicationController
-  include RepositoriesHelper
   
   # GET /repositories
-  # GET /repositories.xml
   def index
-    #@repositories = Repository.owned_by(current_user)
+    # @repositories = Repository.owned_by(current_user)
     @repositories = Repository.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @repositories }
-    end
   end
 
   # GET /repositories/1
-  # GET /repositories/1.xml
   def show
     @repository = Repository.find(params[:id])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @repository }
-    end
   end
 
   # GET /repositories/new
-  # GET /repositories/new.xml
   def new
     @repository = Repository.new
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @repository }
-    end
   end
 
   # GET /repositories/1/edit
@@ -40,56 +22,36 @@ class RepositoriesController < ApplicationController
   end
 
   # POST /repositories
-  # POST /repositories.xml
   def create
     @repository = Repository.new(params[:repository])
-    respond_to do |format|
-      if @repository.save
-        format.html { redirect_to(@repository, :notice => 'Repository was successfully created.') }
-        format.xml  { render :xml => @repository, :status => :created, :location => @repository }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @repository.errors, :status => :unprocessable_entity }
-      end
+    
+    if @repository.save
+      redirect_to(@repository, :notice => 'Repository was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
   # PUT /repositories/1
-  # PUT /repositories/1.xml
   def update
     @repository = Repository.find(params[:id])
 
-    respond_to do |format|
-      if @repository.update_attributes(params[:repository])
-        format.html { redirect_to(@repository, :notice => 'Repository was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @repository.errors, :status => :unprocessable_entity }
-      end
+    if @repository.update_attributes(params[:repository])
+      redirect_to(@repository, :notice => 'Repository was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
   # DELETE /repositories/1
-  # DELETE /repositories/1.xml
   def destroy
     @repository = Repository.find(params[:id])
     @repository.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(repositories_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(repositories_url)
   end
   
-  # GET /repositories/search
-  # GET /repositories/search.xml
   def search
     @repositories = Repository.all
-
-    respond_to do |format|
-      format.html # search.html.haml
-      format.xml  { render :xml => @repositories }
-    end
   end
 end

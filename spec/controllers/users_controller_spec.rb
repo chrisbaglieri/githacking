@@ -104,7 +104,7 @@ describe UsersController do
       Curl::Easy.should_receive(:http_post).with('https://github.com/login/oauth/access_token', 'client_id=' + Github.config[:client_id] + '&redirect_uri=' + Github.config[:redirect_uri] + '&client_secret=' + Github.config[:secret] + '&code=' + code).and_return(result)
 
       post :create, code: code
-
+      session['flash'][:notice].should == 'GitHub didn\'t respond. Try again?'
       response.should be_redirect
     end
     
