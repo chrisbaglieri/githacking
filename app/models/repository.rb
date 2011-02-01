@@ -1,7 +1,7 @@
 class Repository < ActiveRecord::Base
   
   validates_presence_of :project_name
-  validates_uniqueness_of :project_name, :allow_nil => true, :allow_blank => true, scope: :user
+  validates_uniqueness_of :project_name, scope: :user
 
   validate :verify_github_existence
   acts_as_taggable
