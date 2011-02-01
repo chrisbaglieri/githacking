@@ -8,5 +8,5 @@ end
 
 Factory.define :repository do |r|
   r.user { Factory.next :repo_user }
-  r.name { Factory.next :repo_name }
+  r.project_name { Factory.next :repo_name }
 end

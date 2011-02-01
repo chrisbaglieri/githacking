@@ -4,11 +4,11 @@ describe "repositories/index.html.haml" do
   before(:each) do
     assign(:repositories, [
       stub_model(Repository,
-        :name => "Name",
+        :project_name => "Project name",
         :user => "User"
       ),
       stub_model(Repository,
-        :name => "Name",
+        :project_name => "Project name",
         :user => "User"
       )
     ])
@@ -16,6 +16,6 @@ describe "repositories/index.html.haml" do
 
   it "renders a list of repositories" do
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
+    assert_select "tr>td", :text => "Project name".to_s, :count => 2
   end
 end

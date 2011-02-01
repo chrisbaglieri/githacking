@@ -1,6 +1,6 @@
 class Repository < ActiveRecord::Base
   
-  validates_uniqueness_of :name, scope: :user
+  validates_uniqueness_of :project_name, scope: :user
 
   validate :verify_github_existence
   acts_as_taggable
@@ -84,21 +84,21 @@ class Repository < ActiveRecord::Base
   private
 
   def github
-    @github ||= Octopi::User.find(self.user).repository(self.name)
+    @github ||= Octopi::User.find(self.user).repository(self.project_name)
   end
   
   def metadata
-    @raw ||= Curl::Easy.perform("https://github.com/#{user}/#{name}/raw/master/githacking.yaml")
+    @raw ||= Curl::Easy.perform("https://github.com/#{user}/#{project_name}/raw/master/githacking.yaml")
     YAML::load(@raw.body_str)
   end
   
   def verify_github_existence
     begin 
         user = Octopi::User.find(self.user)
-        user.repository(self.name)
+        user.repository(self.project_name)
     rescue Octopi::NotFound => e
         if e.message =~ /Repository/
-            self.errors.add(:name, e.message)
+            self.errors.add(:project_name, e.message)
         elsif e.message =~ /User/
             self.errors.add(:user, e.message)
         end
