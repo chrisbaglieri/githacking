@@ -5,7 +5,13 @@ class UsersController < ApplicationController
   def create
     url = 'https://github.com/login/oauth/access_token'
     query = 'client_id=' + Github.config[:client_id] + '&redirect_uri=' + Github.config[:redirect_uri] + '&client_secret=' + Github.config[:secret] + '&code=' + params[:code]
-    token = Curl::Easy.http_post(url, query).body_str.split(/=/)[1]
+    
+    token_response = Curl::Easy.http_post(url, query).body_str
+    if token_response.empty?
+      flash[:notice] = 'GitHub didn\'t respond. Try again?'
+      redirect_to login_path and return
+    end
+    token = token_response.split(/=/)[1]
     
     url = 'https://github.com/api/v2/json/user/show?access_token=' + token
     data = JSON::parse(Curl::Easy.http_get(url).body_str)['user']
