@@ -96,6 +96,10 @@ class Repository < ActiveRecord::Base
     begin 
         user = Octopi::User.find(self.user)
         user.repository(self.project_name)
+    rescue ArgumentError => e
+        if e.message =~ /User/
+            self.errors.add(:user, "cannot be empty")
+        end
     rescue Octopi::NotFound => e
         if e.message =~ /Repository/
             self.errors.add(:project_name, e.message)
