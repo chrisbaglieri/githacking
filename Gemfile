@@ -11,6 +11,7 @@ gem 'redis'
 gem 'authlogic'
 
 group :test, :development do
+  gem 'webmock'
   gem 'haml-rails'
   gem 'rspec'
   gem 'rspec-rails'
