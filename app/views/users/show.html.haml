@@ -1,5 +1,8 @@
 :erb
   <p>
+    <%= image_tag @user.gravatar_url %>
+  </p>
+  <p>
     <b>Login:</b>
     <%=h @user.login %>
   </p>

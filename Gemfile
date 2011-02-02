@@ -9,6 +9,7 @@ gem 'acts-as-taggable-on'
 gem 'curb'
 gem 'redis'
 gem 'authlogic'
+gem 'gravtastic'
 
 group :test do
   gem 'webmock'

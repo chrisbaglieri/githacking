@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Gravtastic
+  gravtastic
+
   acts_as_authentic do |c|
     # email field is not always populated in a github account
     c.validate_email_field false
