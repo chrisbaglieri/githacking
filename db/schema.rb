@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201155921) do
+ActiveRecord::Schema.define(:version => 20110202162513) do
 
   create_table "repositories", :force => true do |t|
     t.string   "project_name", :null => false
@@ -51,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20110201155921) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "github_access_token",                :null => false
-    t.string   "gravatar_id"
     t.string   "email"
   end
 

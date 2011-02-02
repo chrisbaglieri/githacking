@@ -31,7 +31,6 @@ def stub_anonymous_user_request username='someuser'
   stub_request(:get, "https://github.com/api/v2/yaml/user/show/#{username}?").
     to_return(status: 200, body: <<USER, headers: {})
 user:
-  gravatar_id: b8dbb1987e8e5318584865f880036796
   company: GitHub
   name: Firstname Lastname
   created_at: 2007/10/19 22:24:19 -0700
@@ -86,7 +85,6 @@ def stub_authenticated_user_request username='theuser'
   body = <<USER
 --- 
 user: 
-  gravatar_id: b8dbb1987e8e5318584865f880036796
   company: GitHub
   name: Firstname Lastname
   created_at: 2007/10/19 22:24:19 -0700

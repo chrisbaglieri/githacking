@@ -12,9 +12,8 @@ describe UsersController do
 
       get_result = double Object
       email = 'some@email.com'
-      gravatar_id = 'gravatariddoesntmatter'
       login = 'somelogin'
-      user_data = {email: email, gravatar_id: gravatar_id, login: login}
+      user_data = {email: email, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
@@ -22,7 +21,6 @@ describe UsersController do
 
       u = User.last
       u.email.should == email
-      u.gravatar_id.should == gravatar_id
       u.login.should == login
       u.github_access_token.should == token
     end
@@ -35,9 +33,8 @@ describe UsersController do
       Curl::Easy.should_receive(:http_post).with('https://github.com/login/oauth/access_token', 'client_id=' + Github.config[:client_id] + '&redirect_uri=' + Github.config[:redirect_uri] + '&client_secret=' + Github.config[:secret] + '&code=' + code).and_return(result)
 
       get_result = double Object
-      gravatar_id = 'gravatariddoesntmatter'
       login = 'somelogin'
-      user_data = {gravatar_id: gravatar_id, login: login}
+      user_data = {login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
@@ -45,7 +42,6 @@ describe UsersController do
 
       u = User.last
       u.email.should == nil
-      u.gravatar_id.should == gravatar_id
       u.login.should == login
       u.github_access_token.should == token
     end
@@ -82,9 +78,8 @@ describe UsersController do
 
       get_result = double Object
       email = 'some@email.com'
-      gravatar_id = 'gravatariddoesntmatter'
       login = 'somelogin'
-      user_data = {email: email, gravatar_id: gravatar_id, login: login}
+      user_data = {email: email, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
