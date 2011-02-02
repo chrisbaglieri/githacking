@@ -2,23 +2,16 @@ require 'spec_helper'
 
 describe "repositories/show.html.haml" do
   before(:each) do
-    @repository = assign(:repository, stub_model(Repository,
-                                                 :name => "Name",
-                                                 :user => "User"
-                                                 ))
-    @github = double Object
-    @repository.stub!(:github).and_return(@github)
-    @github.stub!(:issues).and_return({})
-    @github.stub!(:url).and_return('http://theurl.com')
-    @github.stub!(:description).and_return('The description of the project')
-    @github.stub!(:languages).and_return({'languageA' => 12345, 'languageB' => 43111, 'languageC' => 14141})
+    stub_all_github_requests_for(@repository = Factory.build(:repository, project_name: 'Theprojectname', user: 'theuser'))
+
+    @repository.save!
+    assign(:repository, @repository)
   end
 
   it "renders attributes in <p>" do
     render
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Name/)
-    # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/User/)
+
+    rendered.should match(/Theprojectname/)
+    rendered.should match(/theuser/)
   end
 end

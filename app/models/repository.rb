@@ -82,8 +82,6 @@ class Repository < ActiveRecord::Base
   nil
   end
   
-  private
-
   def github
     @github ||= Octopi::User.find(self.user).repository(self.project_name)
   end
