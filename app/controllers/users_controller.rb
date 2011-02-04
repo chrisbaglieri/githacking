@@ -25,7 +25,7 @@ class UsersController < ApplicationController
       return
     end
 
-    @user = User.new(login: data['login'], email: data['email'], github_access_token: token, gravatar_id: data['gravatar_id'])
+    @user = User.new(login: data['login'], email: data['email'], github_access_token: token)
     if @user.save
       redirect_back_or_default account_url
     else

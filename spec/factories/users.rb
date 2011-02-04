@@ -8,7 +8,6 @@ end
 
 Factory.define :user do |u|
   u.login { Factory.next :login }
-  u.gravatar_id 'someidthatisamd5hashofemail'
   u.email { Factory.next :email }
   u.github_access_token 'somegithubaccesstoken'
 end

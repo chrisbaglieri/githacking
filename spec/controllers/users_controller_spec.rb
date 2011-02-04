@@ -13,9 +13,8 @@ describe UsersController do
 
       get_result = double Object
       email = 'some@email.com'
-      gravatar_id =  Digest::MD5.hexdigest(email)
       login = 'somelogin'
-      user_data = {email: email, gravatar_id: gravatar_id, login: login}
+      user_data = {email: email, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
@@ -23,7 +22,6 @@ describe UsersController do
 
       u = User.last
       u.email.should == email
-      u.gravatar_id.should == gravatar_id
       u.login.should == login
       u.github_access_token.should == token
     end
@@ -37,8 +35,7 @@ describe UsersController do
 
       get_result = double Object
       login = 'somelogin'
-      gravatar_id = 'gravatariddoesntmatter'
-      user_data = {gravatar_id: gravatar_id, login: login}
+      user_data = {login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
@@ -46,7 +43,6 @@ describe UsersController do
 
       u = User.last
       u.email.should == nil
-      u.gravatar_id.should == gravatar_id
       u.login.should == login
       u.github_access_token.should == token
     end
@@ -83,9 +79,8 @@ describe UsersController do
 
       get_result = double Object
       email = 'some@email.com'
-      gravatar_id = 'gravatariddoesntmatter'
       login = 'somelogin'
-      user_data = {email: email, gravatar_id: gravatar_id, login: login}
+      user_data = {email: email, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
       
