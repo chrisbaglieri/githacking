@@ -1,3 +1,4 @@
+require 'digest/md5'
 require 'spec_helper'
 
 describe UsersController do
@@ -12,7 +13,7 @@ describe UsersController do
 
       get_result = double Object
       email = 'some@email.com'
-      gravatar_id = 'gravatariddoesntmatter'
+      gravatar_id =  Digest::MD5.hexdigest(email)
       login = 'somelogin'
       user_data = {email: email, gravatar_id: gravatar_id, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
@@ -35,8 +36,8 @@ describe UsersController do
       Curl::Easy.should_receive(:http_post).with('https://github.com/login/oauth/access_token', 'client_id=' + Github.config[:client_id] + '&redirect_uri=' + Github.config[:redirect_uri] + '&client_secret=' + Github.config[:secret] + '&code=' + code).and_return(result)
 
       get_result = double Object
-      gravatar_id = 'gravatariddoesntmatter'
       login = 'somelogin'
+      gravatar_id = 'gravatariddoesntmatter'
       user_data = {gravatar_id: gravatar_id, login: login}
       get_result.should_receive(:body_str).and_return("{\"user\": #{user_data.to_json}}")
       Curl::Easy.should_receive(:http_get).with('https://github.com/api/v2/json/user/show?access_token=' + token).and_return(get_result)
