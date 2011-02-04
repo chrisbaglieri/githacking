@@ -8,11 +8,6 @@ class Repository < ActiveRecord::Base
   
   scope :owned_by, lambda { |user| where(:user => user.login) }
 
-  def metadata
-    @raw ||= Curl::Easy.perform(github_repository_metadata_url)
-    YAML::load(@raw.body_str)
-  end
-
   def url
     github.url
   end
