@@ -1,6 +1,12 @@
 Githacking::Application.routes.draw do
 
-  root to: 'repositories#index'
+  root to: "pages#home"
+  
+  match "about" => 'pages#about'
+  match "faq" => 'pages#faq'
+  match "terms" => 'pages#terms'
+  match "privacy" => 'pages#privacy'
+
   match '/users/oauth' => 'users#create', as: 'oauth_callback'
 
   resource :user_session
@@ -12,5 +18,4 @@ Githacking::Application.routes.draw do
     # Doing resources here screws with users routing
     get '/:id' => 'repositories#show', as: 'repository'
   end
-  
 end
