@@ -1,56 +1,99 @@
-body { background: url("../images/header.gif") repeat-x scroll 0 0 #F2F2F2; color: #666252; }
+/* colors */
+/* images */
+/* typography */
+/* mixins */
+/* globals */
+body {
+  background: url("../images/header.gif") repeat-x scroll 0 0 #f2f2f2;
+  color: #666252; }
+  body a {
+    text-decoration: none;
+    color: navy; }
+  body form abbr {
+    border-bottom: 0pt; }
+  body form label {
+    display: block; }
+  body form input.text, body form input.title, body form textarea {
+    width: 98%; }
 
-form abbr { border-bottom: 0pt; }
-form label { display: block;}
-form input.text, input.title, textarea { width: 98%; }
-
-/* Header */
-#logo { padding-top: 10px; }
-#logo img { float: left; margin-right: 10px; }
-#logo h1 { margin-top: 15px; font-size: 3em; font-weight: 700; font-family: "museo-1","museo-2",serif; color: #789B31; }
-#logo h1 a { text-decoration: none; color: #FFFFFF; }
-#main-navigation ul { margin-right: 0pt; margin-top: 23px; padding: 2px; float: right; list-style: none; height: 35px; background-color: #789B31; }
-#main-navigation ul { -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; border-radius: 5px; }
-#main-navigation ul li { float: left; margin: 2px; display: block; text-align: center; z-index: 200; position: relative; }
-#main-navigation ul li a { padding: 6px 14px; text-decoration: none; color: #eee; background-color: #222; display: block; text-align: center; }
-#main-navigation ul li a { -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; border-radius: 4px; }
-
-/* Main Content */
-#content { background: #FFFFFF; padding-top: 30px; padding-bottom: 30px; }
-#content .main-content { background: url("../images/main-content-background.png") repeat-y left; margin-right: 0pt; }
-#content .secondary-navigation ul { margin: 10px 0pt 0pt 0pt; padding: 0pt; width: 200px; }
-#content .secondary-navigation ul li { list-style-type: none; padding: 10px 0pt 10px 20px; background: #F2F2F2; margin-bottom: 5px; }
-#content .secondary-navigation ul li { -webkit-border-radius-topright: 5px; -webkit-border-radius-bottomright: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -khtml-border-radius-topright: 5px; -khtml-border-radius-bottomright: 5px; border-radius-topright: 5px; border-radius-bottomright: 5px; }
-#content .secondary-navigation ul li:hover { background: #DBDBDB; }
-#content .secondary-navigation ul li a { text-decoration: none; }
-
-/* Repositories */
-#content #repository .title { font-family: "museo-1","museo-2",serif; }
-#content #repository .title span { color: #3D3D3D;}
-#content #repository .title a { color: #3D3D3D; text-decoration: none; }
-#content #repository .issue { padding-bottom: 15px; }
-th, td, caption { padding: 5px 0px 5px 10px; }
-tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td { padding-bottom: 5px; padding-left: 10px; }
-#content .title { font-family: "museo-1","museo-2",serif; color: #3D3D3D; }
-
-/* Footer */
-#footer { background: url("../images/footerhead.jpg") repeat-x scroll 0 0 #F2F2F2; margin-bottom: 40px; }
-#footer-container { padding-top: 20px; }
-#footer-navigation a { padding: 0pt 7px; }
-
-#log-in-to-github {
-    width: 250px;
-    padding: 25px;
+/* header */
+#header #logo {
+  padding-top: 10px; }
+  #header #logo img {
+    float: left;
+    margin-right: 10px; }
+  #header #logo h1 {
+    margin-top: 15px;
+    font-size: 3em;
+    font-weight: 700;
+    font-family: "museo-1", "museo-2", serif; }
+    #header #logo h1 a {
+      text-decoration: none;
+      color: white; }
+#header #main-navigation ul {
+  margin-right: 0pt;
+  margin-top: 23px;
+  padding: 2px;
+  float: right;
+  list-style: none;
+  height: 35px;
+  background-color: #789b31;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px; }
+  #header #main-navigation ul li {
+    float: left;
+    margin: 2px;
+    display: block;
     text-align: center;
-    margin: 0 auto;
-}
-a #log-in-to-github {
-    text-decoration: none;
-    font-size: 15px;
-}
-a {
-    text-decoration: none;
-    color: navy;
-}
+    z-index: 200;
+    position: relative; }
+    #header #main-navigation ul li a {
+      padding: 6px 14px;
+      text-decoration: none;
+      color: #eeeeee;
+      background-color: #222222;
+      display: block;
+      text-align: center;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -khtml-border-radius: 4px;
+      border-radius: 4px; }
 
+/* content - global */
+#content {
+  background: #FFFFFF;
+  padding-top: 30px;
+  padding-bottom: 30px; }
+  #content .main-content {
+    background: url("../images/main-content-background.png") repeat-y left;
+    margin-right: 0pt; }
 
+/* content - repositories */
+#content #repository .title {
+  font-family: "museo-1", "museo-2", serif; }
+  #content #repository .title span {
+    color: #3d3d3d; }
+  #content #repository .title a {
+    color: #3d3d3d;
+    text-decoration: none; }
+#content #repository .issue {
+  padding-bottom: 15px; }
+
+/* footer */
+#footer {
+  background: url("../images/footerhead.jpg") repeat-x scroll 0 0 #f2f2f2;
+  margin-bottom: 40px; }
+  #footer #footer-container {
+    padding-top: 20px; }
+    #footer #footer-container #footer-navigation a {
+      padding: 0pt 7px; }
+
+/* no tables, too painful, get rid of this later */
+th, td, caption {
+  padding: 5px 0px 5px 10px; }
+
+tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td {
+  padding-bottom: 5px;
+  padding-left: 10px; }

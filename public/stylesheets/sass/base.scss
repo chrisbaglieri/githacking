@@ -1,0 +1,133 @@
+/* colors */
+$background_color: #666252;
+$header_background_color: #F2F2F2;
+$githacking_color: #FFFFFF;
+$main_navigation_outer_color: #789B31;
+$main_navigation_inner_color: #222222;
+$main_navigation_text_color: #EEEEEE;
+$link_color: navy;
+$repsitory_title_color: #3D3D3D;
+$footer_background: #F2F2F2;
+
+/* images */
+$header_image: "../images/header.gif";
+$main_content_background_image: "../images/main-content-background.png";
+$footer_head_image: "../images/footerhead.jpg";
+
+/* typography */
+$pretty_font: "museo-1","museo-2",serif;
+
+/* mixins */
+@mixin rounded_corners($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-khtml-border-radius: $radius;
+	border-radius: $radius;
+}
+
+/* globals */
+body { 
+    background: url($header_image) repeat-x scroll 0 0 $header_background_color; 
+    color: $background_color; 
+	a {
+	    text-decoration: none;
+	    color: $link_color;
+	}
+    form {
+        abbr { border-bottom: 0pt; }
+        label { display: block; }
+        input.text, input.title, textarea { width: 98%; }
+    }
+}
+
+/* header */
+#header {
+	#logo { 
+		padding-top: 10px;
+		img { float: left; margin-right: 10px; }
+		h1 {
+			margin-top: 15px; 
+			font-size: 3em; 
+			font-weight: 700; 
+			font-family: $pretty_font;
+			a { 
+				text-decoration: none; 
+				color: $githacking_color; 
+			}
+		}
+	}
+	#main-navigation {
+		ul { 
+			margin-right: 0pt;
+			margin-top: 23px; 
+			padding: 2px; 
+			float: right; 
+			list-style: none; 
+			height: 35px; 
+			background-color: $main_navigation_outer_color;
+			@include rounded_corners(5px);
+			li {
+				float: left; 
+				margin: 2px; 
+				display: block; 
+				text-align: center; 
+				z-index: 200; 
+				position: relative;
+				a {
+					padding: 6px 14px; 
+					text-decoration: none; 
+					color: $main_navigation_text_color; 
+					background-color: $main_navigation_inner_color; 
+					display: block; 
+					text-align: center;
+					@include rounded_corners(4px);
+				}
+			}
+		}
+	}
+}
+
+/* content - global */
+#content { 
+	background: #FFFFFF; 
+	padding-top: 30px; 
+	padding-bottom: 30px; 
+	.main-content { 
+		background: url($main_content_background_image) repeat-y left; 
+		margin-right: 0pt; 
+	}
+}
+
+/* content - repositories */
+#content {
+	#repository {
+		.title { 
+			font-family: $pretty_font;
+			span { color: $repsitory_title_color; }
+			a { 
+				color: $repsitory_title_color; 
+				text-decoration: none; 
+			}
+		}
+		.issue { 
+			padding-bottom: 15px; 
+		}
+	}
+}
+
+/* footer */
+#footer {
+	background: url($footer_head_image) repeat-x scroll 0 0 $footer_background; 
+	margin-bottom: 40px;
+	#footer-container { 
+		padding-top: 20px; 
+		#footer-navigation {
+			a { padding: 0pt 7px; }
+		}
+	}
+}
+
+
+/* no tables, too painful, get rid of this later */
+th, td, caption { padding: 5px 0px 5px 10px; }
+tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td { padding-bottom: 5px; padding-left: 10px; }
