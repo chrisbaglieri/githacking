@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110202162513) do
+ActiveRecord::Schema.define(:version => 20110204185106) do
 
   create_table "repositories", :force => true do |t|
     t.string   "project_name", :null => false
     t.string   "user",         :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "meta_data"
   end
 
   create_table "taggings", :force => true do |t|

@@ -1,4 +1,5 @@
 class Repository < ActiveRecord::Base
+  serialize :meta_data
   
   validates_presence_of :project_name
   validates_uniqueness_of :project_name, scope: :user
@@ -82,8 +83,16 @@ class Repository < ActiveRecord::Base
   end
   
   def metadata
-    @raw ||= Curl::Easy.perform("https://github.com/#{user}/#{project_name}/raw/master/githacking.yaml")
-    YAML::load(@raw.body_str)
+    if !self.meta_data
+      raw = Curl::Easy.perform("https://github.com/#{user}/#{project_name}/raw/master/githacking.yaml")
+      if raw.header_str =~ /200 OK/
+        y = YAML::load(raw.body_str)
+        self.meta_data = y
+        save
+      end
+    end
+
+    self.meta_data
   end
   
   def verify_github_existence
