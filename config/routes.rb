@@ -11,8 +11,6 @@ Githacking::Application.routes.draw do
   resources :users, path: ''  do
     # Doing resources here screws with users routing
     get '/:id' => 'repositories#show', as: 'repository'
-    get '/:id/edit' => 'repositories#edit', as: 'edit_repository'
-    put '/:id' => 'repositories#update'
   end
   
 end

@@ -82,7 +82,9 @@ BODY
 end
 
 def stub_authenticated_user_request username='theuser'
-  body = <<USER
+  stub_request(:get, "https://github.com/api/v2/yaml/user/show/#{username}?").
+    to_return(status: 200, body: <<BODY, headers: {})
+
 --- 
 user: 
   company: GitHub
@@ -98,6 +100,7 @@ user:
   permission: 
   followers_count: 1692
   login: #{username}
+  gravatar_id: includedeventhoughwedontuseit
   email: address@email.com
   total_private_repo_count: 1
   collaborators: 3
@@ -109,14 +112,7 @@ user:
     collaborators: 60
     space: 20971520
     private_repos: 125
- 
-USER
-  stub_request(:get, /https:\/\/github.com\/api\/v2\/yaml\/user\/show\/(.+)\??/).
-    to_return(status: 200, body: body, headers: {})
-
-  stub_request(:get, /https:\/\/github.com\/api\/v2\/yaml\/user\/show\??/).
-    to_return(status: 200, body: body, headers: {})
-
+BODY
   
 
 end
@@ -126,3 +122,4 @@ def stub_all_github_requests_for repo
   stub_anonymous_repo_request repo
   stub_anonymous_repo_languages_request repo
 end
+alias :stub_github_requests_for :stub_all_github_requests_for

@@ -86,7 +86,3 @@
             = render :partial => "issue", :collection => @repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => @repository}
           - else
             Currently, there are no issues available.
-%br
-= link_to 'Edit', edit_repository_path(@repository)
-|
-= link_to 'Back', repositories_path

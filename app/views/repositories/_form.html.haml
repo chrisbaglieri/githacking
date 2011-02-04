@@ -1,4 +1,4 @@
-= form_for(@repository) do |f|
+= form_for(@repository.user, @repository) do |f|
   - if @repository.errors.any?
     #error_explanation
       %h2
