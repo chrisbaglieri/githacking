@@ -73,38 +73,48 @@ class Repository < ActiveRecord::Base
   nil
   end
   
+  def self.from_github_to_domain(github_repo)
+    repository              = Repository.new
+    repository.url          = github_repo.url
+    repository.homepage     = github_repo.homepage
+    repository.watchers     = github_repo.watchers
+    repository.forks        = github_repo.forks
+    repository.fork         = github_repo.fork
+    repository.private      = github_repo.private
+    repository.open_issues  = github_repo.open_issues
+    repository.owner        = github_repo.owner
+    repository.description  = github_repo.description
+    repository.name         = github_repo.name
+    repository.project_name = github_repo.name #TODO: remove me
+    repository.source       = "" #TODO: fixme
+    repository.parent       = "" #TODO: fixme
+
+    # pushed_at
+    # private
+    # created_at # this is diff from this table's created_at
+    # has_wiki
+    # has_downloads
+    # has_issues
+
+    repository
+  end
+
   def self.find_repository(github_user_id, project_name)
     repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{project_name}").first
 
     if not repository
-      grepo                  = Octopi::User.find(github_user_id).repository(project_name)
-      repository             = Repository.new
-      repository.url         = grepo.url
-      repository.homepage    = grepo.homepage
-      repository.watchers    = grepo.watchers
-      repository.forks       = grepo.forks
-      repository.fork        = grepo.fork
-      repository.private     = grepo.private
-      repository.open_issues = grepo.open_issues
-      repository.owner       = grepo.owner
-      repository.description = grepo.description
-      repository.name        = grepo.name
-      repository.user        = github_user_id #TODO:not sure what this is for
-      repository.project_name = grepo.name #TODO: remove me
-      repository.source      = "" #TODO: fixme
-      repository.parent      = "" #TODO: fixme
+      begin
+        grepo = Octopi::User.find(github_user_id).repository(project_name)
 
-      # TODO: should do some error checking here
-      repository.save
+        # TODO: should do some error checking here
+        repository = from_github_to_domain(grepo)
+        repository.user = github_user_id #TODO:not sure what this is for
+        repository.save
 
-      # pushed_at
-      # private
-      # created_at # this is diff from this table's created_at
-      # has_wiki
-      # has_downloads
-      # has_issues
+      rescue Octopi::NotFound => e
+        raise ActiveRecord::RecordNotFound
+      end
     end
-
     repository
   end
   

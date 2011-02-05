@@ -1,41 +1,36 @@
 require 'spec_helper'
 
 describe Repository do
-  it "should not allow users who are not on github to create project" do
+  before do
+    @repo = Factory.build :repository, project_name: 'testing', user: 'user'
+  end
+
+  it "should handle when users who are not on github" do
     Octopi::User.stub!(:find).with("user").and_return {
         raise Octopi::NotFound.new("User")
     }
-    @repo = Factory.build :repository, project_name: 'testing', user: 'user'
-    @repo.valid?
-    @repo.errors[:user].should == ["The User you were looking for could not be found, or is private."]
+
+    lambda {
+      Repository.find_repository(@repo.user, @repo.project_name)
+    }.should raise_error(ActiveRecord::RecordNotFound)
   end
-  it "should not allow repos that don't exist on a user" do
+
+  it "should handle when repository cannot be found" do
     user = double Octopi::User
     Octopi::User.should_receive(:find).with('user').and_return(user)
     user.should_receive(:repository).with('testing').and_return {
         raise Octopi::NotFound.new("Repository")
     }
-    @repo = Factory.build :repository, project_name: 'testing', user: 'user'
-    @repo.valid?
-    @repo.errors[:project_name].should == ["The Repository you were looking for could not be found, or is private."]
+
+    lambda {
+      Repository.find_repository(@repo.user, @repo.project_name)
+    }.should raise_error(ActiveRecord::RecordNotFound)
   end
-  it "should not allow duplicate repo project names within the scope of one user" do
-    user = double Object
-    Octopi::User.stub!(:find).with("user").and_return(user)
-    user.should_receive(:repository).twice
+
+  it "should not call github if the repository has already been saved" do
     @repo1 = Factory.create :repository, project_name: 'Repo', user: 'user'
-    @repo2 = Factory.build :repository, project_name: 'Repo', user: 'user'
-    @repo2.save.should be_false
-  end
-  it "should allow duplicate repo project names outside the scope of one user" do
-    user = double Object
-    Octopi::User.stub!(:find).with("user1").and_return(user)
-    user.should_receive(:repository)
-    user2 = double Object
-    Octopi::User.stub!(:find).with("user2").and_return(user2)
-    user2.should_receive(:repository)
-    @repo1 = Factory.create :repository, project_name: 'Repo', user: 'user1'
-    @repo2 = Factory.build :repository, project_name: 'Repo', user: 'user2'
-    @repo2.save.should be_true
+    Octopi::User.should_not_receive(:find)
+    Repository.should_receive(:where).and_return([@repo1])
+    Repository.find_repository(@repo1.user, @repo1.project_name)
   end
 end

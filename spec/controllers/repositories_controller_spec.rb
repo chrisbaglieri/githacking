@@ -10,8 +10,9 @@ describe RepositoriesController do
   
   describe "GET show" do
     it "assigns the requested repository as @repository" do
+      Repository.should_receive(:find_repository).with(@r.user, @r.project_name).and_return(@r)
+
       get :show, id: @r.project_name, user_id: @r.user
-      Repository.stub!(:find_repository).with(@r.user, @r.project_name).and_return(@r)
       assigns(:repository).id.should == @r.id
     end
 

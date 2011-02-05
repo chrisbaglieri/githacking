@@ -8,6 +8,10 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/1
   def show
-    @repository = Repository.find_repository(params[:user_id], params[:id])
+    begin
+      @repository = Repository.find_repository(params[:user_id], params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render(:file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404)
+    end
   end
 end
