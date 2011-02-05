@@ -4,12 +4,8 @@ class Repository < ActiveRecord::Base
   validates_presence_of :project_name
   validates_uniqueness_of :project_name, scope: :user
 
-  # TOD: fix me
-  #validate :verify_github_existence
   acts_as_taggable
   
-  scope :owned_by,  lambda { |user| where(:user => user.login) }
-
   def owner_url
     "http://github.com/#{user}"
   end
@@ -129,23 +125,6 @@ class Repository < ActiveRecord::Base
     end
 
     self.meta_data
-  end
-  
-  def verify_github_existence
-    begin 
-        user = Octopi::User.find(self.user)
-        user.repository(self.project_name)
-    rescue ArgumentError => e
-        if e.message =~ /User/
-            self.errors.add(:user, "cannot be empty")
-        end
-    rescue Octopi::NotFound => e
-        if e.message =~ /Repository/
-            self.errors.add(:project_name, e.message)
-        elsif e.message =~ /User/
-            self.errors.add(:user, e.message)
-        end
-    end
   end
   
   HUMAN_TAGS = {'gh-bitesize' => 'Bite Size', 'gh-easy' => 'Easy', 'gh-medium' => 'Medium', 'gh-hard' => 'Hard'}
