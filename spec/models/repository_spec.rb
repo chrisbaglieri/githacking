@@ -33,4 +33,21 @@ describe Repository do
     Repository.should_receive(:where).and_return([@repo1])
     Repository.find_repository(@repo1.user, @repo1.project_name)
   end
+
+  it "should handle github object to our repo translation" do
+    @result = Repository.from_github_to_domain(@repo)  
+    @result.url.should          == @repo.url  
+    @result.homepage.should     == @repo.homepage
+    @result.watchers.should     == @repo.watchers
+    @result.forks.should        == @repo.forks
+    @result.fork.should         == @repo.fork
+    @result.private.should      == @repo.private
+    @result.open_issues.should  == @repo.open_issues
+    @result.owner.should        == @repo.owner
+    @result.description.should  == @repo.description
+    @result.name.should         == @repo.name
+    @result.project_name.should == @repo.name #TODO: remove me
+    @result.source.should       == "" #TODO: fixme
+    @result.parent.should       == "" #TODO: fixme
+  end
 end
