@@ -8,7 +8,6 @@ class RepositoriesController < ApplicationController
 
   # GET /repositories/1
   def show
-    @repository = Repository.where(user: params[:user_id], project_name: params[:id]).first
+    @repository = Repository.find_repository(params[:user_id], params[:id])
   end
-  
 end

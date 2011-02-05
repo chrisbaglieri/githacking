@@ -4,25 +4,19 @@ class Repository < ActiveRecord::Base
   validates_presence_of :project_name
   validates_uniqueness_of :project_name, scope: :user
 
-  validate :verify_github_existence
+  # TOD: fix me
+  #validate :verify_github_existence
   acts_as_taggable
   
-  scope :owned_by, lambda { |user| where(:user => user.login) }
+  scope :owned_by,  lambda { |user| where(:user => user.login) }
 
-  def url
-    github.url
-  end
-  
   def owner_url
     "http://github.com/#{user}"
   end
   
-  def description
-    github.description
-  end
-
   def languages
-    github.languages
+    # TODO: FIXME
+    #github.languages
   end
   
   def issues
@@ -39,7 +33,8 @@ class Repository < ActiveRecord::Base
   end
   
   def commits
-    github.commits
+    # TODO: FIXME
+    #github.commits
   end
   
   def needs
@@ -78,8 +73,39 @@ class Repository < ActiveRecord::Base
   nil
   end
   
-  def github
-    @github ||= Octopi::User.find(self.user).repository(self.project_name)
+  def self.find_repository(github_user_id, project_name)
+    repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{project_name}").first
+
+    if not repository
+      grepo                  = Octopi::User.find(github_user_id).repository(project_name)
+      repository             = Repository.new
+      repository.url         = grepo.url
+      repository.homepage    = grepo.homepage
+      repository.watchers    = grepo.watchers
+      repository.forks       = grepo.forks
+      repository.fork        = grepo.fork
+      repository.private     = grepo.private
+      repository.open_issues = grepo.open_issues
+      repository.owner       = grepo.owner
+      repository.description = grepo.description
+      repository.name        = grepo.name
+      repository.user        = github_user_id #TODO:not sure what this is for
+      repository.project_name = grepo.name #TODO: remove me
+      repository.source      = "" #TODO: fixme
+      repository.parent      = "" #TODO: fixme
+
+      # TODO: should do some error checking here
+      repository.save
+
+      # pushed_at
+      # private
+      # created_at # this is diff from this table's created_at
+      # has_wiki
+      # has_downloads
+      # has_issues
+    end
+
+    repository
   end
   
   def metadata

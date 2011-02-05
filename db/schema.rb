@@ -10,14 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204185106) do
+ActiveRecord::Schema.define(:version => 20110204232220) do
 
   create_table "repositories", :force => true do |t|
-    t.string   "project_name", :null => false
-    t.string   "user",         :null => false
+    t.string   "project_name",                     :null => false
+    t.string   "user",                             :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "meta_data"
+    t.string   "name"
+    t.string   "owner"
+    t.string   "description"
+    t.datetime "pushed_at"
+    t.string   "url",                              :null => false
+    t.boolean  "private",       :default => false
+    t.boolean  "has_wiki",      :default => false
+    t.string   "homepage",      :default => "f"
+    t.integer  "watchers",      :default => 0,     :null => false
+    t.integer  "forks",         :default => 0,     :null => false
+    t.boolean  "fork",          :default => false, :null => false
+    t.integer  "open_issues",   :default => 0,     :null => false
+    t.boolean  "has_issues",    :default => false, :null => false
+    t.boolean  "has_downloads", :default => false, :null => false
+    t.string   "source",                           :null => false
+    t.string   "parent",                           :null => false
   end
 
   create_table "taggings", :force => true do |t|
