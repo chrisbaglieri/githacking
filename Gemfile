@@ -13,6 +13,7 @@ gem 'gravtastic'
 
 group :test do
   gem 'webmock'
+  gem 'simplecov', '>= 0.3.8', :require => false # Will install simplecov-html as a dependency
 end
 
 group :test, :development do
