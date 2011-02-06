@@ -1,4 +1,6 @@
 class Repository < ActiveRecord::Base
+  has_many :languages
+
   serialize :meta_data
   
   validates_presence_of :project_name
@@ -8,11 +10,6 @@ class Repository < ActiveRecord::Base
   
   def owner_url
     "http://github.com/#{user}"
-  end
-  
-  def languages
-    # TODO: FIXME
-    #github.languages
   end
   
   def issues
@@ -91,6 +88,10 @@ class Repository < ActiveRecord::Base
     # has_wiki
     # has_downloads
     # has_issues
+
+    github_repo.languages.each do |k,v|
+      repository.languages << Language.new({:name => k, :bytes => v})
+    end
 
     repository
   end

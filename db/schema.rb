@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110204232220) do
+ActiveRecord::Schema.define(:version => 20110205214854) do
+
+  create_table "languages", :force => true do |t|
+    t.string   "name",                         :null => false
+    t.integer  "bytes",         :default => 0, :null => false
+    t.integer  "repository_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "repositories", :force => true do |t|
     t.string   "project_name",                     :null => false
