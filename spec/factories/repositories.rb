@@ -28,4 +28,6 @@ Factory.define :repository do |r|
   r.has_downloads false
   r.source        "blah/blah"
   r.parent        "blah/blah"
+  r.languages     { |languages| [languages.association(:language),
+                                 languages.association(:language)] }
 end
