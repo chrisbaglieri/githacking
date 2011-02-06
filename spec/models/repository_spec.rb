@@ -28,10 +28,9 @@ describe Repository do
   end
 
   it "should not call github if the repository has already been saved" do
-    @repo1 = Factory.create :repository, project_name: 'Repo', user: 'user'
     Octopi::User.should_not_receive(:find)
-    Repository.should_receive(:where).and_return([@repo1])
-    Repository.find_repository(@repo1.user, @repo1.project_name)
+    Repository.should_receive(:where).and_return([@repo])
+    Repository.find_repository(@repo.user, @repo.project_name)
   end
 
   it "should handle github object to our repo translation" do
