@@ -7,7 +7,7 @@ class AddMoreRepositoryColumnsToMatchGithub < ActiveRecord::Migration
     add_column :repositories, :url,         :string,    :null    => false
     add_column :repositories, :private,     :boolean,   :default => false
     add_column :repositories, :has_wiki,    :boolean,   :default => false
-    add_column :repositories, :homepage,    :string,    :null => true,  :default => false
+    add_column :repositories, :homepage,    :string,    :null => true
     add_column :repositories, :watchers,    :integer,   :null => false, :default => 0
     add_column :repositories, :forks,       :integer,   :null => false, :default => 0
     add_column :repositories, :fork,        :boolean,   :null => false, :default => false
