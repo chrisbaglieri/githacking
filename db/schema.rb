@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110205214854) do
+ActiveRecord::Schema.define(:version => 20110205221600) do
 
   create_table "languages", :force => true do |t|
     t.string   "name",                         :null => false
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20110205214854) do
     t.string   "url",                              :null => false
     t.boolean  "private",       :default => false
     t.boolean  "has_wiki",      :default => false
-    t.string   "homepage",      :default => "f"
+    t.string   "homepage"
     t.integer  "watchers",      :default => 0,     :null => false
     t.integer  "forks",         :default => 0,     :null => false
     t.boolean  "fork",          :default => false, :null => false
