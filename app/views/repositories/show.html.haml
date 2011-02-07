@@ -1,9 +1,3 @@
-- content_for :javascripts do
-  :javascript
-    $(document).ready(function() {
-      $('#infos').accordion();
-    });
-
 %p#notice
   = notice
 #repository
@@ -12,39 +6,5 @@
     %span
       \/
     = link_to @repository.name, @repository.url
-  .data
-    #infos
-
-      %h3
-        %a{href: '#'}
-          What is #{@repository.name}?
-      %div
-        %h4
-          Description
-        %p
-          = @repository.description
-        %h4
-          Categories
-        %p
-          = @repository.categories.to_sentence
-        %h4
-          Long Description
-        %p
-          = @repository.long_description
-
-      %h3
-        %a{href: '#'}
-          Can you help?
-      %div
-        %h4
-          Roles We're Looking To Fill
-        %ul
-          - @repository.desired_roles.each do |role|
-            %li 
-              = role
-        %h4
-          Skills We're Looking For
-        %ul
-          - @repository.desired_skills.each do |skill|
-            %li 
-              = skill
+  = render :partial => "statistics", :locals => { :repository => @repository }
+  = render :partial => "details", :locals => { :repository => @repository }

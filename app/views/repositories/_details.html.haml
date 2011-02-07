@@ -1,0 +1,61 @@
+%div.span-24
+  %h2
+    Repository Snapshot
+%div.span-12
+  %h3
+    Description
+  %p
+    = repository.description
+  %h3
+    Categories
+  %p
+    = repository.categories.to_sentence
+  %h3
+    Long Description
+  %p
+    = repository.long_description
+%div.span-12.last
+  %h3
+    Roles we're looking to fill
+  %ul
+    - repository.desired_roles.each do |role|
+      %li 
+        = role
+  %h3
+    Skills we're looking acquire
+  %ul
+    - repository.desired_skills.each do |skill|
+      %li 
+        = skill
+%div.span-24
+  %h2
+    How To Can Help
+  #issues
+    %h3
+      Bytesize
+    - if not repository.issues[Repository::GH_TAGS[0]].nil?
+      = render :partial => "issue", :collection => repository.issues[Repository::GH_TAGS[0]], :locals => { :repository => repository }
+    - else
+      %p
+        Currently, there are no byte sized issues available.
+    %h3
+      Easy
+    - if not repository.issues[Repository::GH_TAGS[1]].nil?
+      = render :partial => "issue", :collection => repository.issues[Repository::GH_TAGS[1]], :locals => {:repository => repository}
+    - else
+      %p
+        Currently, there are no easy issues available.
+    %h3
+      Medium
+    - if not repository.issues[Repository::GH_TAGS[2]].nil?
+      = render :partial => "issue", :collection => repository.issues[Repository::GH_TAGS[2]], :locals => {:repository => repository}
+    - else
+      %p
+        Currently, there are no medium issues available.
+    %h3
+      Hard
+    - if not repository.issues[Repository::GH_TAGS[3]].nil?
+      = render :partial => "issue", :collection => repository.issues[Repository::GH_TAGS[3]], :locals => {:repository => repository}
+    - else
+      %p
+        Currently, there are no hard issues available.
