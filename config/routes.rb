@@ -16,6 +16,9 @@ Githacking::Application.routes.draw do
   resource :account, controller: 'users'
   resources :users, path: ''  do
     # Doing resources here screws with users routing
-    get '/:id' => 'repositories#show', as: 'repository', :constraints => { :id => /.*/ }
+    constraints id: /[^\/]+/ do
+      get '/:id' => 'repositories#show', as: 'repository'
+      get '/:repository_id/issues(/:tag)' => 'repositories#issues', as: 'repository_issues'
+    end
   end
 end
