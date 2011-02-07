@@ -1,7 +1,8 @@
-#header
-  .container
-    #logo.span-13
-      = image_tag("logo.png")
-      %h1
-        = link_to("git hacking", root_path)
-    = render :partial => "shared/navigation"
+.container
+  #logo.span-16
+    = image_tag("terminal.png")
+    %h1
+      = link_to("git hacking", root_path)
+      %span
+        make contributing easier
+  = render :partial => "shared/navigation"

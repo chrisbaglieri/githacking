@@ -8,7 +8,9 @@ body {
   color: #666252; }
   body a {
     text-decoration: none;
-    color: navy; }
+    color: #006699; }
+    body a:hover {
+      color: #66ccff; }
   body form abbr {
     border-bottom: 0pt; }
   body form label {
@@ -21,15 +23,19 @@ body {
   padding-top: 10px; }
   #header #logo img {
     float: left;
-    margin-right: 10px; }
+    margin-right: 15px; }
   #header #logo h1 {
-    margin-top: 15px;
+    margin-top: 10px;
     font-size: 3em;
     font-weight: 700;
     font-family: "museo-1", "museo-2", serif; }
     #header #logo h1 a {
       text-decoration: none;
-      color: white; }
+      color: #222222; }
+    #header #logo h1 span {
+      font-family: "bistro-script-web-1", "bistro-script-web-2", cursive;
+      font-weight: normal;
+      color: #006699; }
 #header #main-navigation ul {
   margin-right: 0pt;
   margin-top: 23px;
@@ -37,7 +43,6 @@ body {
   float: right;
   list-style: none;
   height: 35px;
-  background-color: #789b31;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -khtml-border-radius: 5px;
@@ -56,28 +61,56 @@ body {
       background-color: #222222;
       display: block;
       text-align: center;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
-      -khtml-border-radius: 4px;
-      border-radius: 4px; }
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      -khtml-border-radius: 5px;
+      border-radius: 5px; }
 
 /* content - global */
 #content {
   background: #FFFFFF;
-  padding-top: 30px;
+  padding-top: 15px;
   padding-bottom: 30px; }
   #content .main-content {
     background: url("../images/main-content-background.png") repeat-y left;
     margin-right: 0pt; }
 
+/* content - landing */
 /* content - repositories */
 #content #repository .title {
-  font-family: "museo-1", "museo-2", serif; }
+  font-family: "museo-1", "museo-2", serif;
+  font-weight: 200; }
   #content #repository .title span {
     color: #3d3d3d; }
   #content #repository .title a {
-    color: #3d3d3d;
-    text-decoration: none; }
+    text-decoration: none;
+    padding: 5px; }
+#content #repository h2 {
+  font-family: "museo-1", "museo-2", serif;
+  font-weight: 200;
+  color: white;
+  background: #999999;
+  padding-left: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px; }
+#content #repository .statistic {
+  padding: 10px 0pt 15px 0pt;
+  margin-bottom: 20px;
+  color: #cccccc;
+  background: #eeeeee;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px; }
+  #content #repository .statistic img {
+    float: left;
+    padding: 0pt 10px;
+    display: block; }
+  #content #repository .statistic p {
+    margin: 0pt;
+    padding-right: 10px; }
 #content #repository .issue {
   padding-bottom: 15px; }
 
