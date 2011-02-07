@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "repositories/show.html.haml" do
   before(:each) do
-    stub_all_github_requests_for(@repository = Factory.build(:repository, project_name: 'Theprojectname', user: 'theuser'))
+    stub_all_github_requests_for(@repository = Factory.build(:repository, project_name: 'Theprojectname', owner: 'theuser'))
 
     @repository.save!
     assign(:repository, @repository)

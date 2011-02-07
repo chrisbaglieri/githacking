@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Repository do
   before do
-    @repo = Factory.build :repository, project_name: 'testing', user: 'user'
+    @repo = Factory.build :repository, project_name: 'testing', owner: 'user'
   end
 
   it "should handle when users who are not on github" do
@@ -11,7 +11,7 @@ describe Repository do
     }
 
     lambda {
-      Repository.find_repository(@repo.user, @repo.project_name)
+      Repository.find_repository(@repo.owner, @repo.project_name)
     }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
@@ -44,8 +44,8 @@ describe Repository do
     repo.should_receive(:open_issues).and_return(@repo.open_issues)
     repo.should_receive(:owner).and_return(@repo.owner)
     repo.should_receive(:description).and_return(@repo.description)
-    repo.should_receive(:name).and_return(@repo.name)
-    repo.should_receive(:project_name).and_return(@repo.project_name)
+    repo.should_receive(:name).twice.and_return(@repo.name)
+    repo.stub!(:project_name).and_return(@repo.project_name)
     repo.should_receive(:source).and_return(@repo.source)
     repo.should_receive(:parent).and_return(@repo.parent)
     repo.should_receive(:languages).and_return({"Clojure" => 123})

@@ -4,12 +4,12 @@ class Repository < ActiveRecord::Base
   serialize :meta_data
   
   validates_presence_of :project_name
-  validates_uniqueness_of :project_name, scope: :user
+  validates_uniqueness_of :project_name, scope: :owner
 
   acts_as_taggable
   
   def owner_url
-    "http://github.com/#{user}"
+    "http://github.com/#{owner}"
   end
   
   def issues

@@ -53,10 +53,10 @@ USER
 end
 
 def stub_anonymous_repo_request repo=(Factory.build :repository)
-  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{repo.user}/#{repo.project_name}?").
+  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{repo.owner}/#{repo.project_name}?").
     to_return(:status => 200, :body => <<BODY, :headers => {})
 repository:
-  url: https://github.com/#{repo.user}/#{repo.project_name}
+  url: https://github.com/#{repo.owner}/#{repo.project_name}
   has_issues: true
   homepage: http://#{repo.project_name}.rubyforge.org/
   watchers: 106
@@ -71,7 +71,7 @@ repository:
   pushed_at: 2010/05/05 15:28:38 -0700
   name: #{repo.project_name}
   description: This is the description of #{repo.project_name}.
-  owner: #{repo.user}
+  owner: #{repo.owner}
   open_issues: 0
 BODY
 end

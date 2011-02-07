@@ -8,7 +8,7 @@
   = notice
 #repository
   %h1.title
-    = link_to @repository.user, @repository.owner_url
+    = link_to @repository.owner, @repository.owner_url
     %span
       \/
     = link_to @repository.project_name, @repository.url
