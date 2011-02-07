@@ -54,7 +54,6 @@ describe Repository do
       before do
         @meta_data = "blah blah blah"
         @repo.meta_data = @meta_data
-        @repo.save
       end
 
       it "should not call github or save meta data" do
