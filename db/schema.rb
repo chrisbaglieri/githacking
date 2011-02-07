@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110207034729) do
+ActiveRecord::Schema.define(:version => 20110207052023) do
 
   create_table "languages", :force => true do |t|
     t.string   "name",                         :null => false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20110207034729) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "meta_data"
-    t.string   "name",                             :null => false
+    t.string   "name"
     t.string   "owner",                            :null => false
     t.string   "description"
     t.datetime "pushed_at"
