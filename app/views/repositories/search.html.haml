@@ -10,7 +10,7 @@
   
   <% @repositories.each do |repository| %>
     <tr>
-      <td><%= repository.project_name %></td>
+      <td><%= repository.name %></td>
       <td>
         <% unless repository.categories.blank? %>
             <%= repository.categories.to_sentence %>

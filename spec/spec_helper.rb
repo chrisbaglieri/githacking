@@ -68,14 +68,13 @@ USER
 end
 
 def stub_anonymous_repo_request_from_factory repo=(Factory.build :repository)
-  attrs = repo.attributes
-  attrs[:name] = attrs.delete :project_name
-  stub_anonymous_repo_request(attrs)
+  stub_anonymous_repo_request(repo.attributes.symbolize_keys)
 end
 
 def stub_anonymous_repo_request options={}
   # Set defaults
-  options.reverse_merge!(owner: 'someowner',
+  options.reverse_merge!(url: "https://github.com/someowner/some_project",
+                         owner: 'someowner',
                          name: 'some_project',
                          has_issues: true,
                          watchers: 25,
@@ -83,22 +82,24 @@ def stub_anonymous_repo_request options={}
                          created_at: '2008/04/18 16:14:24 -0700',
                          forks: 11,
                          fork: true,
+                         source: '', # 'somesource/project',
+                         parent: '', # 'parent/project',
                          has_wiki: true,
                          private: false,
+                         homepage: 'http://homepage.com',
                          pushed_at: '2010/05/05 15:28:38 -0700',
                          description: "This is the description of #{options[:name] || 'some_project'}.",
                          open_issues: 3)
                          
-  
   stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{options[:owner]}/#{options[:name]}?").
     to_return(:status => 200, :body => <<BODY, :headers => {})
 repository:
-  url: https://github.com/#{options[:owner]}/#{options[:name]}
+  url: #{options[:url]}
   has_issues: #{options[:has_issues]}
-  homepage: http://#{options[:name]}.rubyforge.org/
+  homepage: #{options[:homepage]}
   watchers: #{options[:watchers]}
-  source: #{options[:owner]}/#{options[:name]}
-  parent: otheruser/#{options[:name]}
+  source: #{options[:source]}
+  parent: #{options[:parent]}
   has_downloads: #{options[:has_downloads]}
   created_at: #{options[:created_at]}
   forks: #{options[:forks]}

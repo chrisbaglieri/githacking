@@ -11,13 +11,13 @@
     = link_to @repository.owner, @repository.owner_url
     %span
       \/
-    = link_to @repository.project_name, @repository.url
+    = link_to @repository.name, @repository.url
   .data
     #infos
 
       %h3
         %a{href: '#'}
-          What is #{@repository.project_name}?
+          What is #{@repository.name}?
       %div
         %h4
           Description

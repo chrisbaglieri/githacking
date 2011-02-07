@@ -3,8 +3,8 @@ class Repository < ActiveRecord::Base
 
   serialize :meta_data
   
-  validates_presence_of :project_name
-  validates_uniqueness_of :project_name, scope: :owner
+  validates_presence_of :name
+  validates_uniqueness_of :name, scope: :owner
 
   acts_as_taggable
   
@@ -75,10 +75,9 @@ class Repository < ActiveRecord::Base
     repository.fork         = github_repo.fork
     repository.private      = github_repo.private
     repository.open_issues  = github_repo.open_issues
-    repository.owner        = github_repo.owner
+    repository.owner        = github_repo.owner.login
     repository.description  = github_repo.description
     repository.name         = github_repo.name
-    repository.project_name = github_repo.name #TODO: remove me
     repository.source       = "" #TODO: fixme
     repository.parent       = "" #TODO: fixme
 
@@ -96,12 +95,12 @@ class Repository < ActiveRecord::Base
     repository
   end
 
-  def self.find_repository(github_user_id, project_name)
-    repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{project_name}").first
+  def self.find_repository(github_user_id, name)
+    repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{name}").first
 
     if not repository
       begin
-        grepo = Octopi::User.find(github_user_id).repository(project_name)
+        grepo = Octopi::User.find(github_user_id).repository(name)
 
         # TODO: should do some error checking here
         repository = from_github_to_domain(grepo)
@@ -116,7 +115,7 @@ class Repository < ActiveRecord::Base
   
   def metadata
     if !self.meta_data
-      raw = Curl::Easy.perform("https://github.com/#{user}/#{project_name}/raw/master/githacking.yaml")
+      raw = Curl::Easy.perform("https://github.com/#{user}/#{name}/raw/master/githacking.yaml")
       if raw.header_str =~ /200 OK/
         y = YAML::load(raw.body_str)
         self.meta_data = y
