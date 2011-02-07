@@ -23,14 +23,14 @@ describe Repository do
     }
 
     lambda {
-      Repository.find_repository(@repo.user, @repo.project_name)
+      Repository.find_repository(@repo.owner, @repo.project_name)
     }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
   it "should not call github if the repository has already been saved" do
     Octopi::User.should_not_receive(:find)
     Repository.should_receive(:where).and_return([@repo])
-    Repository.find_repository(@repo.user, @repo.project_name)
+    Repository.find_repository(@repo.owner, @repo.project_name)
   end
 
   it "should handle github object to our repo translation" do

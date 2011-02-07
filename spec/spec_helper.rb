@@ -77,7 +77,7 @@ BODY
 end
 
 def stub_anonymous_repo_languages_request repo=(Factory.build :repository)
-  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{repo.user}/#{repo.project_name}/languages?").
+  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{repo.owner}/#{repo.project_name}/languages?").
     to_return(:status => 200, :body => <<BODY, :headers => {})
 languages:
   Ruby: 223245
@@ -121,7 +121,7 @@ BODY
 end
 
 def stub_all_github_requests_for repo
-  stub_anonymous_user_request repo.user
+  stub_anonymous_user_request repo.owner
   stub_anonymous_repo_request repo
   stub_anonymous_repo_languages_request repo
 end

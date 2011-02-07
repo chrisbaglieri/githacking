@@ -2,7 +2,7 @@ Factory.sequence :repo_name do |n|
   "Repo#{n.ordinalize}"  
 end
 
-Factory.sequence :repo_user do |n|
+Factory.sequence :repo_owner do |n|
   "User#{n.ordinalize}"
 end
 
@@ -11,10 +11,9 @@ Factory.sequence :repo_url do |n|
 end
 
 Factory.define :repository do |r|
-  r.user         { Factory.next :repo_user }
+  r.owner        { Factory.next :repo_owner }
   r.project_name { Factory.next :repo_name }
   r.name         { Factory.next :repo_name }
-  r.owner        { Factory.next :repo_user }
   r.url          { Factory.next :repo_url }
   r.description  "Best ever"
   r.private       false

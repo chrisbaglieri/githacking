@@ -105,7 +105,6 @@ class Repository < ActiveRecord::Base
 
         # TODO: should do some error checking here
         repository = from_github_to_domain(grepo)
-        repository.user = github_user_id #TODO:not sure what this is for
         repository.save
 
       rescue Octopi::NotFound => e
