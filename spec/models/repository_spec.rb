@@ -36,7 +36,9 @@ describe Repository do
   it "should handle github object to our repo translation" do
     stub_anonymous_user_request(login: @repo.owner)
     stub_anonymous_repo_request_from_factory(@repo)
-    stub_anonymous_repo_languages_request(owner: @repo.owner, name: @repo.name, languages: {'Clojure' => 123})
+    stub_anonymous_repo_languages_request(owner: @repo.owner,
+                                          name: @repo.name,
+                                          languages: {'Clojure' => 123})
     
     repo = Octopi::User.find(@repo.owner).repository(@repo.name)
 
@@ -46,4 +48,34 @@ describe Repository do
     
     @result.attributes.should == @repo.attributes
   end
+
+  describe "metadata" do
+    describe "when meta data exists" do
+      before do
+        @meta_data = "blah blah blah"
+        @repo.meta_data = @meta_data
+        @repo.save
+      end
+
+      it "should not call github or save meta data" do
+        # webmock is used, so it will blow up if tried to use a real http call
+        @repo.should_not_receive(:save)
+
+        @repo.metadata
+      end
+    end
+
+    describe "when meta data doesn't exists" do
+      it "should save meta data into database" do
+        @repo.meta_data.should == nil
+
+        stub_metadata_request @repo.owner, @repo.name
+        @repo.should_receive(:save)
+
+        @repo.metadata
+        @repo.meta_data.should_not == nil
+      end
+    end
+  end
+
 end

@@ -116,7 +116,7 @@ class Repository < ActiveRecord::Base
   def metadata
     if !self.meta_data
       raw = Curl::Easy.perform("https://github.com/#{owner}/#{name}/raw/master/githacking.yaml")
-      if raw.header_str =~ /200 OK/
+      if raw.header_str =~ /200/
         y = YAML::load(raw.body_str)
         self.meta_data = y
         save

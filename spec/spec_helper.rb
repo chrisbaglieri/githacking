@@ -122,6 +122,32 @@ def stub_anonymous_repo_languages_request options={}
     to_return(:status => 200, :body => options.to_yaml, :headers => {})
 end
 
+def stub_metadata_request owner, project_name
+  stub_request(:get, "https://github.com/#{owner}/#{project_name}/raw/master/githacking.yaml"). to_return(:status => 200, body: <<BODY, :headers => {})
+---
+long_description: >
+    hello world this is a test for githacking at philly startup weekend!
+
+categories:
+    - clojure
+    - rabbitmq
+
+needs:
+    roles:
+        - developers
+        - evangelists
+        - testers
+        - ui
+    skills:
+        - awesome people
+
+mentions:
+    - http://aaronfeng.com
+    - http://twitter.com/aaronfeng
+BODY
+
+end
+
 def stub_authenticated_user_request options={}
   options.reverse_merge!(company: 'GitHacking',
                          name: 'Firstname Lastname',
