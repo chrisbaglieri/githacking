@@ -1,4 +1,7 @@
 class Repository < ActiveRecord::Base
+
+  TAGS = ['bytesize', 'easy', 'medium', 'hard']
+  
   has_many :languages
 
   serialize :meta_data
@@ -14,8 +17,8 @@ class Repository < ActiveRecord::Base
   
   def issues
     @issues = {}
-    GH_TAGS.each do |tag|
-        github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
+    TAGS.each do |tag|
+      github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
         @issues[tag] ||= []
         @issues[tag] << issue
       end
@@ -78,8 +81,8 @@ class Repository < ActiveRecord::Base
     repository.owner        = github_repo.owner.login
     repository.description  = github_repo.description
     repository.name         = github_repo.name
-    repository.source       = "" #TODO: fixme
-    repository.parent       = "" #TODO: fixme
+    repository.source       = "" #TODO: fixme, octopi does not support source
+    repository.parent       = "" #TODO: fixme, octopi does not support parent
 
     # pushed_at
     # private
@@ -126,11 +129,5 @@ class Repository < ActiveRecord::Base
     self.meta_data
   end
   
-  HUMAN_TAGS = {'gh-bitesize' => 'Bite Size', 'gh-easy' => 'Easy', 'gh-medium' => 'Medium', 'gh-hard' => 'Hard'}
-  GH_TAGS = ['gh-bitesize', 'gh-easy', 'gh-medium', 'gh-hard']
-  
-  def self.human_tag tag
-    HUMAN_TAGS[tag]
-  end
 
 end
