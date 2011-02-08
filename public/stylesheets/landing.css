@@ -1,0 +1,41 @@
+body {
+  background: url("../images/background.png") center top #99ccff;
+  padding-top: 210px;
+  background-repeat: no-repeat; }
+  body h1 {
+    color: #222222;
+    font-family: "museo-slab-1","museo-slab-2",serif;
+    font-size: 5em;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 0pt; }
+  body h2 {
+    font-size: 3em;
+    color: #00255E;
+    font-family: "bistro-script-web-1","bistro-script-web-2",cursive;
+    text-align: center; }
+  body #fodder {
+    padding-top: 20px; }
+    body #fodder h3 {
+      color: #3C5F96;
+      font-size: 2em;
+      font-family: "museo-slab-1","museo-slab-2",serif;
+      font-weight: 500; }
+    body #fodder p {
+      font-size: 1.3em; }
+    body #fodder img {
+      border: 5px solid #E7F6FF;
+      margin-bottom: 25px; }
+  body #meta {
+    color: #3C5F96;
+    font-size: 2em;
+    font-family: "museo-slab-1","museo-slab-2",serif;
+    font-weight: 500;
+    text-align: center; }
+  body #footer {
+    margin-bottom: 40px; }
+    body #footer #footer-container {
+      text-align: center;
+      padding-top: 20px; }
+      body #footer #footer-container #footer-navigation a {
+        padding: 0pt 7px; }

@@ -1,2 +1,39 @@
-%h1 Pages#home
-%p Find me in app/views/pages/home.html.haml
+= content_for :title, "Git Hacking"
+%h1 git hacking
+%h2 we make contributing easier</h2>
+#fodder
+  %div.prepend-2.span-20.append-2
+    %div.span-10
+      %h3 Find interesting repositories
+      %p
+        Need help finding cool Github repositories to work on? 
+        Git Hacking enables maintainers to add metadata to their projects.
+        Using this metadata, we find active repositories that are interesting to you, faster.
+    %div.span-10.last
+      = image_tag("screenshot-find.png")
+    %div.span-10
+      %h3 Promote your repository
+      %p
+        You've committed your repository. Cool. Now what? Finding the right collaborators is key.
+        Git Hacking gives you a way to share your needs, the roles you require, and the skills you're interested in.
+    %div.span-10.last
+      = image_tag("screenshot-promote.png")
+    %div.span-10
+      %h3 Work on tasks that fit you
+      %p
+        Open source is unique for each developer. Git Hacking embraces that.
+        We help maintainers match issues with developers of all levels.
+        If a company needs a task done faster, we give them tools to reward contributors
+        %strong and
+        maintainers for their hard work.
+    %div.span-10.last
+      = image_tag("screenshot-issues.png")
+#meta
+  %p
+    Follow us for details
+    = link_to "@githacking", "http://twitter.com/githacking"
+    or
+    = link_to "@blog", "http://blog.githacking.com"
+    %br
+    Questions?
+    = mail_to("team@githacking.com")

@@ -1,0 +1,52 @@
+body { 
+	background: url("../images/background.png") center top #99CCFF; 
+	padding-top: 210px; 
+	background-repeat: no-repeat;
+	h1 { 
+		color: #222222; 
+		font-family: "museo-slab-1","museo-slab-2",serif; 
+		font-size: 5em; 
+		text-align: center; 
+		font-weight: 700; 
+		margin-bottom: 0pt; 
+	}
+	h2 { 
+		font-size: 3em; 
+		color: #00255E; 
+		font-family: "bistro-script-web-1","bistro-script-web-2",cursive; 
+		text-align: center; 
+	}
+	#fodder { 
+		padding-top: 20px;
+		h3 { 
+			color: #3C5F96; 
+			font-size: 2em; 
+			font-family: "museo-slab-1","museo-slab-2",serif; 
+			font-weight: 500; 
+		}
+		p { 
+			font-size: 1.3em; 
+		}
+		img { 
+			border: 5px solid #E7F6FF; 
+			margin-bottom: 25px; 
+		}
+	}
+	#meta { 
+		color: #3C5F96; 
+		font-size: 2em; 
+		font-family: "museo-slab-1","museo-slab-2",serif; 
+		font-weight: 500; 
+		text-align: center; 
+	}
+	#footer {
+		margin-bottom: 40px;
+		#footer-container { 
+			text-align: center;
+			padding-top: 20px; 
+			#footer-navigation {
+				a { padding: 0pt 7px; }
+			}
+		}
+	}
+}
