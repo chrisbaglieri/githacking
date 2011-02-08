@@ -1,17 +1,19 @@
 class RepositoriesController < ApplicationController
+
+  before_filter :get_repository, only: [:show, :issues]
   
-  # GET /repositories
-  def index
-    # @repositories = Repository.owned_by(current_user)
-    @repositories = Repository.all
+  # GET /someuser/somerepo
+  def show
   end
 
-  # GET /repositories/1
-  def show
-    begin
-      @repository = Repository.find_repository(params[:user_id], params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render(:file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404)
-    end
+  def issues
+  end
+
+  private
+
+  def get_repository
+    @repository = Repository.find_or_import(params[:user_id], params[:id] || params[:repository_id])
+  rescue ActiveRecord::RecordNotFound
+    render(:file => "#{RAILS_ROOT}/public/404.html", :layout => false, :status => 404)
   end
 end

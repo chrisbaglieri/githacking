@@ -1,0 +1,21 @@
+#issues
+  %h3 Bytesize
+  - if not @repository.issues[Repository::TAGS[0]].nil?
+    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[0]], :locals => { :repository => repository }
+  - else
+    %p Currently, there are no byte sized issues available.
+  %h3 Easy
+  - if not @repository.issues[Repository::TAGS[1]].nil?
+    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[1]], :locals => {:repository => repository}
+  - else
+    %p Currently, there are no easy issues available.
+  %h3 Medium
+  - if not @repository.issues[Repository::TAGS[2]].nil?
+    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[2]], :locals => {:repository => repository}
+  - else
+    %p Currently, there are no medium issues available.
+  %h3 Hard
+  - if not @repository.issues[Repository::TAGS[3]].nil?
+    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[3]], :locals => {:repository => repository}
+  - else
+    %p Currently, there are no hard issues available.

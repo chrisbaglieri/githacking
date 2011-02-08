@@ -98,12 +98,12 @@ class Repository < ActiveRecord::Base
     repository
   end
 
-  def self.find_repository(github_user_id, name)
-    repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{name}").first
+  def self.find_or_import(owner, name)
+    repository = Repository.where(url: "https://github.com/#{owner}/#{name}").first
 
-    if not repository
+    if repository.nil?
       begin
-        grepo = Octopi::User.find(github_user_id).repository(name)
+        grepo = Octopi::User.find(owner).repository(name)
 
         # TODO: should do some error checking here
         repository = from_github_to_domain(grepo)
