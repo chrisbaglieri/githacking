@@ -18,14 +18,12 @@ class Repository < ActiveRecord::Base
   def issues
     @issues = {}
     TAGS.each do |tag|
-      github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
+      github_repository.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
         @issues[tag] ||= []
         @issues[tag] << issue
       end
     end
     return @issues
-  rescue 
-  {}
   end
   
   def commits
@@ -92,7 +90,7 @@ class Repository < ActiveRecord::Base
     # has_issues
 
     github_repo.languages.each do |k,v|
-      repository.languages << Language.new({:name => k, :bytes => v})
+      repository.languages << Language.new(name: k, bytes: v)
     end
 
     repository
@@ -103,10 +101,8 @@ class Repository < ActiveRecord::Base
 
     if repository.nil?
       begin
-        grepo = Octopi::User.find(owner).repository(name)
-
         # TODO: should do some error checking here
-        repository = from_github_to_domain(grepo)
+        repository = from_github_to_domain github_repository(owner, name)
         repository.save
 
       rescue Octopi::NotFound => e
@@ -127,6 +123,16 @@ class Repository < ActiveRecord::Base
     end
 
     self.meta_data
+  end
+
+  private
+
+  def github_repository
+    @github_repo ||= Repository.github_repository self.owner, self.name
+  end
+
+  def self.github_repository owner, name
+    Octopi::User.find(owner).repository(name)
   end
   
 

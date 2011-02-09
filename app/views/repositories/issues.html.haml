@@ -1,21 +1,13 @@
-#issues
-  %h3 Bytesize
-  - if not @repository.issues[Repository::TAGS[0]].nil?
-    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[0]], :locals => { :repository => repository }
-  - else
-    %p Currently, there are no byte sized issues available.
-  %h3 Easy
-  - if not @repository.issues[Repository::TAGS[1]].nil?
-    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[1]], :locals => {:repository => repository}
-  - else
-    %p Currently, there are no easy issues available.
-  %h3 Medium
-  - if not @repository.issues[Repository::TAGS[2]].nil?
-    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[2]], :locals => {:repository => repository}
-  - else
-    %p Currently, there are no medium issues available.
-  %h3 Hard
-  - if not @repository.issues[Repository::TAGS[3]].nil?
-    = render :partial => "issue", :collection => repository.issues[Repository::TAGS[3]], :locals => {:repository => repository}
-  - else
-    %p Currently, there are no hard issues available.
+#issues-wrapper
+  .tabs
+    %ul
+      - Repository::TAGS.each do |tag|
+        %li
+          %a{href: user_repository_issues_path(@repository.owner, @repository.name, tag)}
+            = tag.capitalize
+  .issues
+    - if @issues.nil? or @issues.empty?
+      Sorry, can't find any #{@tag} issues to work on.
+    - else
+      = render partial: 'issue', collection: @issues, locals: { repository: @repository }
+    

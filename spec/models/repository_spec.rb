@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Repository do
   before do
     @repo = Factory.build :repository, name: 'testing', owner: 'user'
+    stub_anonymous_user_request(login: @repo.owner)
+    stub_anonymous_repo_request_from_factory(@repo)
   end
 
   it "should handle when users who are not on github" do
@@ -34,8 +36,6 @@ describe Repository do
   end
 
   it "should handle github object to our repo translation" do
-    stub_anonymous_user_request(login: @repo.owner)
-    stub_anonymous_repo_request_from_factory(@repo)
     stub_anonymous_repo_languages_request(owner: @repo.owner,
                                           name: @repo.name,
                                           languages: {'Clojure' => 123})
@@ -49,7 +49,7 @@ describe Repository do
     @result.attributes.should == @repo.attributes
   end
 
-  describe "metadata" do
+  describe "#metadata" do
     describe "when meta data exists" do
       before do
         @meta_data = "blah blah blah"
@@ -74,6 +74,13 @@ describe Repository do
         @repo.metadata
         @repo.meta_data.should_not == nil
       end
+    end
+  end
+
+  describe "#issues" do
+    it 'should retrieve issues and organize them by tag' do
+      
+      @repo.issues
     end
   end
 

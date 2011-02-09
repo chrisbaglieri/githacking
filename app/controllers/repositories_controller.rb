@@ -7,6 +7,12 @@ class RepositoriesController < ApplicationController
   end
 
   def issues
+    @tag = params[:tag]
+    if @tag and Repository::TAGS.include? @tag
+      @issues = @repository.issues[@tag]
+    elsif @tag and !Repository::TAGS.include? @tag
+      redirect_to(user_repository_issues_path(@repository.owner, @repository.name, Repository::TAGS.first)) and return
+    end
   end
 
   private
