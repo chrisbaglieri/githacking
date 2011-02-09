@@ -1,5 +1,6 @@
 class Repository < ActiveRecord::Base
   has_many :languages
+  has_many :issues
 
   serialize :meta_data
   
