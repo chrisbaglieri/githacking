@@ -2,7 +2,7 @@
   .tabs
     %ul
       - Repository::TAGS.each do |tag|
-        %li
+        %li.tag
           %a{href: user_repository_issues_path(@repository.owner, @repository.name, tag)}
             = tag.capitalize
   .issues

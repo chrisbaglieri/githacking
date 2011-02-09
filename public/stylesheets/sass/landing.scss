@@ -1,8 +1,45 @@
+$main_navigation_inner_color: #222222;
+$main_navigation_text_color: #EEEEEE;
+@mixin rounded_corners($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-khtml-border-radius: $radius;
+	border-radius: $radius;
+}
+
 body { 
 	background: url("../images/background.png") center top #99CCFF; 
-	padding-top: 210px; 
 	background-repeat: no-repeat;
+	#main-navigation {
+		ul { 
+			margin-right: 0pt;
+			margin-top: 23px; 
+			padding: 2px; 
+			float: right; 
+			list-style: none; 
+			height: 35px; 
+			@include rounded_corners(5px);
+			li {
+				float: left; 
+				margin: 2px; 
+				display: block; 
+				text-align: center; 
+				z-index: 200; 
+				position: relative;
+				a {
+					padding: 6px 14px; 
+					text-decoration: none; 
+					color: $main_navigation_text_color; 
+					background-color: $main_navigation_inner_color; 
+					display: block; 
+					text-align: center;
+					@include rounded_corners(5px);
+				}
+			}
+		}
+	}
 	h1 { 
+		padding-top: 210px;
 		color: #222222; 
 		font-family: "museo-slab-1","museo-slab-2",serif; 
 		font-size: 5em; 
@@ -33,6 +70,7 @@ body {
 		}
 	}
 	#meta { 
+		padding-top: 30px;
 		color: #3C5F96; 
 		font-size: 2em; 
 		font-family: "museo-slab-1","museo-slab-2",serif; 

@@ -10,8 +10,6 @@ describe RepositoriesController do
   
   describe "GET show" do
     it "assigns the requested repository as @repository" do
-      Repository.should_receive(:find_repository).with(@r.owner, @r.name).and_return(@r)
-
       get :show, id: @r.name, user_id: @r.owner
       assigns(:repository).id.should == @r.id
     end
@@ -22,9 +20,9 @@ describe RepositoriesController do
   describe "GET issues" do
     before do
       Repository.should_receive(:find_or_import).and_return(@r)
-      @r.should_receive(:issues).and_return('easy' => [1,2,3], 'medium' => ['a','b','c'])
     end
     it 'assigns the issues for the repository for the given tag' do
+      @r.should_receive(:issues).and_return('easy' => [1,2,3], 'medium' => ['a','b','c'])
       get :issues, repository_id: @r.name, user_id: @r.owner, tag: 'easy'
       assigns(:tag).should == 'easy'
       assigns(:issues).should == [1,2,3]

@@ -1,8 +1,37 @@
 body {
   background: url("../images/background.png") center top #99ccff;
-  padding-top: 210px;
   background-repeat: no-repeat; }
+  body #main-navigation ul {
+    margin-right: 0pt;
+    margin-top: 23px;
+    padding: 2px;
+    float: right;
+    list-style: none;
+    height: 35px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px; }
+    body #main-navigation ul li {
+      float: left;
+      margin: 2px;
+      display: block;
+      text-align: center;
+      z-index: 200;
+      position: relative; }
+      body #main-navigation ul li a {
+        padding: 6px 14px;
+        text-decoration: none;
+        color: #eeeeee;
+        background-color: #222222;
+        display: block;
+        text-align: center;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        border-radius: 5px; }
   body h1 {
+    padding-top: 210px;
     color: #222222;
     font-family: "museo-slab-1","museo-slab-2",serif;
     font-size: 5em;
@@ -27,6 +56,7 @@ body {
       border: 5px solid #E7F6FF;
       margin-bottom: 25px; }
   body #meta {
+    padding-top: 30px;
     color: #3C5F96;
     font-size: 2em;
     font-family: "museo-slab-1","museo-slab-2",serif;
