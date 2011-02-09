@@ -1,3 +1,4 @@
 class Label < ActiveRecord::Base
-  belongs_to :issue
+  has_many :labels_tags
+  has_many :issues, :through => :labels_tags
 end

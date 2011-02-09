@@ -10,15 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209061333) do
+ActiveRecord::Schema.define(:version => 20110209221559) do
 
   create_table "issues", :force => true do |t|
-    t.string   "position"
+    t.string   "gravatar_id",                       :null => false
+    t.decimal  "position",                          :null => false
     t.integer  "number",            :default => 0,  :null => false
     t.integer  "votes",             :default => 0,  :null => false
-    t.integer  "comment"
+    t.integer  "comments",          :default => 0,  :null => false
     t.text     "body",              :default => ""
-    t.string   "title",                             :null => false
+    t.text     "title",             :default => ""
     t.string   "user",                              :null => false
     t.string   "state",                             :null => false
     t.datetime "closed_at"
@@ -31,9 +32,13 @@ ActiveRecord::Schema.define(:version => 20110209061333) do
 
   create_table "labels", :force => true do |t|
     t.string   "name",       :null => false
-    t.integer  "issue_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "labels_tags", :id => false, :force => true do |t|
+    t.integer "issue_id", :null => false
+    t.integer "label_id", :null => false
   end
 
   create_table "languages", :force => true do |t|

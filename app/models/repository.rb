@@ -8,20 +8,43 @@ class Repository < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :owner
 
   acts_as_taggable
-  
+
+  def issues_url(label)
+    "http://github.com/api/v2/json/issues/list/#{owner}/#{name}/label/#{label}"
+  end
+
   def owner_url
     "http://github.com/#{owner}"
   end
   
-  def issues
-    @issues = {}
-    GH_TAGS.each do |tag|
-        github.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
-        @issues[tag] ||= []
-        @issues[tag] << issue
-      end
+  def labeled_issues
+    return self.issues unless self.issues.empty?
+
+    issues_hash = {}
+    GH_TAGS.each do |label|
+        issues_hash[label] ||= []
+        response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
+
+        if response["issues"]
+          response["issues"].each do |i|
+            #i.delete "state"
+            labels = i.delete "labels"
+
+            new_issue = Issue.build(i)
+            self.issues << new_issue
+
+            labels.each do |name|
+              new_issue.labels << Label.find_or_create_by_name(:name => name)
+            end
+
+            issues_hash[label] << new_issue
+          end
+        end
+
+        save
     end
-    return @issues
+
+    issues_hash
   rescue 
   {}
   end
@@ -127,8 +150,8 @@ class Repository < ActiveRecord::Base
     self.meta_data
   end
   
-  HUMAN_TAGS = {'gh-bitesize' => 'Bite Size', 'gh-easy' => 'Easy', 'gh-medium' => 'Medium', 'gh-hard' => 'Hard'}
-  GH_TAGS = ['gh-bitesize', 'gh-easy', 'gh-medium', 'gh-hard']
+  HUMAN_TAGS = {'bitesize' => 'Bite Size', 'easy' => 'Easy', 'medium' => 'Medium', 'hard' => 'Hard'}
+  GH_TAGS = ['bitesize', 'easy', 'medium', 'hard']
   
   def self.human_tag tag
     HUMAN_TAGS[tag]
