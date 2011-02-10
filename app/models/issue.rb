@@ -14,11 +14,13 @@ class Issue < ActiveRecord::Base
   end
 
   def self.build(issue)
+    state = issue.delete "state"
     new_issue = nil
-    if issue["state"] == 'open'
+
+    if state == 'open'
       new_issue = OpenIssue.new
       new_issue.attributes = issue
-    elsif issue["state"] == 'closed'
+    elsif state == 'closed'
       new_issue = ClosedIssue.new
       new_issue.attributes = issue
     else
