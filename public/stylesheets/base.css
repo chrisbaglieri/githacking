@@ -75,7 +75,6 @@ body {
     background: url("../images/main-content-background.png") repeat-y left;
     margin-right: 0pt; }
 
-/* content - landing */
 /* content - repositories */
 #content #repository .title {
   font-family: "museo-1", "museo-2", serif;
@@ -85,7 +84,7 @@ body {
   #content #repository .title a {
     text-decoration: none;
     padding: 5px; }
-#content #repository h2 {
+#content #repository .section {
   font-family: "museo-1", "museo-2", serif;
   font-weight: 200;
   color: white;

@@ -1,35 +1,28 @@
 %div.span-24
-  %h2
-    Repository Snapshot
+  %h2.section Repository Snapshot
 %div.span-12
-  %h3
-    Description
-  %p
+  %h3 Description
+  %p 
     = repository.description
-  %h3
-    Categories
-  %p
+  %h3 Categories
+  %p 
     = repository.categories.to_sentence
-  %h3
-    Long Description
-  %p
+  %h3 Long Description
+  %p 
     = repository.long_description
 %div.span-12.last
-  %h3
-    Roles we're looking to fill
-  %ul
+  %h3 Roles we're looking to fill
+  %ul 
     - repository.desired_roles.each do |role|
       %li 
         = role
-  %h3
-    Skills we're looking acquire
+  %h3 Skills we're looking acquire
   %ul
     - repository.desired_skills.each do |skill|
       %li 
         = skill
 %div.span-24
-  %h2
-    How To Help
+  %h2.section How To Help
   #issues
     - repository.labeled_issues.each do |label, issues|
       %h3

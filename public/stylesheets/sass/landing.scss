@@ -1,0 +1,90 @@
+$main_navigation_inner_color: #222222;
+$main_navigation_text_color: #EEEEEE;
+@mixin rounded_corners($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-khtml-border-radius: $radius;
+	border-radius: $radius;
+}
+
+body { 
+	background: url("../images/background.png") center top #99CCFF; 
+	background-repeat: no-repeat;
+	#main-navigation {
+		ul { 
+			margin-right: 0pt;
+			margin-top: 23px; 
+			padding: 2px; 
+			float: right; 
+			list-style: none; 
+			height: 35px; 
+			@include rounded_corners(5px);
+			li {
+				float: left; 
+				margin: 2px; 
+				display: block; 
+				text-align: center; 
+				z-index: 200; 
+				position: relative;
+				a {
+					padding: 6px 14px; 
+					text-decoration: none; 
+					color: $main_navigation_text_color; 
+					background-color: $main_navigation_inner_color; 
+					display: block; 
+					text-align: center;
+					@include rounded_corners(5px);
+				}
+			}
+		}
+	}
+	h1 { 
+		padding-top: 210px;
+		color: #222222; 
+		font-family: "museo-slab-1","museo-slab-2",serif; 
+		font-size: 5em; 
+		text-align: center; 
+		font-weight: 700; 
+		margin-bottom: 0pt; 
+	}
+	h2 { 
+		font-size: 3em; 
+		color: #00255E; 
+		font-family: "bistro-script-web-1","bistro-script-web-2",cursive; 
+		text-align: center; 
+	}
+	#fodder { 
+		padding-top: 20px;
+		h3 { 
+			color: #3C5F96; 
+			font-size: 2em; 
+			font-family: "museo-slab-1","museo-slab-2",serif; 
+			font-weight: 500; 
+		}
+		p { 
+			font-size: 1.3em; 
+		}
+		img { 
+			border: 5px solid #E7F6FF; 
+			margin-bottom: 25px; 
+		}
+	}
+	#meta { 
+		padding-top: 30px;
+		color: #3C5F96; 
+		font-size: 2em; 
+		font-family: "museo-slab-1","museo-slab-2",serif; 
+		font-weight: 500; 
+		text-align: center; 
+	}
+	#footer {
+		margin-bottom: 40px;
+		#footer-container { 
+			text-align: center;
+			padding-top: 20px; 
+			#footer-navigation {
+				a { padding: 0pt 7px; }
+			}
+		}
+	}
+}
