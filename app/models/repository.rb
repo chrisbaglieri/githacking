@@ -10,7 +10,7 @@ class Repository < ActiveRecord::Base
   acts_as_taggable
 
   def issues_url(label)
-    "http://github.com/api/v2/json/issues/list/#{owner}/#{name}/label/#{label}"
+    "https://github.com/api/v2/json/issues/list/#{owner}/#{name}/label/#{label}"
   end
 
   def owner_url
@@ -23,7 +23,6 @@ class Repository < ActiveRecord::Base
 
       if response["issues"]
         response["issues"].each do |i|
-          #i.delete "state"
           labels = i.delete "labels"
 
           new_issue = Issue.build(i)

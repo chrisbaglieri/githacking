@@ -49,6 +49,61 @@ describe Repository do
     @result.attributes.should == @repo.attributes
   end
 
+  describe "populate_issues" do
+    before do
+      @expected_issues = []
+      @repo.should_receive(:issues).any_number_of_times.
+        and_return(@expected_issues)
+    end
+
+    describe "when called" do
+      describe "with issues" do
+        it "should populate labels" do
+          issues = {"issues" => [{"state" => "open", "labels" => ['yes']}]}
+          stub_anonymous_issues_request_with_labels @repo, issues
+
+          expected_labels = []
+
+          issue = Issue.new
+
+          Issue.should_receive(:build).any_number_of_times.
+            and_return(issue)
+
+          Label.should_receive(:find_or_create_by_name).any_number_of_times
+
+          issue.should_receive(:labels).any_number_of_times.
+            and_return(expected_labels)
+
+          @repo.populate_issues
+
+          # one issue per label
+          @expected_issues.count.should == 4
+
+          # total of 4 labels
+          expected_labels.count.should == 4
+        end
+
+        it "should populate issues" do
+          @repo.issues.count.should == 0
+
+          issues = {"issues" => [{"state" => "open", "labels" => []}]}
+          stub_anonymous_issues_request_with_labels @repo, issues
+
+          @repo.populate_issues
+
+          # one issue per label
+          @expected_issues.count.should == 4
+        end
+      end
+
+      it "should retrieve issues from github with our labels" do
+        issues = {"issues" => []}
+        stub_anonymous_issues_request_with_labels @repo, issues
+        @repo.populate_issues
+      end
+    end
+  end
+
   describe "metadata" do
     describe "when meta data exists" do
       before do
