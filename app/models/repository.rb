@@ -46,7 +46,7 @@ class Repository < ActiveRecord::Base
 
     GH_TAGS.each do |label|
       clause = ["issues.repository_id = (?) AND labels.name LIKE (?)", "#{self.id}", "%#{label}%"]
-      issues_hash[label] = Issue.includes(:labels).where(clause)
+      issues_hash[Repository.human_tag(label)] = Issue.includes(:labels).where(clause)
     end
 
     issues_hash

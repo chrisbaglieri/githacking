@@ -31,31 +31,11 @@
   %h2
     How To Help
   #issues
-    %h3
-      Bytesize
-    - if not repository.labeled_issues[Repository::GH_TAGS[0]].empty?
-      = render :partial => "issue", :collection => repository.labeled_issues[Repository::GH_TAGS[0]], :locals => { :repository => repository }
-    - else
-      %p
-        Currently, there are no byte sized issues available.
-    %h3
-      Easy
-    - if not repository.labeled_issues[Repository::GH_TAGS[1]].empty?
-      = render :partial => "issue", :collection => repository.labeled_issues[Repository::GH_TAGS[1]], :locals => {:repository => repository}
-    - else
-      %p
-        Currently, there are no easy issues available.
-    %h3
-      Medium
-    - if not repository.labeled_issues[Repository::GH_TAGS[2]].empty?
-      = render :partial => "issue", :collection => repository.labeled_issues[Repository::GH_TAGS[2]], :locals => {:repository => repository}
-    - else
-      %p
-        Currently, there are no medium issues available.
-    %h3
-      Hard
-    - if not repository.labeled_issues[Repository::GH_TAGS[3]].empty?
-      = render :partial => "issue", :collection => repository.labeled_issues[Repository::GH_TAGS[3]], :locals => {:repository => repository}
-    - else
-      %p
-        Currently, there are no hard issues available.
+    - repository.labeled_issues.each do |label, issues|
+      %h3
+      = label
+      - if issues and not issues.empty?
+        = render :partial => "issue", :collection => issues, :locals => { :repository => repository }
+      - else
+        %p
+          Currently, there are no issues available.
