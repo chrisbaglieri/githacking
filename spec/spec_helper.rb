@@ -187,7 +187,6 @@ def stub_authenticated_user_request options={}
                          plan_collaborators: 60,
                          plan_space: 20971520,
                          plan_private_repos: 125)
-                         public
   stub_request(:get, "https://github.com/api/v2/yaml/user/show/#{username}?").
     to_return(status: 200, body: <<BODY, headers: {})
 --- 
