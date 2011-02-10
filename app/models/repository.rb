@@ -17,31 +17,36 @@ class Repository < ActiveRecord::Base
     "http://github.com/#{owner}"
   end
   
-  def labeled_issues
-    return self.issues unless self.issues.empty?
-
-    issues_hash = {}
+  def populate_issues
     GH_TAGS.each do |label|
-        issues_hash[label] ||= []
-        response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
+      response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
 
-        if response["issues"]
-          response["issues"].each do |i|
-            #i.delete "state"
-            labels = i.delete "labels"
+      if response["issues"]
+        response["issues"].each do |i|
+          #i.delete "state"
+          labels = i.delete "labels"
 
-            new_issue = Issue.build(i)
-            self.issues << new_issue
+          new_issue = Issue.build(i)
+          self.issues << new_issue
 
-            labels.each do |name|
-              new_issue.labels << Label.find_or_create_by_name(:name => name)
-            end
-
-            issues_hash[label] << new_issue
+          labels.each do |name|
+            new_issue.labels << Label.find_or_create_by_name(:name => name)
           end
         end
+      end
+    end
 
-        save
+    save
+  end
+
+  def labeled_issues
+    populate_issues if self.issues.empty?
+
+    issues_hash = {}
+
+    GH_TAGS.each do |label|
+      clause = ["issues.repository_id = (?) AND labels.name LIKE (?)", "#{self.id}", "%#{label}%"]
+      issues_hash[label] = Issue.includes(:labels).where(clause)
     end
 
     issues_hash
