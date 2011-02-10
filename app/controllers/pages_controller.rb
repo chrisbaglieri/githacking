@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   def home
-    render :layout => 'landing'
+    if current_user
+      render 'dashboard'
+    else
+      render 'landing', :layout => 'landing'
+    end
   end
 
   def about
