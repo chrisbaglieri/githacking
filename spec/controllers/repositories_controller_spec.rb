@@ -3,6 +3,8 @@ require 'spec_helper'
 describe RepositoriesController do
 
   before do
+    request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("githacker:point65")
+
     @r = Factory.build :repository
     stub_github_requests_for @r
     @r.save

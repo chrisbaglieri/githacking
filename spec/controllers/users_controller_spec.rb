@@ -2,6 +2,9 @@ require 'digest/md5'
 require 'spec_helper'
 
 describe UsersController do
+  before do
+    request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("githacker:point65")
+  end
 
   describe 'POST :create' do
     it 'should create a user with oAuth2' do
