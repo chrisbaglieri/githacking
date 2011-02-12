@@ -28,7 +28,7 @@ describe Issue do
   describe "build" do
     it "should build OpenIssue" do
       issue_hash = {'state' => 'open'}
-      open_issue = OpenIssue.build(issue_hash)
+      open_issue = Issue.build(issue_hash)
 
       open_issue.class.should == OpenIssue
     end
