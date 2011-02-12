@@ -50,27 +50,29 @@ describe Repository do
   end
 
   describe "labeled_issues" do
-    it "should retrieve labeled issues" do
-      @repo.id = 42
+    describe "when the issues haven't been retrieved" do
+      it "should retrieve labeled issues" do
+        @repo.id = 42
 
-      index = 0
+        index = 0
 
-      where_clause = "issues.repository_id = (?) AND labels.name LIKE (?)"
-      query_method = mock(:query_method)
+        where_clause = "issues.repository_id = (?) AND labels.name LIKE (?)"
+        query_method = mock(:query_method)
 
-      query_method.should_receive(:where) { |clause|
-        clause.first.should  == where_clause
-        clause.second.should == "#{@repo.id}"
-        clause.third.should  == "%#{Repository::GH_TAGS[index]}%"
-        index += 1
-      }.exactly(4).times
+        query_method.should_receive(:where) { |clause|
+          clause.first.should  == where_clause
+          clause.second.should == "#{@repo.id}"
+          clause.third.should  == "%#{Repository::GH_TAGS[index]}%"
+          index += 1
+        }.exactly(4).times
 
-      @repo.should_receive(:populate_issues).and_return(true)
+        @repo.should_receive(:populate_issues).and_return(true)
 
-      Issue.should_receive(:includes).exactly(4).times.with(:labels).
-        and_return(query_method)
+        Issue.should_receive(:includes).exactly(4).times.with(:labels).
+          and_return(query_method)
 
-      @repo.labeled_issues
+        @repo.labeled_issues
+      end
     end
   end
 

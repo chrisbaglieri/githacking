@@ -49,8 +49,6 @@ class Repository < ActiveRecord::Base
     end
 
     issues_hash
-  rescue 
-  {}
   end
   
   def commits
