@@ -10,6 +10,7 @@ gem 'curb'
 gem 'redis'
 gem 'authlogic'
 gem 'gravtastic'
+gem 'hassle', :git => 'git://github.com/koppen/hassle.git'
 
 group :test do
   gem 'webmock'
