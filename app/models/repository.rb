@@ -126,14 +126,13 @@ class Repository < ActiveRecord::Base
   end
 
   def self.find_or_import(owner, name)
-    repository = Repository.where(url: "https://github.com/#{owner}/#{name}").first
+    repository = Repository.where(owner: owner, name: name).first
 
     if repository.nil?
       begin
         # TODO: should do some error checking here
         repository = from_github_to_domain github_repository(owner, name)
         repository.save
-
       rescue Octopi::NotFound => e
         raise ActiveRecord::RecordNotFound
       end

@@ -6,7 +6,9 @@ describe RepositoriesController do
     request.env["HTTP_AUTHORIZATION"] = "Basic " + Base64::encode64("githacker:point65")
 
     @r = Factory.build :repository
-    stub_github_requests_for @r
+    stub_anonymous_user_request login: @r.owner
+    stub_anonymous_repo_request_from_factory @r
+    stub_anonymous_repo_languages_request owner: @r.owner, name: @r.name
     @r.save
   end
   
