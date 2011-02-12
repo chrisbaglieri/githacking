@@ -2,8 +2,7 @@ class Repository < ActiveRecord::Base
 
   TAGS = ['bytesize', 'easy', 'medium', 'hard']
   
-  has_many :repositories_languages
-  has_many :languages, :through => :repositories_languages
+  has_many :languages
   has_many :issues
 
   serialize :meta_data
@@ -119,7 +118,7 @@ class Repository < ActiveRecord::Base
     # has_issues
 
     github_repo.languages.each do |k,v|
-      repository.languages << Language.find_or_create_by_name({:name => k, :bytes => v})
+      repository.languages << Language.new({:name => k, :bytes => v})
     end
 
     repository

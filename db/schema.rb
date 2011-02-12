@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110212201711) do
+ActiveRecord::Schema.define(:version => 20110209221559) do
 
   create_table "issues", :force => true do |t|
     t.string   "gravatar_id",                       :null => false
@@ -42,8 +42,9 @@ ActiveRecord::Schema.define(:version => 20110212201711) do
   end
 
   create_table "languages", :force => true do |t|
-    t.string   "name",                      :null => false
-    t.integer  "bytes",      :default => 0, :null => false
+    t.string   "name",                         :null => false
+    t.integer  "bytes",         :default => 0, :null => false
+    t.integer  "repository_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,11 +69,6 @@ ActiveRecord::Schema.define(:version => 20110212201711) do
     t.boolean  "has_downloads", :default => false, :null => false
     t.string   "source",                           :null => false
     t.string   "parent",                           :null => false
-  end
-
-  create_table "repositories_languages", :id => false, :force => true do |t|
-    t.integer "repository_id", :null => false
-    t.integer "language_id",   :null => false
   end
 
   create_table "taggings", :force => true do |t|
