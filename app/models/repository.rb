@@ -3,6 +3,7 @@ class Repository < ActiveRecord::Base
   TAGS = ['bytesize', 'easy', 'medium', 'hard']
   
   has_many :languages
+  has_many :issues
 
   serialize :meta_data
   
@@ -10,20 +11,47 @@ class Repository < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :owner
 
   acts_as_taggable
-  
+
+  def issues_url(label)
+    "https://github.com/api/v2/json/issues/list/#{owner}/#{name}/label/#{label}"
+  end
+
   def owner_url
     "http://github.com/#{owner}"
   end
   
-  def issues
-    @issues = {}
-    TAGS.each do |tag|
-      github_repository.issues.reject { |issue| !issue.labels.include?(tag) }.each do |issue|
-        @issues[tag] ||= []
-        @issues[tag] << issue
+  def populate_issues
+    GH_TAGS.each do |label|
+      response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
+
+      if response["issues"]
+        response["issues"].each do |i|
+          labels = i.delete "labels"
+
+          new_issue = Issue.build(i)
+          self.issues << new_issue
+
+          labels.each do |name|
+            new_issue.labels << Label.find_or_create_by_name(:name => name)
+          end
+        end
       end
     end
-    return @issues
+
+    save
+  end
+
+  def labeled_issues
+    populate_issues if self.issues.empty?
+
+    issues_hash = {}
+
+    TAGS.each do |label|
+      clause = ["issues.repository_id = (?) AND labels.name LIKE (?)", "#{self.id}", "%#{label}%"]
+      issues_hash[Repository.human_tag(label)] = Issue.includes(:labels).where(clause)
+    end
+
+    issues_hash
   end
   
   def commits
@@ -34,37 +62,37 @@ class Repository < ActiveRecord::Base
   def needs
     metadata['needs']
   rescue 
-  []
+    []
   end
   
   def categories
     metadata['categories']
   rescue 
-  []
+    []
   end
   
   def desired_roles
     metadata['needs']['roles']
   rescue 
-  []
+    []
   end
   
   def desired_skills
     metadata['needs']['skills']
   rescue 
-  []
+    []
   end
   
   def mentions
     metadata['mentions']
   rescue 
-  []
+    []
   end
   
   def long_description
     metadata['long_description']
   rescue 
-  nil
+    nil
   end
   
   def self.from_github_to_domain(github_repo)
