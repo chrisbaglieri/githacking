@@ -124,7 +124,7 @@ end
 
 
 def stub_anonymous_issues_request options={}
-  stub_request(:get, pp("https://github.com/api/v2/json/issues/list/#{options[:owner]}/#{options[:name]}/label/#{options[:label]}")).
+  stub_request(:get, "https://github.com/api/v2/json/issues/list/#{options[:owner]}/#{options[:name]}/label/#{options[:label]}").
     to_return(:status => 200, :body => options[:issues].to_json, :header => {})
 end
 
