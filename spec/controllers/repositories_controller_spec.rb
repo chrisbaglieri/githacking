@@ -18,16 +18,17 @@ describe RepositoriesController do
 
   end
 
-  # TODO: Redo with issues fixtures once issues persisting is in.
   describe "GET issues" do
     before do
       Repository.should_receive(:find_or_import).and_return(@r)
     end
     it 'assigns the issues for the repository for the given tag' do
-      @r.should_receive(:issues).and_return('easy' => [1,2,3], 'medium' => ['a','b','c'])
+      issues = Array.new(4).collect { Factory.create :open_issue, repository: @r }
+      issues.collect { |i| i.labels.create(name: 'easy') }
       get :issues, repository_id: @r.name, user_id: @r.owner, tag: 'easy'
       assigns(:tag).should == 'easy'
-      assigns(:issues).should == [1,2,3]
+      assigns(:issues).size.should == 4
+      assigns(:issues).collect(&:id).should == issues.collect(&:id)
     end
     it 'should redirect if the tag isn\'t a githacking tracked tag' do
       get :issues, repository_id: @r.name, user_id: @r.owner, tag: 'notagithackingtag'

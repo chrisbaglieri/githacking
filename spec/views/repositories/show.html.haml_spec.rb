@@ -9,7 +9,6 @@ describe "repositories/show.html.haml" do
   end
 
   it "renders attributes in <p>" do
-    @repository.should_receive(:labeled_issues).and_return({})
     render
 
     rendered.should match(/Theprojectname/)

@@ -124,12 +124,12 @@ end
 
 
 def stub_anonymous_issues_request options={}
-  stub_request(:get, "https://github.com/api/v2/json/issues/list/#{options[:owner]}/#{options[:name]}/label/#{options[:label]}").
+  stub_request(:get, pp("https://github.com/api/v2/json/issues/list/#{options[:owner]}/#{options[:name]}/label/#{options[:label]}")).
     to_return(:status => 200, :body => options[:issues].to_json, :header => {})
 end
 
 def stub_anonymous_issues_request_with_labels repo, issues
-  ['bitesize', 'easy', 'medium', 'hard'].each do |label|
+  ['bytesize', 'easy', 'medium', 'hard'].each do |label|
     stub_anonymous_issues_request(:owner  => repo.owner,
                                   :name   => repo.name,
                                   :label  => label,

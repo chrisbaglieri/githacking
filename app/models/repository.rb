@@ -21,7 +21,7 @@ class Repository < ActiveRecord::Base
   end
   
   def populate_issues
-    GH_TAGS.each do |label|
+    TAGS.each do |label|
       response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
 
       if response["issues"]
@@ -48,7 +48,7 @@ class Repository < ActiveRecord::Base
 
     TAGS.each do |label|
       clause = ["issues.repository_id = (?) AND labels.name LIKE (?)", "#{self.id}", "%#{label}%"]
-      issues_hash[Repository.human_tag(label)] = Issue.includes(:labels).where(clause)
+      issues_hash[label] = Issue.includes(:labels).where(clause)
     end
 
     issues_hash

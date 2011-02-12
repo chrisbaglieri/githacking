@@ -62,7 +62,7 @@ describe Repository do
         query_method.should_receive(:where) { |clause|
           clause.first.should  == where_clause
           clause.second.should == "#{@repo.id}"
-          clause.third.should  == "%#{Repository::GH_TAGS[index]}%"
+          clause.third.should  == "%#{Repository::TAGS[index]}%"
           index += 1
         }.exactly(4).times
 
