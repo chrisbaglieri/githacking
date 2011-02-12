@@ -1,9 +1,15 @@
 module Github
   def self.config
-    @@config ||= {
-      client_id: '18786efa22cdf1194680',
-      secret: '5854dbf3ddb941f1ea5b2d112f958c3b83737863',
-      redirect_uri: 'http://githacking.com:3000/users/oauth'
-    }
+    unless defined?(@@config)
+      github_config_file = File.join(Rails.root,'config','github.yml')
+      raise "#{github_config_file} is missing!" unless File.exists? github_config_file
+      github_config = YAML.load_file(github_config_file)[Rails.env].symbolize_keys
+      @@config = {
+        client_id: github_config[:client_id],
+        secret: github_config[:secret],
+        redirect_uri: github_config[:redirect_uri]
+      }
+    end
+    @@config
   end
 end

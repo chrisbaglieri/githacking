@@ -13,12 +13,7 @@ module Githacking
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
-    
-    config.github = {}
-    config.github[:client_id] = '18786efa22cdf1194680'
-    config.github[:secret] = '5854dbf3ddb941f1ea5b2d112f958c3b83737863'
-    config.github[:redirect_uri] = 'http://githacking.com:3000/users/oauth'
-      
+
     config.generators do |g|
       g.test_framework      :rspec
       g.fixture_replacement :factory_girl
