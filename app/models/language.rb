@@ -1,3 +1,4 @@
 class Language < ActiveRecord::Base
-  belongs_to :repository
+  has_many :repositories_languages
+  has_many :repositories, :through => :repositories_languages
 end
