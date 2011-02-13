@@ -2,7 +2,7 @@
   .tabs.span-24.last
     %ul
       - Repository::TAGS.each do |tag|
-        %li{class: "tag span-4 #{(tag == Repository::TAGS.last ? ' last' : '')} #{tag == @tag ? 'selected' : ''}"}
+        %li{class: "tag span-6 #{(tag == Repository::TAGS.last ? ' last' : '')} #{tag == @tag ? 'selected' : ''}"}
           %a{href: user_repository_issues_path(@repository.owner, @repository.name, tag)}
             = tag.capitalize
   .issues.span-24.last
