@@ -180,6 +180,10 @@ tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody
             display: inline;
             padding: 5px 0px 20px;
             text-align: center;
+            cursor: pointer;
+        }
+        li:hover {
+          background: #A3D4FF + #111; 
         }
         .selected {
             background: #fff;
