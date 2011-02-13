@@ -51,4 +51,40 @@ describe Issue do
       -> { Issue.build(state: 'somethingelse') }.should raise_error
     end
   end
+
+  describe "#distance_in_the_past" do
+    describe 'should calculate how long in the past an issue was created' do
+      it 'when greater than 1 day' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now - 1.day - 1.hour
+        issue.distance_in_the_past.should == "1 day ago"
+      end
+      it 'when greater than 2 day' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now - 2.day - 1.hour
+        issue.distance_in_the_past.should == "2 days ago"
+      end
+      it 'when greater than 1 hour' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now - 1.hour - 1.minute
+        issue.distance_in_the_past.should == "1 hour ago"
+      end
+      it 'when greater than 1 minute' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now - 1.minute - 10.seconds
+        issue.distance_in_the_past.should == "1 minute ago"
+      end
+      it 'when less than one 1 minute' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now - 10.seconds
+        issue.distance_in_the_past.should == '10 seconds ago'
+      end
+      it 'when less than one 1 second' do
+        issue = Factory.create :open_issue
+        issue.should_receive(:created_at).and_return Time.now
+        issue.distance_in_the_past.should match(/milisecond/)
+      end
+    end
+    
+  end
 end
