@@ -25,7 +25,7 @@ describe Issue do
     end
   end
 
-  describe "build" do
+  describe "#build" do
     it "should build OpenIssue" do
       issue_hash = {'state' => 'open'}
       open_issue = Issue.build(issue_hash)
@@ -48,7 +48,7 @@ describe Issue do
     end
 
     it "should handle when issue state is not open or closed" do
-      pending 'not sure what to do here...'
+      -> { Issue.build(state: 'somethingelse') }.should raise_error
     end
   end
 end

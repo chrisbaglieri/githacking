@@ -24,7 +24,7 @@ class Issue < ActiveRecord::Base
       new_issue = ClosedIssue.new
       new_issue.attributes = issue
     else
-      # TODO: maybe throw a exception here?
+      raise 'State must be open or closed'
     end
 
     new_issue
