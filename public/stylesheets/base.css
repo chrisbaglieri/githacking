@@ -132,6 +132,8 @@ tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody
 
 /* issues */
 #issues-wrapper .tabs {
+  position: relative;
+  top: -15px;
   background: #A3D4FF; }
   #issues-wrapper .tabs ul {
     margin: 0px;
