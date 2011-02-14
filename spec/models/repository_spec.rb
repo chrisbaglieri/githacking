@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Repository do
   before do
     @repo = Factory.build :repository, name: 'testing', owner: 'user'
+    stub_anonymous_user_request(login: @repo.owner)
+    stub_anonymous_repo_request_from_factory(@repo)
   end
 
   it "should handle when users who are not on github" do
@@ -11,7 +13,7 @@ describe Repository do
     }
 
     lambda {
-      Repository.find_repository(@repo.owner, @repo.name)
+      Repository.find_or_import(@repo.owner, @repo.name)
     }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
@@ -23,19 +25,17 @@ describe Repository do
     }
 
     lambda {
-      Repository.find_repository(@repo.owner, @repo.name)
+      Repository.find_or_import(@repo.owner, @repo.name)
     }.should raise_error(ActiveRecord::RecordNotFound)
   end
 
   it "should not call github if the repository has already been saved" do
     Octopi::User.should_not_receive(:find)
     Repository.should_receive(:where).and_return([@repo])
-    Repository.find_repository(@repo.owner, @repo.name)
+    Repository.find_or_import(@repo.owner, @repo.name)
   end
 
   it "should handle github object to our repo translation" do
-    stub_anonymous_user_request(login: @repo.owner)
-    stub_anonymous_repo_request_from_factory(@repo)
     stub_anonymous_repo_languages_request(owner: @repo.owner,
                                           name: @repo.name,
                                           languages: {'Clojure' => 123})
@@ -49,7 +49,34 @@ describe Repository do
     @result.attributes.should == @repo.attributes
   end
 
-  describe "populate_issues" do
+  describe "labeled_issues" do
+    describe "when the issues haven't been retrieved" do
+      it "should retrieve labeled issues" do
+        @repo.id = 42
+
+        index = 0
+
+        where_clause = "issues.repository_id = (?) AND labels.name LIKE (?)"
+        query_method = mock(:query_method)
+
+        query_method.should_receive(:where) { |clause|
+          clause.first.should  == where_clause
+          clause.second.should == "#{@repo.id}"
+          clause.third.should  == "%#{Repository::TAGS[index]}%"
+          index += 1
+        }.exactly(4).times
+
+        @repo.should_receive(:populate_issues).and_return(true)
+
+        Issue.should_receive(:includes).exactly(4).times.with(:labels).
+          and_return(query_method)
+
+        @repo.labeled_issues
+      end
+    end
+  end
+
+  describe "#populate_issues" do
     before do
       @expected_issues = []
       @repo.should_receive(:issues).any_number_of_times.
@@ -104,7 +131,7 @@ describe Repository do
     end
   end
 
-  describe "metadata" do
+  describe "#metadata" do
     describe "when meta data exists" do
       before do
         @meta_data = "blah blah blah"
@@ -129,6 +156,13 @@ describe Repository do
         @repo.metadata
         @repo.meta_data.should_not == nil
       end
+    end
+  end
+
+  describe "#issues" do
+    it 'should retrieve issues and organize them by tag' do
+      
+      @repo.issues
     end
   end
 

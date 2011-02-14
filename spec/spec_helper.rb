@@ -129,7 +129,7 @@ def stub_anonymous_issues_request options={}
 end
 
 def stub_anonymous_issues_request_with_labels repo, issues
-  ['bitesize', 'easy', 'medium', 'hard'].each do |label|
+  ['bytesize', 'easy', 'medium', 'hard'].each do |label|
     stub_anonymous_issues_request(:owner  => repo.owner,
                                   :name   => repo.name,
                                   :label  => label,
@@ -224,5 +224,5 @@ end
 def stub_github_requests_for repo
   stub_anonymous_user_request(login: repo.owner)
   stub_anonymous_repo_request_from_factory repo
-  stub_anonymous_repo_languages_request(languages: repo.languages)
+  stub_anonymous_repo_languages_request(owner: repo.owner, name: repo.name, languages: repo.languages)
 end

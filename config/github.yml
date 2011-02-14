@@ -1,0 +1,14 @@
+development:
+  client_id: 18786efa22cdf1194680
+  secret: 5854dbf3ddb941f1ea5b2d112f958c3b83737863
+  redirect_uri: http://githacking.com:3000/users/oauth
+  
+test: 
+  client_id: 18786efa22cdf1194680
+  secret: 5854dbf3ddb941f1ea5b2d112f958c3b83737863
+  redirect_uri: http://githacking.com:3000/users/oauth
+
+production:
+  client_id: aba374239bda517d7f83
+  secret: 2f657cf96c3bc2f8759d5952c5754eea89b630bb
+  redirect_uri: http://yousupersneakygithackers.heroku.com/users/oauth

@@ -1,9 +1,8 @@
 %div.issue
-  %strong Title: 
-  #{issue.title} (last updated on #{issue.updated_at.strftime('%m/%d/%Y')})
-  %br
-  %strong Description:
-  #{issue.body}
-  %br
-  %span.button
-    = link_to 'Go Forth & Hack', github_repository_issues_url(repository, issue.number)
+  .title 
+    = link_to issue.title, github_repository_issues_url(repository, issue.number)
+  .time
+    = issue.distance_in_the_past
+  %p
+    #{issue.body}
+    

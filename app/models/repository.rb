@@ -1,4 +1,7 @@
 class Repository < ActiveRecord::Base
+
+  TAGS = ['bytesize', 'easy', 'medium', 'hard']
+  
   has_many :languages
   has_many :issues
 
@@ -18,7 +21,7 @@ class Repository < ActiveRecord::Base
   end
   
   def populate_issues
-    GH_TAGS.each do |label|
+    TAGS.each do |label|
       response = JSON.parse(Curl::Easy.perform(issues_url(label)).body_str)
 
       if response["issues"]
@@ -43,14 +46,12 @@ class Repository < ActiveRecord::Base
 
     issues_hash = {}
 
-    GH_TAGS.each do |label|
+    TAGS.each do |label|
       clause = ["issues.repository_id = (?) AND labels.name LIKE (?)", "#{self.id}", "%#{label}%"]
-      issues_hash[Repository.human_tag(label)] = Issue.includes(:labels).where(clause)
+      issues_hash[label] = Issue.includes(:labels).where(clause)
     end
 
     issues_hash
-  rescue 
-  {}
   end
   
   def commits
@@ -61,37 +62,37 @@ class Repository < ActiveRecord::Base
   def needs
     metadata['needs']
   rescue 
-  []
+    []
   end
   
   def categories
     metadata['categories']
   rescue 
-  []
+    []
   end
   
   def desired_roles
     metadata['needs']['roles']
   rescue 
-  []
+    []
   end
   
   def desired_skills
     metadata['needs']['skills']
   rescue 
-  []
+    []
   end
   
   def mentions
     metadata['mentions']
   rescue 
-  []
+    []
   end
   
   def long_description
     metadata['long_description']
   rescue 
-  nil
+    nil
   end
   
   def self.from_github_to_domain(github_repo)
@@ -106,8 +107,8 @@ class Repository < ActiveRecord::Base
     repository.owner        = github_repo.owner.login
     repository.description  = github_repo.description
     repository.name         = github_repo.name
-    repository.source       = "" #TODO: fixme
-    repository.parent       = "" #TODO: fixme
+    repository.source       = "" #TODO: fixme, octopi does not support source
+    repository.parent       = "" #TODO: fixme, octopi does not support parent
 
     # pushed_at
     # private
@@ -123,17 +124,14 @@ class Repository < ActiveRecord::Base
     repository
   end
 
-  def self.find_repository(github_user_id, name)
-    repository = Repository.where(:url => "https://github.com/#{github_user_id}/#{name}").first
+  def self.find_or_import(owner, name)
+    repository = Repository.where(owner: owner, name: name).first
 
-    if not repository
+    if repository.nil?
       begin
-        grepo = Octopi::User.find(github_user_id).repository(name)
-
         # TODO: should do some error checking here
-        repository = from_github_to_domain(grepo)
+        repository = from_github_to_domain github_repository(owner, name)
         repository.save
-
       rescue Octopi::NotFound => e
         raise ActiveRecord::RecordNotFound
       end
@@ -153,12 +151,16 @@ class Repository < ActiveRecord::Base
 
     self.meta_data
   end
-  
-  HUMAN_TAGS = {'bitesize' => 'Bite Size', 'easy' => 'Easy', 'medium' => 'Medium', 'hard' => 'Hard'}
-  GH_TAGS = ['bitesize', 'easy', 'medium', 'hard']
-  
-  def self.human_tag tag
-    HUMAN_TAGS[tag]
+
+  private
+
+  def github_repository
+    @github_repo ||= Repository.github_repository self.owner, self.name
   end
+
+  def self.github_repository owner, name
+    Octopi::User.find(owner).repository(name)
+  end
+  
 
 end

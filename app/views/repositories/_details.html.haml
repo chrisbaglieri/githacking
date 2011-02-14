@@ -23,12 +23,3 @@
         = skill
 %div.span-24
   %h2.section How To Help
-  #issues
-    - repository.labeled_issues.each do |label, issues|
-      %h3
-      = label
-      - if issues and not issues.empty?
-        = render :partial => "issue", :collection => issues, :locals => { :repository => repository }
-      - else
-        %p
-          Currently, there are no issues available.
