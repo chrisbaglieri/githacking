@@ -16,15 +16,66 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: languages; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE languages (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    bytes integer DEFAULT 0 NOT NULL,
+    repository_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: languages_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE languages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+--
+-- Name: languages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE languages_id_seq OWNED BY languages.id;
+
+
+--
 -- Name: repositories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE repositories (
     id integer NOT NULL,
-    name character varying(255) NOT NULL,
+    project_name character varying(255) NOT NULL,
     "user" character varying(255) NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    weight double precision,
+    meta_data text,
+    name character varying(255),
+    owner character varying(255),
+    description character varying(255),
+    pushed_at timestamp without time zone,
+    url character varying(255) NOT NULL,
+    private boolean DEFAULT false,
+    has_wiki boolean DEFAULT false,
+    homepage character varying(255) DEFAULT 'f'::character varying,
+    watchers integer DEFAULT 0 NOT NULL,
+    forks integer DEFAULT 0 NOT NULL,
+    fork boolean DEFAULT false NOT NULL,
+    open_issues integer DEFAULT 0 NOT NULL,
+    has_issues boolean DEFAULT false NOT NULL,
+    has_downloads boolean DEFAULT false NOT NULL,
+    source character varying(255) NOT NULL,
+    parent character varying(255) NOT NULL
 );
 
 
@@ -140,7 +191,6 @@ CREATE TABLE users (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     github_access_token character varying(255) NOT NULL,
-    gravatar_id character varying(255),
     email character varying(255)
 );
 
@@ -162,6 +212,13 @@ CREATE SEQUENCE users_id_seq
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE languages ALTER COLUMN id SET DEFAULT nextval('languages_id_seq'::regclass);
 
 
 --
@@ -190,6 +247,14 @@ ALTER TABLE tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 --
 
 ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Name: languages_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY languages
+    ADD CONSTRAINT languages_pkey PRIMARY KEY (id);
 
 
 --
@@ -249,20 +314,32 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO schema_migrations (version) VALUES ('20110130175959');
-
 INSERT INTO schema_migrations (version) VALUES ('20110129164713');
-
-INSERT INTO schema_migrations (version) VALUES ('20110129231809');
-
-INSERT INTO schema_migrations (version) VALUES ('20110130151059');
-
-INSERT INTO schema_migrations (version) VALUES ('20110130145643');
-
-INSERT INTO schema_migrations (version) VALUES ('20110130150304');
 
 INSERT INTO schema_migrations (version) VALUES ('20110129165041');
 
 INSERT INTO schema_migrations (version) VALUES ('20110129180847');
 
+INSERT INTO schema_migrations (version) VALUES ('20110129231809');
+
 INSERT INTO schema_migrations (version) VALUES ('20110130004021');
+
+INSERT INTO schema_migrations (version) VALUES ('20110130150825');
+
+INSERT INTO schema_migrations (version) VALUES ('20110130145643');
+
+INSERT INTO schema_migrations (version) VALUES ('20110130150304');
+
+INSERT INTO schema_migrations (version) VALUES ('20110130151059');
+
+INSERT INTO schema_migrations (version) VALUES ('20110130175959');
+
+INSERT INTO schema_migrations (version) VALUES ('20110201155921');
+
+INSERT INTO schema_migrations (version) VALUES ('20110202162513');
+
+INSERT INTO schema_migrations (version) VALUES ('20110204185106');
+
+INSERT INTO schema_migrations (version) VALUES ('20110204232220');
+
+INSERT INTO schema_migrations (version) VALUES ('20110205221600');

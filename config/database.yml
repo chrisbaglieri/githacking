@@ -2,10 +2,13 @@ development:
   adapter: postgresql
   database: githacking_development
   
-test:
+test: &test
   adapter: postgresql
   database: githacking_test
 
 production:
   adapter: postgresql
   database: githacking
+
+cucumber:
+  <<: *test
