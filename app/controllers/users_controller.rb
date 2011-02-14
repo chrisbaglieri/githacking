@@ -4,14 +4,17 @@ class UsersController < ApplicationController
   
   def create
     url = 'https://github.com/login/oauth/access_token'
-    query = 'client_id=' + Github.config[:client_id] + '&redirect_uri=' + Github.config[:redirect_uri] + '&client_secret=' + Github.config[:secret] + '&code=' + params[:code]
+    query = 'client_id=' + Github.config[:client_id] + 
+      '&redirect_uri=' + Github.config[:redirect_uri] + 
+      '&client_secret=' + Github.config[:secret] + 
+      '&code=' + params[:code]
     
     token_response = Curl::Easy.http_post(url, query).body_str
     if token_response.empty?
       flash[:notice] = 'GitHub didn\'t respond. Try again?'
       redirect_to login_path and return
     end
-    token = token_response.split(/=/)[1]
+    token = token_response.split('=')[1]
     
     url = 'https://github.com/api/v2/json/user/show?access_token=' + token
     data = JSON::parse(Curl::Easy.http_get(url).body_str)['user']
@@ -21,13 +24,13 @@ class UsersController < ApplicationController
     # Login if the user exists
     unless @user.nil?
       @user_session = UserSession.create(@user)
-      redirect_back_or_default(account_url)
+      redirect_back_or_default(root_url)
       return
     end
 
     @user = User.new(login: data['login'], email: data['email'], github_access_token: token)
     if @user.save
-      redirect_back_or_default account_url
+      redirect_back_or_default root_url
     else
       render :action => :new
     end
