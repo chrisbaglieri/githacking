@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(:version => 20110209221559) do
   create_table "repositories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "weight"
     t.text     "meta_data"
     t.string   "name",                             :null => false
     t.string   "owner",                            :null => false
@@ -61,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20110209221559) do
     t.string   "url",                              :null => false
     t.boolean  "private",       :default => false
     t.boolean  "has_wiki",      :default => false
-    t.string   "homepage",      :default => "f"
+    t.string   "homepage"
     t.integer  "watchers",      :default => 0,     :null => false
     t.integer  "forks",         :default => 0,     :null => false
     t.boolean  "fork",          :default => false, :null => false
