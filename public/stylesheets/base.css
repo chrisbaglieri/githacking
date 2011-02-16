@@ -84,32 +84,22 @@ body {
   #content #repository .title a {
     text-decoration: none;
     padding: 5px; }
+#content #repository h3 {
+  color: #666252;
+  margin-bottom: .5em; }
 #content #repository .section {
   font-family: "museo-1", "museo-2", serif;
   font-weight: 200;
-  color: white;
-  background: #999999;
+  color: #999999;
+  background: #eeeeee;
   padding-left: 10px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px; }
 #content #repository .statistic {
-  padding: 10px 0pt 15px 0pt;
-  margin-bottom: 20px;
-  color: #cccccc;
-  background: #eeeeee;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px; }
-  #content #repository .statistic img {
-    float: left;
-    padding: 0pt 10px;
-    display: block; }
-  #content #repository .statistic p {
-    margin: 0pt;
-    padding-right: 10px; }
+  margin-bottom: 30px;
+  color: #cccccc; }
 #content #repository .issue {
   padding-bottom: 15px; }
 

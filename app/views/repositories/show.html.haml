@@ -7,5 +7,8 @@
     %span
       \/
     = link_to @repository.name, @repository.url
-  = render :partial => "statistics", :locals => { :repository => @repository }
-  = render :partial => "details", :locals => { :repository => @repository }
+  %hr
+  %div.span-15.colborder
+    = render :partial => "details", :locals => { :repository => @repository }
+  %div.span-8.last
+    = render :partial => "statistics", :locals => { :repository => @repository }

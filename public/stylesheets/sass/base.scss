@@ -8,10 +8,9 @@ $main_navigation_text_color: #EEEEEE;
 $link_color: #006699;
 $link_hover_color: #66CCFF;
 $repsitory_title_color: #3D3D3D;
-$statistics_background_color: #EEEEEE;
-$statistics_header_color: #CCCCCC;
-$repository_section_background_color: #999999;
-$repository_section_color: #FFFFFF;
+$statistics_content_color: #CCCCCC;
+$repository_section_background_color: #EEEEEE;
+$repository_section_color: #999999;
 $footer_background: #F2F2F2;
 
 /* images */
@@ -121,6 +120,10 @@ body {
 				padding: 5px;
 			}
 		}
+		h3 {
+			color: $default_content_color;
+			margin-bottom: .5em;
+		}
 		.section {
 			font-family: $emphatic_font;
 			font-weight: 200;
@@ -130,20 +133,8 @@ body {
 			@include rounded_corners(5px);
 		}
 		.statistic {
-			padding: 10px 0pt 15px 0pt;
-			margin-bottom: 20px;
-			color: $statistics_header_color;
-			background: $statistics_background_color;
-			@include rounded_corners(5px);
-			img { 
-				float: left; 
-				padding: 0pt 10px;
-				display: block;
-			}
-			p { 
-				margin: 0pt;
-				padding-right: 10px;
-			}
+			margin-bottom: 30px;
+			color: $statistics_content_color;
 		}
 		.issue { 
 			padding-bottom: 15px; 
