@@ -7,6 +7,9 @@
     %span
       \/
     = link_to @repository.name, @repository.url
+    %span
+      \/
+    = link_to 'issues', github_repository_issues_url(@repository)
   %hr
   #issues
     %div.span-15.colborder
