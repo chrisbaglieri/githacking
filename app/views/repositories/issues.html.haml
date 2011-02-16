@@ -14,6 +14,9 @@
   #issues
     %div.span-15.colborder
       %h2.section #{@tag.capitalize} Issues
-      = render partial: 'issue', collection: @issues, locals: { repository: @repository }
+      - if @issues.nil? or @issues.empty?
+        %p Sorry, can't find any #{@tag} issues to work on.
+      - else
+        = render partial: 'issue', collection: @issues, locals: { repository: @repository }
     %div.span-8.last
       = render :partial => "issue_types", locals: { repository: @repository }
