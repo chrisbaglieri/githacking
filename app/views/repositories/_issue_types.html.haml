@@ -1,0 +1,28 @@
+%div.issue-type
+  %div.span-1
+    = image_tag("medicalreport.png")
+  %div.span-7.last
+    %p 
+      = link_to "Bytesize issues", user_repository_issues_path(repository.owner, repository.name, Repository::TAGS[0])
+      are generally well-suited for junior developers new to contributing to open source eager to dive in wherever helpful.
+%div.issue-type
+  %div.span-1
+    = image_tag("medicalreport.png")
+  %div.span-7.last
+    %p
+      = link_to "Easy issues", user_repository_issues_path(repository.owner, repository.name, Repository::TAGS[1])
+      are generally well-suited for developers who can sling code but are new to contributing to open source.
+%div.issue-type
+  %div.span-1
+    = image_tag("medicalreport.png")
+  %div.span-7.last
+    %p
+      = link_to "Medium issues", user_repository_issues_path(repository.owner, repository.name, Repository::TAGS[2])
+      are generally well-suited for open source contributors who can sling code and are prepared to invest a bit of time.
+%div.issue-type
+  %div.span-1
+    = image_tag("medicalreport.png")
+  %div.span-7.last
+    %p
+      = link_to "Hard issues", user_repository_issues_path(repository.owner, repository.name, Repository::TAGS[3])
+      are generally well-suited for open source contributors who can sling code and are prepared to invest significant time.

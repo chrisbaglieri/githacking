@@ -132,12 +132,9 @@ body {
 			padding-left: 10px;
 			@include rounded_corners(5px);
 		}
-		.statistic {
+		.statistic, .issue-type {
 			margin-bottom: 30px;
 			color: $statistics_content_color;
-		}
-		.issue { 
-			padding-bottom: 15px; 
 		}
 	}
 }
@@ -158,29 +155,3 @@ body {
 /* no tables, too painful, get rid of this later */
 th, td, caption { padding: 5px 0px 5px 10px; }
 tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td { padding-bottom: 5px; padding-left: 10px; }
-
-/* issues */
-#issues-wrapper{
-    .tabs {
-        position: relative;
-        top: -15px;
-        background: #A3D4FF;
-        ul {
-            margin: 0px;
-            padding: 0px;
-        }
-        li.tag {
-            display: inline;
-            padding: 5px 0px 20px;
-            text-align: center;
-            cursor: pointer;
-        }
-        li:hover {
-          background: #A3D4FF + #111; 
-        }
-        .selected {
-            background: #fff;
-        }
-    }
-
-}

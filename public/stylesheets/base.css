@@ -97,11 +97,9 @@ body {
   -moz-border-radius: 5px;
   -khtml-border-radius: 5px;
   border-radius: 5px; }
-#content #repository .statistic {
+#content #repository .statistic, #content #repository .issue-type {
   margin-bottom: 30px;
   color: #cccccc; }
-#content #repository .issue {
-  padding-bottom: 15px; }
 
 /* footer */
 #footer {
@@ -119,21 +117,3 @@ th, td, caption {
 tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td {
   padding-bottom: 5px;
   padding-left: 10px; }
-
-/* issues */
-#issues-wrapper .tabs {
-  position: relative;
-  top: -15px;
-  background: #A3D4FF; }
-  #issues-wrapper .tabs ul {
-    margin: 0px;
-    padding: 0px; }
-  #issues-wrapper .tabs li.tag {
-    display: inline;
-    padding: 5px 0px 20px;
-    text-align: center;
-    cursor: pointer; }
-  #issues-wrapper .tabs li:hover {
-    background: #b4e5ff; }
-  #issues-wrapper .tabs .selected {
-    background: #fff; }

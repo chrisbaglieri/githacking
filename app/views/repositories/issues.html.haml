@@ -1,16 +1,16 @@
-- content_for :javascripts do
-  = javascript_include_tag 'issues'
-
-#issues-wrapper.span-24.last
-  .tabs.span-24.last
-    %ul
-      - Repository::TAGS.each do |tag|
-        %li{class: "tag span-6 #{(tag == Repository::TAGS.last ? ' last' : '')} #{tag == @tag ? 'selected' : ''}"}
-          %a{href: user_repository_issues_path(@repository.owner, @repository.name, tag)}
-            = tag.capitalize
-  .issues.span-24.last
-    - if @issues.nil? or @issues.empty?
-      Sorry, can't find any #{@tag} issues to work on.
-    - else
+= content_for :title, "githacking / #{@repository.owner} / #{@repository.name}"
+%p#notice
+  = notice
+#repository
+  %h1.title
+    = link_to @repository.owner, @repository.owner_url
+    %span
+      \/
+    = link_to @repository.name, @repository.url
+  %hr
+  #issues
+    %div.span-15.colborder
+      %h2.section #{@tag.capitalize} Issues
       = render partial: 'issue', collection: @issues, locals: { repository: @repository }
-    
+    %div.span-8.last
+      = render :partial => "issue_types", locals: { repository: @repository }

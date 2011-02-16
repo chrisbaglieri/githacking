@@ -1,8 +1,8 @@
 %div.issue
-  .title 
+  %h3 
     = link_to issue.title, github_repository_issues_url(repository, issue.number)
-  .time
-    = issue.distance_in_the_past
-  %p
+  %p 
     #{issue.body}
+    %br
+    = issue.distance_in_the_past
     
