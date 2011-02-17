@@ -1,7 +1,7 @@
 development:
-  client_id: 18786efa22cdf1194680
-  secret: 5854dbf3ddb941f1ea5b2d112f958c3b83737863
-  redirect_uri: http://githacking.com:3000/users/oauth
+  client_id: 80576453025347a0d798
+  secret: a223140b13e45a622579ca309c4bd6ae9c6324d6
+  redirect_uri: http://localhost:3000/users/oauth
   
 test: 
   client_id: 18786efa22cdf1194680
