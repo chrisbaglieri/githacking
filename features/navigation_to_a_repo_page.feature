@@ -3,9 +3,11 @@ Feature: Navigating to a Repository page
     navigating to our repository pages.
     
     Background:
-    
-    Scenario: Without repository existing.
         Given We need to show github user "codingjester"
         Given We need an anonymous repo "pyImgur" by "codingjester"
+    
+    Scenario: Without repository existing.
         Given I log in as "test_user"
         When I go to "codingjester/pyImgur"
+        Then I should see "codingjester"
+        And I should see "pyImgur"
