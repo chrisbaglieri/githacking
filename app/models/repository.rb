@@ -77,12 +77,6 @@ class Repository < ActiveRecord::Base
     []
   end
   
-  def desired_skills
-    metadata['needs']['skills']
-  rescue 
-    []
-  end
-  
   def mentions
     metadata['mentions']
   rescue 
