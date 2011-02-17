@@ -24,6 +24,7 @@ class UsersController < ApplicationController
     # Login if the user exists
     unless @user.nil?
       @user_session = UserSession.create(@user)
+      pp current_user
       redirect_back_or_default(root_url)
       return
     end
