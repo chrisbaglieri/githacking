@@ -15,3 +15,7 @@ Given /^We need an anonymous repo "([^\"]+)" by "([^\"]+)"$/ do |repo, username|
   stub_anonymous_repo_request owner: username, name: repo
   stub_anonymous_repo_languages_request owner: username, name: repo
 end
+
+Then /^there should be a saved repo "([^\"]+)" by "([^\"]+)"$/ do |repo, username|
+  Repository.where(name: repo, owner: username).first.should_not be_nil
+end

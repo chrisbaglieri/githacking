@@ -11,3 +11,4 @@ Feature: Navigating to a Repository page
         When I go to "codingjester/pyImgur"
         Then I should see "codingjester"
         And I should see "pyImgur"
+        And there should be a saved repo "pyImgur" by "codingjester"
