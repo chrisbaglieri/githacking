@@ -96,7 +96,11 @@ body {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -khtml-border-radius: 5px;
-  border-radius: 5px; }
+  border-radius: 5px;
+  -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); }
 #content #repository .statistic, #content #repository .issue-type {
   margin-bottom: 30px;
   color: #cccccc; }

@@ -29,6 +29,12 @@ $script_font: "bistro-script-web-1","bistro-script-web-2",cursive;
 	-khtml-border-radius: $radius;
 	border-radius: $radius;
 }
+@mixin shadow($depth) {
+	-moz-box-shadow:0 $depth 0 rgba(0,0,0,0.1);
+	-webkit-box-shadow:0 $depth 0 rgba(0,0,0,0.1);
+	-o-box-shadow:0 $depth 0 rgba(0,0,0,0.1);
+	box-shadow:0 $depth 0 rgba(0,0,0,0.1);
+}
 
 /* globals */
 body { 
@@ -131,6 +137,7 @@ body {
 			background: $repository_section_background_color;
 			padding-left: 10px;
 			@include rounded_corners(5px);
+			@include shadow(2px);
 		}
 		.statistic, .issue-type {
 			margin-bottom: 30px;
