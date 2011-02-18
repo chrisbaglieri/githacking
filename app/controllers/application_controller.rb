@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
-  #before_filter :authenticate
-
+  
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :logged_in?
@@ -42,11 +41,5 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
-  end
-  
-  def authenticate
-      authenticate_or_request_with_http_basic do |username, password|
-        username == 'githacker' and password == 'point65'
-      end
   end
 end
