@@ -12,6 +12,10 @@ module NavigationHelpers
       '/'
     when /codingjester\/pyImgur/
       'codingjester/pyImgur'
+    when /buntingsan\/twixrforkids/
+      'buntingsan/twixrforkids'
+    when /codingjester\/asdfg6/
+      'codingjester/asdfg6'
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

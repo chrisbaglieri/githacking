@@ -90,6 +90,14 @@ def stub_anonymous_repo_languages_request options={}
     to_return(:status => 200, :body => options.to_yaml, :headers => {})
 end
 
+def stub_missing_repo_request options={}
+  options.reverse_merge!(owner: 'notspecifiedowner',
+                         name: 'notspecifiedname',
+                         languages: {'Ruby' => 12345, 'JavaScript' => 5431})
+  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{options[:owner]}/#{options[:name]}?").
+    to_return(:status => 404, :body => "This page doesn't exist", :headers => {})
+end
+
 
 def stub_anonymous_issues_request options={}
   stub_request(:get, "https://github.com/api/v2/json/issues/list/#{options[:owner]}/#{options[:name]}/label/#{options[:label]}").
