@@ -131,13 +131,22 @@ body {
 			margin-bottom: .5em;
 		}
 		.section {
-			font-family: $emphatic_font;
-			font-weight: 200;
-			color: $repository_section_color;
-			background: $repository_section_background_color;
-			padding-left: 10px;
-			@include rounded_corners(5px);
-			@include shadow(2px);
+			h2 {
+				font-family: $emphatic_font;
+				font-weight: 200;
+				color: $repository_section_color;
+				background: $repository_section_background_color;
+				padding-left: 10px;
+				@include rounded_corners(5px);
+				@include shadow(2px);
+			}
+			.role {
+				padding-bottom: 20px;
+				.requirements {
+					list-style: none;
+					padding-left: 0pt;
+				}
+			}
 		}
 		.statistic, .issue-type {
 			margin-bottom: 30px;

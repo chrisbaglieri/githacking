@@ -87,7 +87,7 @@ body {
 #content #repository h3 {
   color: #666252;
   margin-bottom: .5em; }
-#content #repository .section {
+#content #repository .section h2 {
   font-family: "museo-1", "museo-2", serif;
   font-weight: 200;
   color: #999999;
@@ -101,6 +101,11 @@ body {
   -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
   -o-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); }
+#content #repository .section .role {
+  padding-bottom: 20px; }
+  #content #repository .section .role .requirements {
+    list-style: none;
+    padding-left: 0pt; }
 #content #repository .statistic, #content #repository .issue-type {
   margin-bottom: 30px;
   color: #cccccc; }
