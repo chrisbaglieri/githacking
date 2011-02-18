@@ -2,14 +2,7 @@
 %p#notice
   = notice
 #repository
-  %h1.title
-    = link_to @repository.owner, @repository.owner_url
-    %span
-      \/
-    = link_to @repository.name, @repository.url
-    %span
-      \/
-    = link_to 'issues', github_repository_issues_url(@repository)
+  = render :partial => "header", :locals => { :repository => @repository, :context => 'issues' }
   %hr
   #issues
     %div.span-15.colborder

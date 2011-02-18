@@ -2,11 +2,7 @@
 %p#notice
   = notice
 #repository
-  %h1.title
-    = link_to @repository.owner, @repository.owner_url
-    %span
-      \/
-    = link_to @repository.name, @repository.url
+  = render :partial => "header", :locals => { :repository => @repository, :context => 'details' }
   %hr
   %div.span-15.colborder
     = render :partial => "details", :locals => { :repository => @repository }

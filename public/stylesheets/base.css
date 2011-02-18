@@ -5,7 +5,7 @@
 /* globals */
 body {
   background: url("../images/header.gif") repeat-x scroll 0 0 #f2f2f2;
-  color: #666252; }
+  color: #222222; }
   body a {
     text-decoration: none;
     color: #006699; }
@@ -78,14 +78,18 @@ body {
 /* content - repositories */
 #content #repository .title {
   font-family: "museo-1", "museo-2", serif;
-  font-weight: 200; }
-  #content #repository .title span {
-    color: #3d3d3d; }
+  font-weight: 200;
+  color: #cccccc; }
   #content #repository .title a {
-    text-decoration: none;
-    padding: 5px; }
+    text-decoration: none; }
+    #content #repository .title a.active {
+      font-weight: 300; }
+    #content #repository .title a.inactive {
+      color: #cccccc; }
+    #content #repository .title a:hover {
+      color: #66ccff; }
 #content #repository h3 {
-  color: #666252;
+  color: #222222;
   margin-bottom: .5em; }
 #content #repository .section h2 {
   font-family: "museo-1", "museo-2", serif;
@@ -108,7 +112,7 @@ body {
     padding-left: 0pt; }
 #content #repository .statistic, #content #repository .issue-type {
   margin-bottom: 30px;
-  color: #cccccc; }
+  color: #222222; }
 
 /* footer */
 #footer {
@@ -118,11 +122,3 @@ body {
     padding-top: 20px; }
     #footer #footer-container #footer-navigation a {
       padding: 0pt 7px; }
-
-/* no tables, too painful, get rid of this later */
-th, td, caption {
-  padding: 5px 0px 5px 10px; }
-
-tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td {
-  padding-bottom: 5px;
-  padding-left: 10px; }

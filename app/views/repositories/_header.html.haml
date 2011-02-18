@@ -1,0 +1,15 @@
+%h1.title
+  = link_to repository.owner, repository.owner_url
+  %span
+  \/
+  - if context.eql? 'details'
+    = link_to repository.name, local_path(repository), :class => 'active'
+  - else
+    = link_to repository.name, local_path(repository)
+  %span
+  \/
+  - if context.eql? 'issues'
+    = link_to 'issues', local_issues_path(repository), :class => 'active'
+  - else
+    = link_to 'issues', local_issues_path(repository), :class => 'inactive'
+    
