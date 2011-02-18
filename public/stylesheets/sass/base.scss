@@ -1,14 +1,15 @@
 /* colors */
 $background_color: #F2F2F2;
-$default_content_color: #666252;
+$default_content_color: #222222;
 $githacking_color: #222222;
 $tagline_color: #006699;
 $main_navigation_inner_color: #222222;
 $main_navigation_text_color: #EEEEEE;
 $link_color: #006699;
 $link_hover_color: #66CCFF;
+$inactive_color: #CCCCCC;
 $repsitory_title_color: #3D3D3D;
-$statistics_content_color: #CCCCCC;
+$statistics_content_color: #222222;
 $repository_section_background_color: #EEEEEE;
 $repository_section_color: #999999;
 $footer_background: #F2F2F2;
@@ -120,10 +121,12 @@ body {
 		.title { 
 			font-family: $emphatic_font;
 			font-weight: 200;
-			span { color: $repsitory_title_color; }
+			color: $inactive_color;
 			a { 
 				text-decoration: none;
-				padding: 5px;
+				&.active { font-weight: 300; }
+				&.inactive { color: $inactive_color; }
+				&:hover { color: $link_hover_color; }
 			}
 		}
 		h3 {
@@ -166,8 +169,3 @@ body {
 		}
 	}
 }
-
-
-/* no tables, too painful, get rid of this later */
-th, td, caption { padding: 5px 0px 5px 10px; }
-tbody tr:nth-child(even) td, tbody tr.even td, tbody tr:nth-child(odd) td, tbody tr.odd td { padding-bottom: 5px; padding-left: 10px; }
