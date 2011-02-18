@@ -19,3 +19,13 @@ end
 Then /^there should be a saved repo "([^\"]+)" by "([^\"]+)"$/ do |repo, username|
   Repository.where(name: repo, owner: username).first.should_not be_nil
 end
+
+Given /^there is a repository "([^\"]*)" by "([^\"]*)"$/ do |repo, username|
+   Factory.create :repository, owner: username, name: repo 
+end
+
+Given /^there is no repository "([^\"]*)" by "([^\"]*)" on GitHub$/ do |repo, username|
+  puts repo
+  puts username
+  stub_missing_repo_request owner: username, name: repo
+end
