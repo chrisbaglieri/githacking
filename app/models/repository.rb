@@ -72,8 +72,9 @@ class Repository < ActiveRecord::Base
   end
   
   def desired_roles
-    metadata['needs']['roles']
-  rescue 
+    roles = metadata['needs']['roles']
+    validate_roles(roles)
+  rescue
     []
   end
   
@@ -156,5 +157,12 @@ class Repository < ActiveRecord::Base
     Octopi::User.find(owner).repository(name)
   end
   
-
+  def validate_roles(roles)
+    roles.each do |role|
+      unless role.key?('role')
+        raise "Missing required attribute"
+      end
+    end
+    roles
+  end
 end
