@@ -9,4 +9,13 @@
 %p
   = repository.long_description
 %h2.section Project Needs
+%roles
+- repository.desired_roles.each do |role_metadata|
+  %role
+    %h3
+      = role_metadata['role']
+    %ul
+    - role_metadata.each do |key, value|
+      - if key != 'role'
+        %li #{key.capitalize}: #{value}
 %h2.section Team
