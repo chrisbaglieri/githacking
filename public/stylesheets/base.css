@@ -76,6 +76,12 @@ body {
     margin-right: 0pt; }
 
 /* content - repositories */
+#content #dashboard .title {
+  font-family: "museo-1", "museo-2", serif;
+  font-weight: 300;
+  color: #006699; }
+
+/* content - repositories */
 #content #repository .title {
   font-family: "museo-1", "museo-2", serif;
   font-weight: 200;

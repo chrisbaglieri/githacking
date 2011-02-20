@@ -1,6 +1,8 @@
 class PagesController < ApplicationController
   def home
     if current_user
+      @repositories = nil
+      @activities = nil
       render 'dashboard'
     else
       render 'landing', :layout => 'landing'

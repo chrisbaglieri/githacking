@@ -117,6 +117,17 @@ body {
 
 /* content - repositories */
 #content {
+	#dashboard {
+		.title { 
+			font-family: $emphatic_font;
+			font-weight: 300;
+			color: $link_color;
+		}
+	}
+}
+
+/* content - repositories */
+#content {
 	#repository {
 		.title { 
 			font-family: $emphatic_font;
