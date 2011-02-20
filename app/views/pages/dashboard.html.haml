@@ -1,2 +1,9 @@
-%h1 Pages#dashboard
-%p Find me in app/views/pages/dashboard.html.haml
+= content_for :title, "githacking / dashboard"
+%p#notice
+  = notice
+#dashboard
+  %h1.title Dashboard
+  %div.span-15.colborder
+    = render :partial => "repositories", :object => @repositories
+  %div.span-8.last
+    = render :partial => "activities", :object => @activities
