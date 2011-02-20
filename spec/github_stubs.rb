@@ -125,12 +125,9 @@ categories:
 
 needs:
     roles:
-        - developers
-        - evangelists
-        - testers
-        - ui
-    skills:
-        - awesome people
+        - role:        Evangelist
+          language:    Any
+          description: General hackers interested in the project eager to help spread the word and work with interested developers.
 
 mentions:
     - http://aaronfeng.com
