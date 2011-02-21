@@ -80,7 +80,7 @@ class Repository < ActiveRecord::Base
     metadata.long_description
   end
   
-  def self.from_github_to_domain(github_repo, load_children=true)
+  def self.from_github_to_domain(github_repo, load_associations=true)
     repository              = Repository.new
     repository.url          = github_repo.url
     repository.homepage     = github_repo.homepage
@@ -101,7 +101,7 @@ class Repository < ActiveRecord::Base
     # has_wiki
     # has_downloads
     # has_issues
-    if load_children
+    if load_associations
       github_repo.languages.each do |k,v|
         repository.languages << Language.new({name: k, bytes: v})
       end
