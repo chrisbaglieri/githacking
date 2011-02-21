@@ -9,4 +9,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :github_access_token
   
+  def repositories
+    return @repository_stubs if defined?(@repository_stubs)
+    @repository_stubs = []
+    Octopi::User.find(self.login).repositories.each do |remote_repository|
+      @repository_stubs << Repository.from_github_to_domain(remote_repository)
+    end
+    @repository_stubs
+  end
 end

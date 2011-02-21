@@ -82,6 +82,49 @@ repository:
 BODY
 end
 
+def stub_anonymous_repos_request options={}
+  # Set defaults
+  options.reverse_merge!(url: "https://github.com/someowner/some_project",
+                         owner: 'someowner',
+                         name: 'some_project',
+                         has_issues: true,
+                         watchers: 25,
+                         has_downloads: true,
+                         created_at: '2008/04/18 16:14:24 -0700',
+                         forks: 11,
+                         fork: true,
+                         source: '', # 'somesource/project',
+                         parent: '', # 'parent/project',
+                         has_wiki: true,
+                         private: false,
+                         homepage: 'http://homepage.com',
+                         pushed_at: '2010/05/05 15:28:38 -0700',
+                         description: "This is the description of #{options[:name] || 'some_project'}.",
+                         open_issues: 3)
+                         
+  stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{options[:owner]}?").
+    to_return(:status => 200, :body => <<BODY, :headers => {})
+repositories:
+  - url: #{options[:url]}
+    has_issues: #{options[:has_issues]}
+    homepage: #{options[:homepage]}
+    watchers: #{options[:watchers]}
+    source: #{options[:source]}
+    parent: #{options[:parent]}
+    has_downloads: #{options[:has_downloads]}
+    created_at: #{options[:created_at]}
+    forks: #{options[:forks]}
+    fork: #{options[:fork]}
+    has_wiki: #{options[:has_wiki]}
+    private: #{options[:private]}
+    pushed_at: #{options[:pushed_at]}
+    name: #{options[:name]}
+    description: #{options[:description]}
+    owner: #{options[:owner]}
+    open_issues: #{options[:open_issues]}
+BODY
+end
+
 def stub_anonymous_repo_languages_request options={}
   options.reverse_merge!(owner: 'notspecifiedowner',
                          name: 'notspecifiedname',
