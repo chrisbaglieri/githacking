@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
     return @repository_stubs if defined?(@repository_stubs)
     @repository_stubs = []
     Octopi::User.find(self.login).repositories.each do |remote_repository|
-      @repository_stubs << Repository.from_github_to_domain(remote_repository)
+      # build local repos, don't bother loading languages
+      @repository_stubs << Repository.from_github_to_domain(remote_repository, false)
     end
     @repository_stubs
   end
