@@ -74,17 +74,38 @@ body {
   #content .main-content {
     background: url("../images/main-content-background.png") repeat-y left;
     margin-right: 0pt; }
+  #content .title {
+    font-family: "museo-1", "museo-2", serif;
+    font-weight: 200;
+    color: #006699; }
+  #content h3 {
+    color: #222222;
+    margin-bottom: .5em; }
+  #content .section h2 {
+    font-family: "museo-1", "museo-2", serif;
+    font-weight: 200;
+    color: #666666;
+    background: #eeeeee;
+    padding-left: 10px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); }
 
-/* content - repositories */
-#content #dashboard .title {
-  font-family: "museo-1", "museo-2", serif;
-  font-weight: 300;
-  color: #006699; }
+/* content - dashboard */
+#content .repository {
+  margin-bottom: 15px; }
+  #content .repository .details {
+    padding-left: 10px; }
+    #content .repository .details p {
+      margin-bottom: 5px; }
 
-/* content - repositories */
+/* content - repository */
 #content #repository .title {
-  font-family: "museo-1", "museo-2", serif;
-  font-weight: 200;
   color: #cccccc; }
   #content #repository .title a {
     text-decoration: none; }
@@ -94,23 +115,6 @@ body {
       color: #cccccc; }
     #content #repository .title a:hover {
       color: #66ccff; }
-#content #repository h3 {
-  color: #222222;
-  margin-bottom: .5em; }
-#content #repository .section h2 {
-  font-family: "museo-1", "museo-2", serif;
-  font-weight: 200;
-  color: #666666;
-  background: #eeeeee;
-  padding-left: 10px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  border-radius: 5px;
-  -moz-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-  -webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-  -o-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1); }
 #content #repository .section .role {
   padding-bottom: 20px; }
   #content #repository .section .role .requirements {
