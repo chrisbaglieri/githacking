@@ -1,0 +1,16 @@
+%div.section
+  %h2 Public Repositories
+  %div.repositories
+    - repositories.each do |repository|
+      %div.repository
+        %h3 
+          = link_to repository.name, local_repository_path(repository)
+        %div.details
+          %p 
+            %strong Description:
+            %br
+            #{repository.description}
+          %p 
+            %strong Staistics:
+            %br
+            #{repository.watchers} watcher(s), #{repository.forks} fork(s), #{repository.open_issues} issue(s)

@@ -113,25 +113,43 @@ body {
 		background: url($main_content_background_image) repeat-y left; 
 		margin-right: 0pt; 
 	}
-}
-
-/* content - repositories */
-#content {
-	#dashboard {
-		.title { 
+	.title { 
+		font-family: $emphatic_font;
+		font-weight: 200;
+		color: $link_color;
+	}
+	h3 {
+		color: $default_content_color;
+		margin-bottom: .5em;
+	}
+	.section {
+		h2 {
 			font-family: $emphatic_font;
-			font-weight: 300;
-			color: $link_color;
+			font-weight: 200;
+			color: $repository_section_color;
+			background: $repository_section_background_color;
+			padding-left: 10px;
+			@include rounded_corners(5px);
+			@include shadow(2px);
 		}
 	}
 }
 
-/* content - repositories */
+/* content - dashboard */
+#content {
+	.repository {
+		margin-bottom: 15px;
+		.details {
+			padding-left: 10px;
+			p { margin-bottom: 5px; }
+		}
+	}
+}
+
+/* content - repository */
 #content {
 	#repository {
 		.title { 
-			font-family: $emphatic_font;
-			font-weight: 200;
 			color: $inactive_color;
 			a { 
 				text-decoration: none;
@@ -140,20 +158,7 @@ body {
 				&:hover { color: $link_hover_color; }
 			}
 		}
-		h3 {
-			color: $default_content_color;
-			margin-bottom: .5em;
-		}
 		.section {
-			h2 {
-				font-family: $emphatic_font;
-				font-weight: 200;
-				color: $repository_section_color;
-				background: $repository_section_background_color;
-				padding-left: 10px;
-				@include rounded_corners(5px);
-				@include shadow(2px);
-			}
 			.role {
 				padding-bottom: 20px;
 				.requirements {
