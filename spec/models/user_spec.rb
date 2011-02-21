@@ -8,4 +8,12 @@ describe User do
     end
   end
   
+  it 'should pull back public repositories from github on repositories' do
+    user = Factory.build(:user)
+    repo = Factory.build :repository, owner: user.login
+    stub_github_requests_for repo
+    stub_anonymous_repos_request(owner: user.login)
+    user.repositories.count.should == 1
+  end
+  
 end
