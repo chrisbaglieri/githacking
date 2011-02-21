@@ -15,11 +15,11 @@
     - repository.desired_roles.each do |role_metadata|
       %div.role.span-15
         %h3
-          = role_metadata['role']
+          = role_metadata.name
         %div.requirements
-          - role_metadata.each do |key, value|
-            - if key != 'role'
-              %div.name.span-2 #{key.capitalize}: 
-              %div.name.span-13.last #{value}
+          %div.name.span-2 Language: 
+          %div.name.span-13.last #{role_metadata.language}
+          %div.name.span-2 Description: 
+          %div.name.span-13.last #{role_metadata.description}
 %div.section.span-15
   %h2 Team

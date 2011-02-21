@@ -132,30 +132,32 @@ describe Repository do
   end
 
   describe "#metadata" do
-    describe "when meta data exists" do
+    describe "when meta has been previously saved" do
       before do
         @meta_data = "blah blah blah"
         @repo.meta_data = @meta_data
       end
 
       it "should not call github or save meta data" do
-        # webmock is used, so it will blow up if tried to use a real http call
-        @repo.should_not_receive(:save)
+        # It should not attempt to hit the github api
+        Curl::Easy.should_not_receive(:perform)
 
         @repo.metadata
       end
     end
 
-    describe "when meta data doesn't exists" do
-      it "should save meta data into database" do
-        @repo.meta_data.should == nil
-
+    describe "when meta data is not previously saved" do
+      before do
         stub_metadata_request @repo.owner, @repo.name
-        @repo.should_receive(:save)
-
-        @repo.metadata
-        @repo.meta_data.should_not == nil
       end
+      
+      it "should save meta data into database" do
+        @repo.meta_data.should be_nil
+        @repo.should_receive(:save)
+        @repo.metadata
+        @repo.meta_data.should_not be_nil
+        @repo.meta_data.is_a?(Repository::Metadata).should be_true
+      end     
     end
   end
 

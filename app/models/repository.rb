@@ -11,7 +11,7 @@ class Repository < ActiveRecord::Base
   validates_uniqueness_of :name, scope: :owner
 
   acts_as_taggable
-
+  
   def issues_url(label)
     "https://github.com/api/v2/json/issues/list/#{owner}/#{name}/label/#{label}"
   end
@@ -60,34 +60,24 @@ class Repository < ActiveRecord::Base
   end
   
   def needs
-    metadata['needs']
-  rescue 
-    []
+    metadata.needs
   end
   
   def categories
-    metadata['categories']
-  rescue 
-    []
+    metadata.categories
   end
   
   def desired_roles
-    roles = metadata['needs']['roles']
+    roles = metadata.needs[:roles]
     validate_roles(roles)
-  rescue
-    []
   end
   
   def mentions
-    metadata['mentions']
-  rescue 
-    []
+    metadata.mentions
   end
   
   def long_description
-    metadata['long_description']
-  rescue 
-    nil
+    metadata.long_description
   end
   
   def self.from_github_to_domain(github_repo)
@@ -111,9 +101,8 @@ class Repository < ActiveRecord::Base
     # has_wiki
     # has_downloads
     # has_issues
-
     github_repo.languages.each do |k,v|
-      repository.languages << Language.new({:name => k, :bytes => v})
+      repository.languages << Language.new({name: k, bytes: v})
     end
 
     repository
@@ -136,10 +125,10 @@ class Repository < ActiveRecord::Base
   
   def metadata
     if !self.meta_data
-      raw = Curl::Easy.perform("https://github.com/#{owner}/#{name}/raw/master/githacking.yaml")
+      raw = Curl::Easy.perform("https://github.com/#{owner}/#{name}/raw/master/githacking.yml")
       if raw.header_str =~ /200/
-        y = YAML::load(raw.body_str)
-        self.meta_data = y
+        data = YAML::load(raw.body_str)
+        self.meta_data = Metadata.new data
         save
       end
     end
@@ -159,10 +148,34 @@ class Repository < ActiveRecord::Base
   
   def validate_roles(roles)
     roles.each do |role|
-      unless role.key?('role')
-        raise "Missing required attribute"
-      end
+      raise "Missing required attribute" if role.name.nil? 
     end
     roles
+  end
+  
+  class Metadata
+    attr_reader :long_description, :categories, :needs, :mentions
+    def initialize data
+      @long_description = data['long_description']
+      @categories = data['categories']
+      roles = Role.build(data['needs']['roles'])
+      @needs = {roles: roles}
+      @mentions = data['mentions']
+    end
+
+    class Role
+      attr_reader :name, :language, :description
+      
+      def self.build data
+        return data.collect { |datum| Role.new(datum) } if data.is_a? Array
+        return [Role.new(data)]
+      end
+
+      def initialize data
+        @name = data['role']
+        @language = data['language']
+        @description = data['description']
+      end
+    end
   end
 end

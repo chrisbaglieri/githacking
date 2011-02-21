@@ -2,9 +2,8 @@ require 'spec_helper'
 
 describe "repositories/show.html.haml" do
   before(:each) do
-    stub_github_requests_for(@repository = Factory.build(:repository, name: 'Theprojectname', owner: 'theuser'))
-
-    @repository.save!
+    @repository = Factory.build(:repository, id: 12345, name: 'Theprojectname', owner: 'theuser')
+    stub_metadata_request @repository.owner, @repository.name
     assign(:repository, @repository)
   end
 

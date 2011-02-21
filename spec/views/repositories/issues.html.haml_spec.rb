@@ -2,9 +2,7 @@ require 'spec_helper'
 
 describe "repositories/issues.html.haml" do
   before(:each) do
-    stub_github_requests_for(@repository = Factory.build(:repository, name: 'Theprojectname', owner: 'theuser'))
-
-    @repository.save!
+    @repository = Factory.build(:repository, id: 12345, name: 'Theprojectname', owner: 'theuser')
     assign(:repository, @repository)
     assign(:tag, 'bytesize')
   end
@@ -17,16 +15,9 @@ describe "repositories/issues.html.haml" do
     rendered.should match(/Sorry, can't find any bytesize issues to work on./)
   end
 
-  # TODO: update with factory issues when Aaron gets them in.
   it 'lists issues if they are displayed' do
-    assign(:issues, (0..2).to_a.collect do |x|
-             a = double Object
-             a.should_receive(:number).and_return x
-             a.should_receive(:title).and_return "The #{x} title"
-             a.should_receive(:updated_at).and_return Time.now
-             a.should_receive(:body).and_return "The #{x} body"
-             a
-           end)
+    issues = (0..2).to_a.collect { |x| Factory.create :open_issue, title: "The #{x} title", body: "The #{x} body", repository: @repository }
+    assign(:issues, issues)
 
     render
 

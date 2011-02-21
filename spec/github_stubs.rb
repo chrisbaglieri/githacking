@@ -86,6 +86,11 @@ def stub_anonymous_repo_languages_request options={}
   options.reverse_merge!(owner: 'notspecifiedowner',
                          name: 'notspecifiedname',
                          languages: {'Ruby' => 12345, 'JavaScript' => 5431})
+  languages = {}
+  options[:languages].each do |language|
+    languages[language.name] = language.bytes
+  end if options[:languages].is_a? Array
+  
   stub_request(:get, "https://github.com/api/v2/yaml/repos/show/#{options.delete :owner}/#{options.delete :name}/languages?").
     to_return(:status => 200, :body => options.to_yaml, :headers => {})
 end
@@ -114,7 +119,7 @@ def stub_anonymous_issues_request_with_labels repo, issues
 end
 
 def stub_metadata_request owner, project_name
-  stub_request(:get, "https://github.com/#{owner}/#{project_name}/raw/master/githacking.yaml"). to_return(:status => 200, body: <<BODY, :headers => {})
+  stub_request(:get, "https://github.com/#{owner}/#{project_name}/raw/master/githacking.yml"). to_return(:status => 200, body: <<BODY, :headers => {})
 ---
 long_description: >
     hello world this is a test for githacking at philly startup weekend!
@@ -199,3 +204,4 @@ def stub_github_requests_for repo
   stub_anonymous_repo_request_from_factory repo
   stub_anonymous_repo_languages_request(owner: repo.owner, name: repo.name, languages: repo.languages)
 end
+
