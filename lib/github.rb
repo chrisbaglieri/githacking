@@ -9,6 +9,18 @@ module Github
     "https://github.com/api/v2/json/repos/show/#{user}?page=#{page}"
   end
   
+  def self.languages_url user, repo
+    "http://github.com/api/v2/json/repos/show/#{user}/#{repo}/languages"
+  end
+
+  def self.languages user, repo
+    result = curl self.languages_url(user, repo)
+
+    handle_error result
+
+    result["languages"]
+  end
+
   def self.repository user, repo
     result = curl self.repo_url(user, repo)
 
