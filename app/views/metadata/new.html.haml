@@ -1,0 +1,29 @@
+#new-metadata-form
+  = form_tag user_repository_metadata_path do
+    .label
+      = label_tag 'metadata[long_description]', 'Long Description'
+    .field
+      = text_area_tag 'metadata[long_description]'
+    .label
+      = label_tag 'metadata[categories][]', 'Categories'
+    .field
+      = text_field_tag 'metadata[categories][]'
+    %h3
+      Needs
+    .label
+      = label_tag 'metadata[needs][roles][]', 'Roles'
+    .field
+      Name:
+      = text_field_tag 'metadata[needs][roles][][role]'
+      %br
+      Language: 
+      = text_field_tag 'metadata[needs][roles][][langauge]'
+      %br
+      Description:
+      = text_field_tag 'metadata[needs][roles][][description]'
+    .label
+      = label_tag 'metadata[mentions][]', 'Mentions'
+    .field
+      = text_field_tag 'metadata[mentions][]'
+    
+  
