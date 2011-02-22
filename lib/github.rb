@@ -13,6 +13,18 @@ module Github
     "http://github.com/api/v2/json/repos/show/#{user}/#{repo}/languages"
   end
 
+  def self.user_url login
+    "http://github.com/api/v2/json/user/show/#{login}"
+  end
+
+  def self.user login
+    result = curl self.user_url(login)
+
+    handle_error result
+
+    result["user"]
+  end
+
   def self.languages user, repo
     result = curl self.languages_url(user, repo)
 
