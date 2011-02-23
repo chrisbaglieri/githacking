@@ -32,7 +32,8 @@
         = text_field_tag 'metadata[needs][roles][][description]', nil, class: 'role-description'
     .label
       = label_tag 'metadata[mentions][]', 'Mentions'
-    .field
-      = text_field_tag 'metadata[mentions][]'
+    #mentions
+      .field.mention
+        = text_field_tag 'metadata[mentions][]'
     
   

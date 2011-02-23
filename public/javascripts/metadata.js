@@ -12,24 +12,36 @@ function empty_role_fields() {
 </div>');
 }
 
-function empty_category_field() {
-    return "<div class='field category'><input name='metadata[categories][]' type='text'/></div>";
+function empty_field(units, unit) {
+    return "<div class='field "+ unit +"'><input name='metadata["+ units +"][]' type='text'/></div>";
+}
+
+function empty_mention_field() {
+    return "<div class='field mention'><input name='metadata[mentions][]' type='text'/></div>";
+}
+
+function append_empty_field(units, unit) {
+    var last_value = $('#' + units + ' input:last').val();
+    if (last_value != '') {
+        $('#' + units).append(empty_field(units, unit));
+    }
+    var dom_units = $('#'+ units + ' .'+ unit);
+    // -2 because we want the last empty field to stick around
+    for(var i = dom_units.length-2; i >= 0; i--){
+        var dom_unit = $(dom_units[i]);
+        var input = $(dom_unit.find('input'));
+        if (input.val() == '' && !input.hasClass('active')) {
+            dom_unit.remove();
+        }
+    }
 }
 
 function append_empty_category_field() {
-    var last_category_value = $('#categories input:last').val();
-    if (last_category_value != '') {
-        $('#categories').append(empty_category_field());
-    }
-    var categories = $('#categories .category');
-    // -2 because we want the last empty field to stick around
-    for(var i = categories.length-2; i >= 0; i--){
-        var cat = $(categories[i]);
-        var input = $(cat.find('input'));
-        if (input.val() == '' && !input.hasClass('active')) {
-            cat.remove();
-        }
-    }
+    append_empty_field('categories', 'category');
+}
+
+function append_empty_mention_field() {
+    append_empty_field('mentions', 'mention');
 }
 
 function append_empty_role_fields() {
@@ -72,6 +84,7 @@ function set_active(){
 
 $(document).ready(function(){
                       $('#categories').bind('keyup', append_empty_category_field);
+                      $('#mentions').bind('keyup', append_empty_mention_field);
                       $('#roles').bind('keyup', append_empty_role_fields);
                       $('input').live('blur', set_inactive);
                       $('input').live('focus', set_active);
