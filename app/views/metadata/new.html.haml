@@ -10,15 +10,17 @@
     .label
       = label_tag 'metadata[categories][]', 'Categories'
     #categories
+      -# This markup is mirrored in metadata.js. Be sure to keep both
+      -# places consistent!
       .field.category
         = text_field_tag 'metadata[categories][]'
     %h3
       Needs
     .label
       = label_tag 'metadata[needs][roles][]', 'Roles'
-    #role-fields
-      -# Note that if this html changes, the changes must be reflected
-      -# in metadata.js#empty_role_fields for the autofield population
+    #roles
+      -# This markup is mirrored in metadata.js. Be sure to keep both
+      -# places consistent!
       .field.role
         Name:
         = text_field_tag 'metadata[needs][roles][][role]', nil, class: 'role-role'
