@@ -145,13 +145,16 @@ class Repository < ActiveRecord::Base
   def self.github_repository owner, name
     Octopi::User.find(owner).repository(name)
   end
-  
+
+  #TODO: Move into Metadata::Role, with ActiveModel::Errors support, perhaps?
   def validate_roles(roles)
     roles.each do |role|
       raise "Missing required attribute" if role.name.nil? 
     end
     roles
   end
+
+  public
   
   class Metadata
     attr_reader :long_description, :categories, :needs, :mentions
@@ -161,6 +164,13 @@ class Repository < ActiveRecord::Base
       roles = Role.build(data['needs']['roles'])
       @needs = {roles: roles}
       @mentions = data['mentions']
+    end
+
+    def to_file
+      file = Tempfile.new("githacking.yml")
+      file.puts self.to_yaml
+      file.flush
+      file
     end
 
     class Role
