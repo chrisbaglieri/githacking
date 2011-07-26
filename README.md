@@ -24,4 +24,8 @@ Shortly thereafter, Stack Overflow launched [Careers 2.0](http://careers.stackov
 
 # Now What
 
-I still believe connecting developers with repositories of interest can be improved. I still believe Career 2.0, while good, can be better. I also believe it's only a matter of time until Github jumps into this space. And truthfully, if that were to happen, I'd be the first in line. I'm open sourcing this in the hopes it inspires others hackers to build tools that help them and the startups that employ them.
+I still believe connecting developers with repositories of interest can be improved. I still believe Career 2.0, while good, can be better. I also believe it's only a matter of time until Github jumps into this space. And truthfully, if that were to happen, I'd be the first in line.
+
+## Why Am I Open Sourcing This
+
+There's no doubt this repository is a cake that needs a little bit more time in the oven. I'm also of the mindset closed ideas get nowhere. Githacking was always about the community and there's no better way to help the community than sharing something that potentially inspires other hackers to do the same.
