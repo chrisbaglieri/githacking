@@ -6,12 +6,6 @@ Githacking was the idea I pitched at Philadelphia Startup Weekend 2011; it subse
 
 My philosophy that weekend, three words, build cool shit. That's it, simple and to the point. I did not come to compete. I did not come to build a company. I came to have a good time and spend 54 hours doing what I love to do, hack. Icing on the cake was doing it with others who felt exactly the same way.
 
-## Post Philadelphia Startup Weekend 2011
-
-The interesting thing about Startup Weekend is that a lot of the ideas that emerge are difficult to build a business on, especially one that can support the entire team behind the idea. There are exceptions. We were not one of them. Realizing this we pivoted and began exploring developer profiles and building a recruitment engine on that foundation. We were well aware of the trend of startups and small companies using Github as a metric for measuring the caliber of developers. In this new direction, we hoped to piggyback on that practice.
-
-Shortly thereafter, Stack Overflow launched [Careers 2.0](http://careers.stackoverflow.com/) and it deflated us. They had traction, an active and immense pool of users, a brand and trusted name, blah blah blah. We had an incomplete minimal viable product. We never did recover from their launch. The team disengaged. While we tried to re-ignite our efforts on a few occasions, the engine ran out of gas. We failed early and fast. We learned. We started working on the next idea.
-
 ## Press
 
 * [Hacker News](http://news.ycombinator.com/item?id=2158958)
@@ -22,10 +16,14 @@ Shortly thereafter, Stack Overflow launched [Careers 2.0](http://careers.stackov
 * [Demo/Pitch Part 2](http://www.youtube.com/watch?v=-FwXXt_7umQ)
 * [5by5 Podcast](http://5by5.tv/devshow/35)
 
+## Post Philadelphia Startup Weekend 2011
+
+The interesting thing about Startup Weekend is that a lot of the ideas that emerge are difficult to build a business on, especially one that can support the entire team behind the idea. There are exceptions. We were not one of them. Realizing this we pivoted and began exploring developer profiles and building a recruitment engine on that foundation. We were well aware of the trend of startups and small companies using Github as a metric for measuring the caliber of developers. In this new direction, we hoped to piggyback on that practice.
+
+Shortly thereafter, Stack Overflow launched [Careers 2.0](http://careers.stackoverflow.com/) and it deflated us. They had traction, an active and immense pool of users, a brand and trusted name, blah blah blah. We had an incomplete minimal viable product. We never did recover from their launch. The team disengaged. While we tried to re-ignite our efforts on a few occasions, the engine ran out of gas. We failed early and fast. We learned. We started working on the next idea.
+
 # Now What
 
 I still believe connecting developers with repositories of interest can be improved. I still believe Career 2.0, while good, can be better. I also believe it's only a matter of time until Github jumps into this space. And truthfully, if that were to happen, I'd be the first in line.
-
-## Why Am I Open Sourcing This
 
 There's no doubt this repository is a cake that needs a little bit more time in the oven. I'm also of the mindset closed ideas get nowhere. Githacking was always about the community and there's no better way to help the community than sharing something that potentially inspires other hackers to do the same.
