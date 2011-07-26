@@ -8,10 +8,10 @@ Our philosophy that weekend, three words, build cool shit. That's it, simple and
 
 ## Team
 
-* [@chrisbaglieri (me)](http://www.twitter.com/chrisbaglieri)
-* [@bluepojo](http://www.twitter.com/bluepojo)
-* [@codingjester](http://www.twitter.com/codingjester)
-* [@aaronfeng](http://www.twitter.com/aaronfeng))
+* [Chris Baglieri (@chrisbaglieri)](http://www.twitter.com/chrisbaglieri)
+* [Josiah Kiehl (@bluepojo)](http://www.twitter.com/bluepojo)
+* [John Bunting (@codingjester)](http://www.twitter.com/codingjester)
+* [Aaron Feng (@aaronfeng)](http://www.twitter.com/aaronfeng)
 
 ## Press
 
