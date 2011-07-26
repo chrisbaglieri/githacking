@@ -2,9 +2,16 @@
 
 ## Philadelphia Startup Weekend 2011
 
-Githacking was the idea I pitched at Philadelphia Startup Weekend 2011; it subsequently went on to win the event. The gist of what we ([me @chrisbaglieri](http://www.twitter.com/chrisbaglieri), [@bluepojo](http://www.twitter.com/bluepojo), [@codingjester](http://www.twitter.com/codingjester), and [@aaronfeng](http://www.twitter.com/aaronfeng)) set out to build was a layer on top of Github that helped contributors and maintainers in the open source community find and manage projects. For contributors, we hoped to better connect them to projects of interest (which may or may not be the most forked or trending repositories). For maintainers, we hoped to help promote their work and arm them with tools to recruit contributors.
+Githacking was the idea I pitched at Philadelphia Startup Weekend 2011; it subsequently went on to win the event. The gist of what we set out to build was a layer on top of Github that helped contributors and maintainers in the open source community find and manage projects. For contributors, we hoped to better connect them to projects of interest (which may or may not be the most forked or trending repositories). For maintainers, we hoped to help promote their work and arm them with tools to recruit contributors.
 
-My philosophy that weekend, three words, build cool shit. That's it, simple and to the point. I did not come to compete. I did not come to build a company. I came to have a good time and spend 54 hours doing what I love to do, hack. Icing on the cake was doing it with others who felt exactly the same way.
+Our philosophy that weekend, three words, build cool shit. That's it, simple and to the point. We did not come to compete. We did not come to build a company. We came to have a good time and spend 54 hours doing what we love to do, hack. Icing on the cake was doing it with others who felt exactly the same way.
+
+## Team
+
+* [@chrisbaglieri (me)](http://www.twitter.com/chrisbaglieri)
+* [@bluepojo](http://www.twitter.com/bluepojo)
+* [@codingjester](http://www.twitter.com/codingjester)
+* [@aaronfeng](http://www.twitter.com/aaronfeng))
 
 ## Press
 
